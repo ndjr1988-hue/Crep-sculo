@@ -1,5 +1,5 @@
 /* foco-tela.css: o modo foco na conversa (painel à esquerda da coluna, ou faixa sob o cabeçalho). */
-.foco{box-sizing:border-box;background:#fff;color:var(--txt);border:1px solid var(--line);font-size:14px;line-height:1.35;z-index:21}
+.foco{box-sizing:border-box;background:#000000;color:var(--txt);border:1px solid var(--line);font-size:14px;line-height:1.35;z-index:21}
 .foco[hidden]{display:none}
 .foco button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0;text-align:left}
 .foco-cab{display:flex;align-items:center;gap:4px}
@@ -17,11 +17,11 @@
 .foco-tique{width:100%;min-height:36px;display:flex;align-items:flex-start;gap:10px;padding:6px 4px;border-radius:8px}
 .foco-tique:hover{background:rgba(0,0,0,.04)}
 .foco-caixa{flex:0 0 20px;width:20px;height:20px;margin-top:1px;border:2px solid var(--accent);border-radius:6px;box-sizing:border-box;
-            display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:#fff}
+            display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#ffffff;background:#000000}
 .foco-texto{flex:1;min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .foco-item.feito .foco-caixa{background:var(--accent)}
 .foco-item.feito .foco-texto{text-decoration:line-through;color:var(--muted)}
-.foco-aviso{margin:8px 0 0;padding:6px 8px;border-radius:8px;background:#fdecea;color:#8a2a1f;font-size:13px;overflow-wrap:anywhere}
+.foco-aviso{margin:8px 0 0;padding:6px 8px;border-radius:8px;background:#150402;color:#8a2a1f;font-size:13px;overflow-wrap:anywhere}
 .foco-aviso[hidden]{display:none}
 .foco-so-erro .foco-corpo{display:block;padding-bottom:6px}
 .foco-so-erro .foco-abre{min-height:32px;font-weight:500;color:var(--muted);cursor:default}
@@ -34,7 +34,7 @@
 /* faixa: item do fluxo logo abaixo do cabeçalho; a lista aberta desce por cima da conversa, sem empurrá-la */
 .foco-faixa{position:relative;flex:0 0 auto;z-index:21;height:36px;border-left:0;border-right:0;border-top:0}
 .foco-faixa .foco-cab{height:36px}
-.foco-faixa .foco-corpo{position:absolute;top:36px;left:0;right:0;max-height:min(50vh,360px);overflow-y:auto;background:#fff;
+.foco-faixa .foco-corpo{position:absolute;top:36px;left:0;right:0;max-height:min(50vh,360px);overflow-y:auto;background:#000000;
                         border-bottom:1px solid var(--line);box-shadow:0 8px 16px rgba(0,0,0,.12);padding-top:6px}
 .foco-faixa.foco-so-erro{overflow:hidden}
 .foco-faixa.foco-so-erro .foco-corpo{position:static;box-shadow:none;border:0;padding:0}

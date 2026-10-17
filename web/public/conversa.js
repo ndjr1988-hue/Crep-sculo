@@ -225,10 +225,10 @@ function pintaAvatar(el, a) {
   if (!el) return;
   const img = a.avatar_img || (/^https:\/\//i.test(a.avatar || '') ? a.avatar : '');
   el.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(a.avatar || (a.nome || '?').slice(0, 1));
-  el.style.background = a.cor || '#2f9e5e';
+  el.style.background = a.cor || '#9e2f38';
 }
-document.documentElement.style.setProperty('--accent', AGENTE.cor || '#2f9e5e');
-document.title = AGENTE.nome + ' - DG Claw';
+document.documentElement.style.setProperty('--accent', AGENTE.cor || '#9e2f38');
+document.title = AGENTE.nome + ' - Crepúsculo';
 $('nomeAgente').textContent = AGENTE.nome;
 pintaAvatar(avEl, AGENTE);
 entrada.placeholder = 'Escrever para ' + AGENTE.nome;
@@ -1195,7 +1195,7 @@ wrap.addEventListener('toggle', ev => {
 
 /* Conversa vazia: nunca tela em branco. */
 function htmlVazio() {
-  return '<div class="vazio"><div class="vz-ico" aria-hidden="true">🦞</div>' +
+  return '<div class="vazio"><div class="vz-ico" aria-hidden="true">🌘</div>' +
     `<b>O ${esc(AGENTE.nome)} está acordando...</b>` +
     '<small>Ele ainda não escreveu nada por aqui. Assim que responder, a conversa ' +
     'aparece nesta tela sozinha. Você já pode mandar a primeira mensagem.</small></div>';
@@ -3648,7 +3648,7 @@ function passosTutorial() {
   }
   if (!$('mlConfig').hidden) {
     passos.push({ alvo: '#mlConfig', antes: abreM, titulo: 'Configurações',
-      oque: 'Hoje tem um item: Instalar o app, que coloca o DG Claw como aplicativo na tela inicial do aparelho.',
+      oque: 'Hoje tem um item: Instalar o app, que coloca o Crepúsculo como aplicativo na tela inicial do aparelho.',
       como: 'No Android e no computador, com Chrome ou Edge, o toque abre o pedido de instalação do navegador. No iPhone e no iPad, o item mostra o caminho: Compartilhar e depois Adicionar à Tela de Início. O item some sozinho quando o app já está instalado.',
       porque: 'O app instalado abre sem a barra do navegador e fica a um toque, como qualquer outro aplicativo.' });
   }

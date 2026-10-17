@@ -6,10 +6,10 @@
   overflow-wrap:anywhere;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.075)}
 .dgc-linha{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .dgc-valor{flex:1 1 160px;min-width:0;min-height:36px;box-sizing:border-box;padding:0 10px;font-size:16px;
-  border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--txt);font-family:inherit}
+  border:1px solid var(--line);border-radius:8px;background:#000000;color:var(--txt);font-family:inherit}
 .dgc-valor:focus{outline:none;border-color:var(--accent)}
 .dgc-salvar{flex:0 0 auto;min-height:36px;min-width:32px;padding:0 14px;border:0;border-radius:8px;
-  background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+  background:var(--accent);color:#ffffff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
 .dgc-salvar:disabled{opacity:.6;cursor:default}
 .dgc-msg{margin-top:8px;font-size:13px;color:#b3261e;overflow-wrap:anywhere}
 .dgc-ok{font-size:14px;font-weight:600;color:var(--accent);overflow-wrap:anywhere}

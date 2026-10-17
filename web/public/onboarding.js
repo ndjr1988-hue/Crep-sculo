@@ -207,7 +207,7 @@
     function inicio() {
       tela = 'inicio';
       document.body.classList.add('admin-primeiro-acesso');
-      host.innerHTML = cab('Bem-vindo ao seu DG Claw') + '<section data-tour="nas-inicio"><p>Eu sou o Admin. Cuido deste servidor e ajudo você a criar seus agentes.</p><p>Você escolhe um nome, conta o que quer delegar e acompanha tudo por aqui. Depois, é só conversar com seu agente pelo menu à esquerda.</p><button id="nasComecar" type="button" class="nas-principal" data-pergunta="Quero criar meu primeiro agente">Quero criar meu primeiro agente</button></section><p class="nas-erro" role="alert" hidden></p>';
+      host.innerHTML = cab('Bem-vindo ao seu Crepúsculo') + '<section data-tour="nas-inicio"><p>Eu sou o Admin. Cuido deste servidor e ajudo você a criar seus agentes.</p><p>Você escolhe um nome, conta o que quer delegar e acompanha tudo por aqui. Depois, é só conversar com seu agente pelo menu à esquerda.</p><button id="nasComecar" type="button" class="nas-principal" data-pergunta="Quero criar meu primeiro agente">Quero criar meu primeiro agente</button></section><p class="nas-erro" role="alert" hidden></p>';
       abreModal();
       host.querySelector('.nas-tutorial').onclick = () => tutorial('[data-tour="nas-inicio"]');
       host.querySelector('#nasComecar').onclick = async () => {
@@ -252,14 +252,14 @@
       };
       host.querySelector('#nasGerarFoto').onclick = () => {
         const c = document.createElement('canvas'); c.width = c.height = 320;
-        const x = c.getContext('2d'), cores = [['#e1ecdc','#477553'],['#e7e2f3','#7963a7'],['#f5e3d6','#b57750'],['#dceaf3','#497c9a']];
+        const x = c.getContext('2d'), cores = [['#231314','#b88a8e'],['#110c1d','#7a7a7a'],['#29170a','#b57750'],['#0c1a23','#497c9a']];
         const cor = cores[crypto.getRandomValues(new Uint8Array(1))[0] % cores.length];
         x.fillStyle = cor[0]; x.fillRect(0,0,320,320);
         x.fillStyle = cor[1]; x.beginPath(); x.roundRect(70,82,180,158,55); x.fill();
         x.lineWidth = 9; x.strokeStyle = cor[1]; x.beginPath(); x.moveTo(160,82); x.lineTo(160,56); x.stroke();
         x.beginPath(); x.arc(160,48,13,0,Math.PI*2); x.fill();
-        x.fillStyle = '#fffefa'; [125,195].forEach(v => { x.beginPath(); x.arc(v,147,17,0,Math.PI*2); x.fill(); });
-        x.strokeStyle = '#fffefa'; x.lineWidth = 8; x.lineCap = 'round'; x.beginPath(); x.arc(160,175,30,.15,Math.PI-.15); x.stroke();
+        x.fillStyle = '#050400'; [125,195].forEach(v => { x.beginPath(); x.arc(v,147,17,0,Math.PI*2); x.fill(); });
+        x.strokeStyle = '#050400'; x.lineWidth = 8; x.lineCap = 'round'; x.beginPath(); x.arc(160,175,30,.15,Math.PI-.15); x.stroke();
         x.fillStyle = cor[1]; x.beginPath(); x.roundRect(95,257,130,65,24); x.fill();
         c.toBlob(blob => {
           if (!blob || tela !== 'formulario') return;

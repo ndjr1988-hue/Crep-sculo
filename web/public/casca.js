@@ -40,7 +40,7 @@
     '<header data-tour="casca-cabecalho" id="cabecalho">' +
     '<button class="btn ghost" id="btnMenu" type="button" aria-label="Abrir o menu" data-tour="casca-menu">☰</button>' +
     '<div class="av" id="av" aria-hidden="true"></div>' +
-    '<div class="who" id="who" data-tour="casca-titulo"><b id="nomeAgente">DG Claw</b><span id="estado"></span></div>' +
+    '<div class="who" id="who" data-tour="casca-titulo"><b id="nomeAgente">Crepúsculo</b><span id="estado"></span></div>' +
     '<button class="btn" id="btnTutorial" type="button" title="Visita guiada desta tela: o que é cada parte e por que está aqui">Tutorial</button>' +
     '</header>';
 
@@ -51,7 +51,7 @@
     '<button class="fechar" id="btnFechaMenu" type="button" aria-label="Fechar o menu">✕</button>' +
     '<div class="ml-marca" data-tour="gm-marca">' +
     '<div class="ml-moldura" id="mlMoldura" aria-hidden="true"></div>' +
-    '<div class="ml-nome" id="mlNome">DG Claw</div>' +
+    '<div class="ml-nome" id="mlNome">Crepúsculo</div>' +
     '<div class="ml-sub" id="mlSub"></div>' +
     '<button type="button" class="gm-tut" id="gmTutorial" title="Visita guiada do menu: o que é cada parte e por que está aqui">Tutorial</button>' +
     '<div class="ml-troca" id="mlTroca" data-tour="agentes" hidden>' +
@@ -80,12 +80,12 @@
   };
 
   function pintaCabecalho(ag) {
-    document.documentElement.style.setProperty('--accent', ag.cor || '#2f9e5e');
-    $('nomeAgente').textContent = ag.nome || 'DG Claw';
+    document.documentElement.style.setProperty('--accent', ag.cor || '#9e2f38');
+    $('nomeAgente').textContent = ag.nome || 'Crepúsculo';
     const av = $('av');
     const img = ag.avatar_img || (/^https:\/\//i.test(ag.avatar || '') ? ag.avatar : '');
     av.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(ag.avatar || (ag.nome || '?').slice(0, 1));
-    av.style.background = ag.cor || '#2f9e5e';
+    av.style.background = ag.cor || '#9e2f38';
   }
 
   function pintaTitulo() {
@@ -163,7 +163,7 @@
         est.lista = lista;
         let ag = escolheAgente(lista, ctx);
         const slug = (/^\/p\/([^/]+)/.exec(location.pathname) || [])[1] || new URLSearchParams(location.search).get('a') || guardado || '';
-        if (!ag) ag = { id: erro ? slug : '', nome: 'DG Claw', cor: '#2f9e5e', avatar: 'D' };
+        if (!ag) ag = { id: erro ? slug : '', nome: 'Crepúsculo', cor: '#9e2f38', avatar: 'D' };
         est.agente = ag;
         pintaCabecalho(ag);
         if (!erro) { try { localStorage.setItem('dgclaw:agente', ag.id); } catch (_) { /* sem armazenamento */ } }

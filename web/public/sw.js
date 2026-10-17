@@ -68,7 +68,7 @@ self.addEventListener('push', ev => {
     try { cru = ev.data.text(); } catch (e) { console.warn('sw: não consegui ler o texto do aviso:', e.message); }
     try { d = JSON.parse(cru); } catch (e) { console.warn('sw: o aviso não veio em JSON, mostro o texto cru:', e.message); }
   }
-  if (!d || typeof d !== 'object') d = { titulo: 'DG Claw', corpo: cru || 'Você tem um aviso novo.' };
+  if (!d || typeof d !== 'object') d = { titulo: 'Crepúsculo', corpo: cru || 'Você tem um aviso novo.' };
   const acoes = Array.isArray(d.acoes) ? d.acoes.filter(a => a && a.acao && a.titulo).slice(0, 2) : [];
   const opcoes = {
     body: d.corpo || '',
@@ -81,7 +81,7 @@ self.addEventListener('push', ev => {
   };
   if (d.tag) opcoes.tag = d.tag;
   if (d.imagem) opcoes.image = d.imagem;
-  ev.waitUntil(self.registration.showNotification(d.titulo || 'DG Claw', opcoes));
+  ev.waitUntil(self.registration.showNotification(d.titulo || 'Crepúsculo', opcoes));
 });
 
 /* Foca uma janela já aberta do DG Claw e leva para a url; sem janela, abre uma. */
