@@ -141,7 +141,7 @@ function mdToHtml(md) {
 
 // Config carregada do backend no boot (/api/config). Default seguro até chegar.
 let APP_CONFIG = {
-  agentName: 'DG Claw', creatorName: 'Dono', avatar: BASE + '/assets/sprites/avatar.jpg',
+  agentName: 'Crepúsculo', creatorName: 'Dono', avatar: BASE + '/assets/sprites/avatar.jpg',
   level: null, logs: [{ id: 'heartbeat', label: 'HEARTBEAT' }], moodSprites: null,
   tabPowers: { posts: 'instagram', followers: 'instagram', reunioes: 'meetings' },
 };
@@ -2741,7 +2741,8 @@ function iniciarMenuCelular() {
 function iniciarTema() {
   const raiz = document.documentElement;
   const guardado = (() => { try { return localStorage.getItem('dgclaw-tema'); } catch { return null; } })();
-  if (guardado === 'claro' || guardado === 'escuro') raiz.dataset.tema = guardado;
+  // Crepúsculo: escuro por padrão; o claro só vale se a pessoa escolher no botão
+  raiz.dataset.tema = guardado === 'claro' ? 'claro' : 'escuro';
 
   document.getElementById('btn-tema')?.addEventListener('click', () => {
     const escuroAgora = raiz.dataset.tema
