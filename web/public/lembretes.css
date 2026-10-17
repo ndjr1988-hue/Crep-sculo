@@ -16,14 +16,14 @@
 .lf-acoes{display:flex;gap:6px;flex:0 0 auto}
 .lf button{font:inherit;font-size:13.5px;font-weight:600;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #e0c870;background:#000000;color:#ffe9a5;cursor:pointer}
 .lf button:disabled{opacity:.5;cursor:default}
-.lf-feito{background:#9e2f38!important;border-color:#9e2f38!important;color:#ffffff!important}
+.lf-feito{background:#d40000!important;border-color:#d40000!important;color:#ffffff!important}
 .lf-menu{flex:1 1 100%;display:flex;gap:6px;flex-wrap:wrap}
 .lf-menu[hidden]{display:none}
 .lf-erro{margin:4px 0 2px;color:#a01818;font-size:13px;overflow-wrap:anywhere}
 .lf-erro[hidden]{display:none}
 
 /* ── Tela /lembretes ───────────────────────────────────────────────────── */
-body.lp{--lp-txt:#f0e3e4;--lp-fraco:#a08a8c;--lp-linha:#201819;--lp-acento:#9e2f38;--lp-fundo:#0c0909;
+body.lp{--lp-txt:#f0e3e4;--lp-fraco:#a08a8c;--lp-linha:#201819;--lp-acento:#d40000;--lp-fundo:#0c0909;
   margin:0;background:var(--lp-fundo);color:var(--lp-txt);overflow:auto;height:auto;
   font:15.5px/1.46 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   -webkit-text-size-adjust:100%}

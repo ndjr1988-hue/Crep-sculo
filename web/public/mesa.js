@@ -392,7 +392,7 @@
 
   function avatar(a) {
     const img = a.avatar_img || (/^https:\/\//i.test(a.avatar || '') ? a.avatar : '');
-    const cor = esc(a.cor || '#9e2f38');
+    const cor = esc(a.cor || '#d40000');
     return `<span class="mz-foto" style="background:${cor}">${img ? `<img src="${esc(img)}" alt="">` : esc(a.avatar || (a.nome || '?').slice(0, 1))}</span>`;
   }
 

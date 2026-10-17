@@ -80,12 +80,12 @@
   };
 
   function pintaCabecalho(ag) {
-    document.documentElement.style.setProperty('--accent', ag.cor || '#9e2f38');
+    document.documentElement.style.setProperty('--accent', ag.cor || '#d40000');
     $('nomeAgente').textContent = ag.nome || 'Crepúsculo';
     const av = $('av');
     const img = ag.avatar_img || (/^https:\/\//i.test(ag.avatar || '') ? ag.avatar : '');
     av.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(ag.avatar || (ag.nome || '?').slice(0, 1));
-    av.style.background = ag.cor || '#9e2f38';
+    av.style.background = ag.cor || '#d40000';
   }
 
   function pintaTitulo() {
@@ -163,7 +163,7 @@
         est.lista = lista;
         let ag = escolheAgente(lista, ctx);
         const slug = (/^\/p\/([^/]+)/.exec(location.pathname) || [])[1] || new URLSearchParams(location.search).get('a') || guardado || '';
-        if (!ag) ag = { id: erro ? slug : '', nome: 'Crepúsculo', cor: '#9e2f38', avatar: 'D' };
+        if (!ag) ag = { id: erro ? slug : '', nome: 'Crepúsculo', cor: '#d40000', avatar: 'D' };
         est.agente = ag;
         pintaCabecalho(ag);
         if (!erro) { try { localStorage.setItem('dgclaw:agente', ag.id); } catch (_) { /* sem armazenamento */ } }

@@ -9,7 +9,7 @@
    Computador (>= 1100px): barra fixa de 240px à esquerda, sem ☰ e sem véu. */
 aside#menu{
   --ml-painel:#000000; --ml-fundo2:#0f0b0b; --ml-linha:#1e1718; --ml-texto:#f0e3e4; --ml-fraco:#937e80;
-  --ml-a1:var(--accent); --ml-a2:color-mix(in srgb,var(--accent) 70%,#1d3b8f);
+  --ml-a1:var(--accent); --ml-a2:#ff2a2a;
   background:var(--ml-painel);color:var(--ml-texto);overflow-y:auto;overflow-x:hidden;
   padding:22px 14px 10px;gap:14px;
 }
@@ -52,6 +52,17 @@ aside#menu{
 .ml-vazio{padding:9px;color:var(--ml-fraco);font-size:12.5px;line-height:1.45}
 .ml-vazio button{margin-top:6px;min-height:40px;padding:0 12px;border:1px solid var(--ml-linha);
   border-radius:10px;background:var(--ml-painel);font:inherit;cursor:pointer}
+
+/* Crepúsculo: esferas dos agentes (troca com um toque) */
+.ml-esferas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;width:100%;margin-top:12px}
+.ml-esferas[hidden]{display:none}
+.ml-esfera{display:flex;flex-direction:column;align-items:center;gap:4px;width:52px;text-decoration:none;color:var(--ml-fraco)}
+.ml-esfera .ml-mini{flex:0 0 44px;width:44px;height:44px;font-size:17px;
+  box-shadow:0 0 0 2px var(--ml-painel),0 0 0 3px var(--ml-linha);transition:transform .15s,box-shadow .15s}
+.ml-esfera small{font-size:11px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ml-esfera:hover .ml-mini{transform:scale(1.07)}
+.ml-esfera.atual{color:var(--ml-texto)}
+.ml-esfera.atual .ml-mini{box-shadow:0 0 0 2px var(--ml-painel),0 0 0 4px var(--ml-a1)}
 
 /* páginas */
 .ml-tabs{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}

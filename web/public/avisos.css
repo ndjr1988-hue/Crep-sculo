@@ -1,5 +1,5 @@
 /* avisos.css: a tela do quadro de avisos (classes av-). Celular primeiro. */
-.av-raiz{--av-linha:#1e1718;--av-texto:#f0e3e4;--av-fraco:#937e80;--av-fundo2:#0f0b0b;--av-acento:#9e2f38;
+.av-raiz{--av-linha:#1e1718;--av-texto:#f0e3e4;--av-fraco:#937e80;--av-fundo2:#0f0b0b;--av-acento:#d40000;
   max-width:760px;margin:0 auto;padding:12px 12px 40px;color:var(--av-texto);box-sizing:border-box;
   overflow-wrap:anywhere;word-break:break-word}
 .av-raiz *{box-sizing:border-box}
@@ -14,7 +14,7 @@
 .av-btn:disabled{opacity:.5;cursor:default}
 .av-primario{background:var(--av-acento);border-color:var(--av-acento);color:#ffffff;font-weight:600;min-height:40px}
 .av-primario:hover{background:#88272f}
-.av-perigo{background:#c0392b;border-color:#c0392b;color:#ffffff}
+.av-perigo{background:#d40000;border-color:#d40000;color:#ffffff}
 .av-perigo:hover{background:#a93226}
 .av-mini{min-height:32px;padding:0 12px;font-size:13px}
 .av-ajuda{width:32px;height:32px;border-radius:50%;border:1px solid var(--av-linha);background:#000000;
@@ -34,21 +34,21 @@
 .av-check input{width:18px;height:18px;margin:0}
 .av-fraco{color:var(--av-fraco);font-size:13px}
 .av-cont{margin:0;text-align:right;font-size:12px;color:var(--av-fraco)}
-.av-cont.av-passou{color:#c0392b;font-weight:700}
-.av-erro{margin:0;font-size:13px;color:#c0392b}
+.av-cont.av-passou{color:#d40000;font-weight:700}
+.av-erro{margin:0;font-size:13px;color:#d40000}
 .av-erro[hidden],.av-resposta[hidden],.av-escolha[hidden]{display:none}
 .av-resposta{margin:0;padding:8px 10px;border-radius:10px;background:#160b0c;color:#d2a3a7;font-size:14px}
 .av-status{margin:6px 0 0;font-size:13px;min-height:0}
 .av-status:empty{display:none}
-.av-status.av-erro{color:#c0392b}
+.av-status.av-erro{color:#d40000}
 .av-status.av-ok{color:#d2a3a7}
 .av-vazio{margin:0;padding:18px 8px;text-align:center;color:var(--av-fraco);font-size:14px}
-.av-erro-bloco{color:#c0392b}
+.av-erro-bloco{color:#d40000}
 .av-dia-t{margin:14px 0 6px;font-size:13px;color:var(--av-fraco);font-weight:700}
 .av-dia:first-child .av-dia-t{margin-top:0}
 .av-aviso{border:1px solid var(--av-linha);border-left:4px solid var(--av-cor,#937e80);border-radius:10px;
   padding:10px 12px;margin-bottom:8px;background:#000000}
-.av-t-decisao{--av-cor:#2f6fd0}.av-t-preferencia{--av-cor:#8e44ad}.av-t-entrega{--av-cor:#9e2f38}
+.av-t-decisao{--av-cor:#2f6fd0}.av-t-preferencia{--av-cor:#8e44ad}.av-t-entrega{--av-cor:#d40000}
 .av-t-aprendizado{--av-cor:#d68910}.av-t-referencia{--av-cor:#16a0a0}.av-t-pedido{--av-cor:#d35400}
 .av-t-resumo_do_dia{--av-cor:#937e80}
 .av-apagado{opacity:.55;background:var(--av-fundo2)}
@@ -64,7 +64,7 @@
 .av-situacao{margin:6px 0 0;font-size:13px;color:#f0b175;font-style:italic}
 .av-entregas{list-style:none;margin:6px 0 0;padding:0;font-size:12.5px;color:var(--av-fraco)}
 .av-entregas li{padding:1px 0}
-.av-e-falha{color:#c0392b;font-weight:600}
+.av-e-falha{color:#d40000;font-weight:600}
 .av-e-recado{color:#d2a3a7}
 .av-acoes{margin-top:8px;display:flex;justify-content:flex-end}
 .av-retirada{margin-top:8px;display:flex;flex-direction:column;gap:8px;font-size:13px}
@@ -91,7 +91,7 @@
 #tourCaixa .tour-acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
 #tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #1e1718;
   background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#c7adaf}
-#tourCaixa button.pri{background:#9e2f38;border-color:#9e2f38;color:#ffffff}
+#tourCaixa button.pri{background:#d40000;border-color:#d40000;color:#ffffff}
 #tourCaixa button:disabled{opacity:.4;cursor:default}
 #tourCaixa .tour-x{margin-right:auto}
 [hidden]{display:none !important}

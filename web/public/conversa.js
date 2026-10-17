@@ -225,9 +225,9 @@ function pintaAvatar(el, a) {
   if (!el) return;
   const img = a.avatar_img || (/^https:\/\//i.test(a.avatar || '') ? a.avatar : '');
   el.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(a.avatar || (a.nome || '?').slice(0, 1));
-  el.style.background = a.cor || '#9e2f38';
+  el.style.background = a.cor || '#d40000';
 }
-document.documentElement.style.setProperty('--accent', AGENTE.cor || '#9e2f38');
+document.documentElement.style.setProperty('--accent', AGENTE.cor || '#d40000');
 document.title = AGENTE.nome + ' - Crepúsculo';
 $('nomeAgente').textContent = AGENTE.nome;
 pintaAvatar(avEl, AGENTE);
@@ -239,7 +239,7 @@ if (!caps.voz) document.documentElement.classList.add('sem-voz');
 /* ── Texto de estado, faixas, utilidades ──────────────────────────────────── */
 function setEstado(txt, ehErro) {
   estadoEl.textContent = txt;
-  estadoEl.style.color = ehErro ? '#c0392b' : '';
+  estadoEl.style.color = ehErro ? '#d40000' : '';
   pintaAtividade();
 }
 
@@ -1076,13 +1076,13 @@ function metaPendente(p) {
     return `<span class="meta" title="entregue">✓ ${esc(p.hhmm)}</span>`;
   }
   if (p.estado === 'falhou' && p.recusado) {   // comando recusado: reenviar daria o mesmo erro
-    return `<span class="meta"><span style="color:#c0392b;font-weight:600">recusado</span> ` +
+    return `<span class="meta"><span style="color:#d40000;font-weight:600">recusado</span> ` +
            `${esc(p.erro || 'motivo desconhecido')} ` +
            `<button class="mini descartar" data-pend="${p.n}">descartar</button></span>`;
   }
   if (p.estado === 'falhou') {
     const ocupado = p.conferindo ? ' disabled' : '';
-    return `<span class="meta"><span style="color:#c0392b;font-weight:600" ` +
+    return `<span class="meta"><span style="color:#d40000;font-weight:600" ` +
            `title="${esc(p.erro || 'motivo desconhecido')}">não foi enviada</span> ` +
            `<button class="mini reenviar" data-pend="${p.n}"${ocupado}>reenviar</button> ` +
            `<button class="mini descartar" data-pend="${p.n}"${ocupado}>descartar</button></span>`;

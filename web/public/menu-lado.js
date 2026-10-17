@@ -88,9 +88,18 @@
     const sub = a.subtitulo || [a.provedor, a.modelo].filter(Boolean).join(' · ');
     return `<a class="ml-ag${aqui ? ' atual' : ''}" role="menuitem" href="/a/${encodeURIComponent(a.id)}"` +
       `${aqui ? ' aria-current="page"' : ''}>` +
-      `<span class="ml-mini" style="background:${esc(a.cor || '#9e2f38')}">${fotoDe(a)}</span>` +
+      `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
       `<span class="ml-quem"><b>${esc(a.nome)}</b><small>${esc(sub)}</small></span>` +
       `${aqui ? '<span class="ml-aqui">aqui</span>' : ''}</a>`;
+  }
+
+  /* Crepúsculo: atalho redondo de um agente, com a foto (ou a letra) e o nome embaixo. */
+  function esferaAgente(a, atualId) {
+    const aqui = a.id === atualId;
+    return `<a class="ml-esfera${aqui ? ' atual' : ''}" href="/a/${encodeURIComponent(a.id)}" title="${esc(a.nome)}"` +
+      `${aqui ? ' aria-current="page"' : ''}>` +
+      `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
+      `<small>${esc(a.nome)}</small></a>`;
   }
 
   function linksPainel(a) {
@@ -168,10 +177,20 @@
       $('mlRecarrega').onclick = recarrega.bind(null, ag);
       return;
     }
-    // sem outro agente para onde ir, o seletor só atrapalha
-    troca.hidden = lista.length < 2;
     const ordem = lista.filter(a => a.tipo === 'admin').concat(lista.filter(a => a.tipo !== 'admin'));
     caixa.innerHTML = ordem.map(a => itemAgente(a, ag.id)).join('');
+    // Crepúsculo: as esferas dos agentes trocam com um toque; o seletor fica só para o caso de erro
+    troca.hidden = true;
+    let esferas = $('mlEsferas');
+    if (!esferas) {
+      esferas = document.createElement('nav');
+      esferas.id = 'mlEsferas';
+      esferas.className = 'ml-esferas';
+      esferas.setAttribute('aria-label', 'Agentes');
+      troca.insertAdjacentElement('afterend', esferas);
+    }
+    esferas.hidden = lista.length < 2;
+    esferas.innerHTML = ordem.map(a => esferaAgente(a, ag.id)).join('');
   }
 
   /* silencioso: nas buscas automáticas uma falha de rede passageira não troca a lista por um erro. */
@@ -216,7 +235,7 @@
   /* opcoes: { agente, agentes (a lista já carregada), fecha() (fecha a gaveta), ativo (chave da página aberta; padrão 'conversa'), extras (itens extras do painel), erroLista (texto: a lista de agentes falhou) } */
   function inicia(opcoes) {
     const ag = opcoes.agente;
-    $('mlMoldura').innerHTML = `<span class="ml-foto" style="background:${esc(ag.cor || '#9e2f38')}">${fotoDe(ag)}</span>`;
+    $('mlMoldura').innerHTML = `<span class="ml-foto" style="background:${esc(ag.cor || '#d40000')}">${fotoDe(ag)}</span>`;
     $('mlNome').textContent = ag.nome;
     $('mlSub').textContent = ag.tipo === 'admin' ? 'administrador do servidor'
       : (ag.subtitulo || [ag.provedor, ag.modelo].filter(Boolean).join(' · '));
