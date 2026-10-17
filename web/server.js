@@ -751,6 +751,15 @@ function criarServidor(opcoes) {
       return undefined;
     }
 
+    // Crepúsculo: retratos dos agentes, guardados na pasta de dados (fora do repositório, não somem
+    // na reinstalação). O registro aponta o "avatar" do agente para https://<domínio>/avatares/<nome>.jpg
+    const retrato = /^\/avatares\/([a-z0-9-]+\.(?:png|jpe?g|webp))$/.exec(p);
+    if (retrato && (m === 'GET' || m === 'HEAD')) {
+      if (!sessao) return H.erroJson(res, 401, 'Entre no painel para ver os retratos.');
+      if (servirArquivo(req, res, path.join(config.dataDir, 'avatares', retrato[1]), 'private, max-age=3600')) return undefined;
+      return H.erroJson(res, 404, 'Retrato não encontrado.');
+    }
+
     if (m === 'GET' || m === 'HEAD') {
       const arq = arquivoPublico(p);
       if (arq) {
