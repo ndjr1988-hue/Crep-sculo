@@ -30,12 +30,12 @@ test('transcrever com Groq: URL, modelo, idioma, Authorization e User-Agent pró
   } finally { global.fetch = original; }
 });
 
-test('ElevenLabs continua na frente da Groq', async () => {
+test('Crepúsculo: Groq (grátis) vem na frente da ElevenLabs na transcrição', async () => {
   const original = global.fetch;
   const urls = [];
   global.fetch = async (url) => { urls.push(url); return { ok: true, json: async () => ({ text: 'oi' }) }; };
   try {
     await criarVoz({ env: { GROQ_API_KEY: 'g', ELEVENLABS_API_KEY: 'e' }, log }).transcrever(Buffer.from('a'), 'a.webm', 'audio/webm');
-    assert.match(urls[0], /elevenlabs/);
+    assert.match(urls[0], /groq/);
   } finally { global.fetch = original; }
 });

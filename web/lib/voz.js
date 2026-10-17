@@ -1,7 +1,8 @@
 'use strict';
 // Microfone e voz. Só funcionam com chave no web.env:
 //   ELEVENLABS_API_KEY (transcrever e falar), GROQ_API_KEY (só transcrever, plano grátis)
-//   ou OPENAI_API_KEY (só transcrever). Na transcrição a ordem é ElevenLabs, Groq, OpenAI.
+//   ou OPENAI_API_KEY (só transcrever). Na transcrição a ordem é Groq, ElevenLabs, OpenAI
+//   (Crepúsculo: o Groq é grátis; a cota da ElevenLabs fica para as vozes).
 // Sem chave a rota responde 503 com o motivo e a tela esconde os botões.
 
 const ELEVEN = 'https://api.elevenlabs.io';
@@ -45,14 +46,14 @@ function criarVoz({ env, log }) {
       const fd = new FormData();
       fd.append('file', new Blob([dados], { type: mime || 'audio/mp4' }), nomeArquivo || 'audio.m4a');
       let r;
-      if (temEleven) {
-        fd.append('model_id', 'scribe_v1');
-        r = await chama('transcrição (ElevenLabs)', `${ELEVEN}/v1/speech-to-text`, { method: 'POST', headers: { 'xi-api-key': env.ELEVENLABS_API_KEY }, body: fd });
-      } else if (temGroq) {
+      if (temGroq) {
         // O Cloudflare da Groq bloqueia o User-Agent padrão do fetch, por isso o próprio.
         fd.append('model', 'whisper-large-v3-turbo');
         fd.append('language', 'pt');
         r = await chama('transcrição (Groq)', 'https://api.groq.com/openai/v1/audio/transcriptions', { method: 'POST', headers: { Authorization: `Bearer ${env.GROQ_API_KEY}`, 'User-Agent': 'DGClaw/1.0' }, body: fd });
+      } else if (temEleven) {
+        fd.append('model_id', 'scribe_v1');
+        r = await chama('transcrição (ElevenLabs)', `${ELEVEN}/v1/speech-to-text`, { method: 'POST', headers: { 'xi-api-key': env.ELEVENLABS_API_KEY }, body: fd });
       } else {
         fd.append('model', 'whisper-1');
         fd.append('language', 'pt');
