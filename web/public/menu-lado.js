@@ -190,7 +190,10 @@
       troca.insertAdjacentElement('afterend', esferas);
     }
     esferas.hidden = lista.length < 2;
-    esferas.innerHTML = ordem.map(a => esferaAgente(a, ag.id)).join('');
+    // o Admin (gestor da conta) fica sozinho em cima; a equipe, numa fileira abaixo
+    const chefes = ordem.filter(a => a.tipo === 'admin'), equipe = ordem.filter(a => a.tipo !== 'admin');
+    esferas.innerHTML = (chefes.length ? `<div class="ml-esferas-topo">${chefes.map(a => esferaAgente(a, ag.id)).join('')}</div>` : '') +
+      `<div class="ml-esferas-equipe">${equipe.map(a => esferaAgente(a, ag.id)).join('')}</div>`;
   }
 
   /* silencioso: nas buscas automáticas uma falha de rede passageira não troca a lista por um erro. */
