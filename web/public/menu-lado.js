@@ -264,6 +264,9 @@
     painel.hidden = !links.length;
     $('mlTabs').insertAdjacentHTML('beforeend', `<div data-tour="gm-lembretes"><a class="ml-tab" href="${comAgente(LINK_LEMBRETES.href, ag.id)}">` +
       `<span class="ml-ico" aria-hidden="true">${LINK_LEMBRETES.ico}</span>${LINK_LEMBRETES.nome}</a></div>`);
+    // Crepúsculo: atalho para o Deezer do dono (abre o app do Deezer se estiver instalado)
+    $('mlTabs').insertAdjacentHTML('beforeend', '<a class="ml-tab" href="https://www.deezer.com/" target="_blank" rel="noopener">' +
+      '<span class="ml-ico" aria-hidden="true">🎵</span>Música</a>');
     // a Mesa já está no HTML com href="/mesa": passa a levar o agente junto
     const mesa = document.querySelector('#mlTabs a[href="/mesa"]');
     if (mesa) mesa.setAttribute('href', comAgente('/mesa', ag.id));
