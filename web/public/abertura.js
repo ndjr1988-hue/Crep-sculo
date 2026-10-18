@@ -1,13 +1,13 @@
 'use strict';
-/* abertura.js (Crepúsculo): música de abertura pelo tocador oficial do Deezer.
+/* abertura.js (Crepúsculo): vinheta de abertura.
 
-   Os navegadores só deixam tocar som depois de um gesto da pessoa, então o tocador aparece no
-   primeiro clique ou toque da sessão (uma vez por aba aberta), num cartão pequeno no canto. Com o
-   Deezer logado e assinatura, toca a faixa inteira; sem login, a prévia de 30 s. A música é do
-   catálogo do Deezer, que licencia a execução: nada de arquivo de áudio guardado aqui.
-   O "não tocar mais" fica guardado neste navegador. */
+   Os navegadores só deixam tocar som depois de um gesto da pessoa, então a vinheta toca no
+   primeiro clique, toque ou tecla de cada aba aberta, sempre do início. O arquivo fica na pasta
+   de dados do servidor (/abertura/vinheta.mp3, só com sessão), fora do repositório: é uma música
+   comprada pelo dono, para uso pessoal. Sem arquivo, nada acontece.
+   O "não tocar mais" fica guardado neste navegador (localStorage). */
 (function () {
-  const FAIXA = '92720046';   // Back In Black (AC/DC), abertura do Homem de Ferro, escolhida pelo dono
+  const ARQUIVO = '/abertura/vinheta.mp3';
   const CHAVE_SESSAO = 'crepusculo-abertura-tocou';
   const CHAVE_DESLIGADA = 'crepusculo-abertura-desligada';
 
@@ -16,26 +16,37 @@
 
   if (ler(localStorage, CHAVE_DESLIGADA) === '1' || ler(sessionStorage, CHAVE_SESSAO) === '1') return;
 
-  function toca() {
+  const audio = new Audio();
+  audio.preload = 'auto';
+  let pronto = false;
+  audio.addEventListener('canplaythrough', () => { pronto = true; }, { once: true });
+  audio.addEventListener('error', () => { pronto = false; parar(); });
+  audio.src = ARQUIVO;
+
+  function parar() {
     document.removeEventListener('pointerdown', toca, true);
     document.removeEventListener('keydown', toca, true);
-    if (ler(sessionStorage, CHAVE_SESSAO) === '1') return;
-    gravar(sessionStorage, CHAVE_SESSAO, '1');
+  }
 
-    const cartao = document.createElement('div');
-    cartao.className = 'abertura';
-    cartao.setAttribute('role', 'region');
-    cartao.setAttribute('aria-label', 'Música de abertura');
-    cartao.innerHTML =
-      '<div class="abertura-topo"><span>🌘 abertura</span>' +
+  function aviso() {
+    const el = document.createElement('div');
+    el.className = 'abertura';
+    el.innerHTML = '<span>🌘 abertura</span>' +
       '<button type="button" class="abertura-nunca" title="Não tocar mais neste navegador">não tocar mais</button>' +
-      '<button type="button" class="abertura-fecha" aria-label="Fechar e parar a música">✕</button></div>' +
-      `<iframe title="Música de abertura (Deezer)" src="https://widget.deezer.com/widget/dark/track/${FAIXA}?autoplay=true&tracklist=false"` +
-      ' allow="autoplay; encrypted-media; clipboard-write" loading="eager"></iframe>';
-    const fecha = () => cartao.remove();
-    cartao.querySelector('.abertura-fecha').onclick = fecha;
-    cartao.querySelector('.abertura-nunca').onclick = () => { gravar(localStorage, CHAVE_DESLIGADA, '1'); fecha(); };
-    document.body.appendChild(cartao);
+      '<button type="button" class="abertura-fecha" aria-label="Parar a vinheta">✕</button>';
+    const some = () => { audio.pause(); el.remove(); };
+    el.querySelector('.abertura-fecha').onclick = some;
+    el.querySelector('.abertura-nunca').onclick = () => { gravar(localStorage, CHAVE_DESLIGADA, '1'); some(); };
+    audio.addEventListener('ended', () => el.remove(), { once: true });
+    document.body.appendChild(el);
+  }
+
+  function toca() {
+    if (!pronto && audio.readyState < 2) return;   // ainda baixando ou sem arquivo: espera o próximo gesto
+    parar();
+    gravar(sessionStorage, CHAVE_SESSAO, '1');
+    audio.currentTime = 0;
+    audio.play().then(aviso).catch(() => { /* navegador recusou: fica para a próxima abertura */ });
   }
 
   document.addEventListener('pointerdown', toca, true);
