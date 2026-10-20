@@ -50,7 +50,10 @@ select.btn{-webkit-appearance:none;appearance:none;padding-right:26px;
       background:
         radial-gradient(ellipse at 90% 100%,rgba(212,0,0,.20),transparent 55%),
         linear-gradient(165deg,#050505 0%,#080808 60%,#0c0606 100%);
-      background-attachment:local}
+      /* Com "local" o fundo andava junto com os balões e, no elástico do iOS no fim
+         da conversa, subia e deixava uma faixa clara. Com "scroll" ele fica
+         preso à caixa; o contain impede o elástico de passar para a página. */
+      background-attachment:scroll;overscroll-behavior-y:contain}
 .wrap{max-width:880px;margin:0 auto}
 
 /* a pilha de data NÃO é sticky: grudada no topo ela passava por cima do

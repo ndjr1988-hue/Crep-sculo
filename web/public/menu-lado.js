@@ -96,6 +96,19 @@
     return esc(a.avatar || (a.nome || '?').slice(0, 1));
   }
 
+  /* Hora da última mensagem: "hh:mm" se foi hoje, "ontem" ou "dd/mm". ts em epoch ms; sem ts (null,
+     0 ou inválido) devolve '' e o item fica sem hora, porque "não sei" não é "meia-noite de 1970". */
+  function horaCurta(ts, agora) {
+    if (typeof ts !== 'number' || !isFinite(ts) || ts <= 0) return '';
+    const d = new Date(ts), hoje = agora ? new Date(agora) : new Date();
+    const dia = x => x.getFullYear() * 10000 + x.getMonth() * 100 + x.getDate();
+    const p2 = n => String(n).padStart(2, '0');
+    if (dia(d) === dia(hoje)) return p2(d.getHours()) + ':' + p2(d.getMinutes());
+    const ontem = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - 1);
+    if (dia(d) === dia(ontem)) return 'ontem';
+    return p2(d.getDate()) + '/' + p2(d.getMonth() + 1);
+  }
+
   function itemAgente(a, atualId) {
     const aqui = a.id === atualId;
     const sub = a.subtitulo || [a.provedor, a.modelo].filter(Boolean).join(' · ');
@@ -103,7 +116,29 @@
       `${aqui ? ' aria-current="page"' : ''}>` +
       `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
       `<span class="ml-quem"><b>${esc(a.nome)}</b><small>${esc(sub)}</small></span>` +
-      `${aqui ? '<span class="ml-aqui">aqui</span>' : ''}</a>`;
+      `${aqui ? '<span class="ml-aqui">aqui</span>' : ''}` +
+      `${horaCurta(a.ultima_ts) ? `<span class="ml-hora">${esc(horaCurta(a.ultima_ts))}</span>` : ''}` +
+      `${bolinhaMenu(a, aqui)}</a>`;
+  }
+
+  /* Bolinha de não lidas. `a.nao_lidas` é número (a contagem do servidor), `a.mais` marca "passou do teto".
+     null (não medido), 0 e o agente em que a pessoa já está não mostram nada: sumir é melhor que mentir. */
+  function bolinhaMenu(a, aqui) {
+    const n = a.nao_lidas;
+    if (aqui || typeof n !== 'number' || !isFinite(n) || n <= 0) return '';
+    const texto = (a.mais || n > 99) ? '99+' : String(n);
+    const rot = n + (n === 1 ? ' mensagem não lida' : ' mensagens não lidas') + (a.mais ? ' ou mais' : '');
+    return `<span class="ml-nl" role="img" aria-label="${esc(rot)}">${texto}</span>`;
+  }
+
+  /* Soma das não lidas dos OUTROS agentes. null (não medido) entra como nada, nunca como número. */
+  function totalNaoLidas(lista, contagens, atualId) {
+    let total = 0;
+    for (const a of lista || []) {
+      const n = contagens && contagens[a.id] && contagens[a.id].nao_lidas;
+      if (a.id !== atualId && typeof n === 'number' && isFinite(n) && n > 0) total += n;
+    }
+    return total;
   }
 
   /* Crepúsculo: atalho redondo de um agente, com a foto (ou a letra) e o nome embaixo. */
@@ -112,7 +147,7 @@
     return `<a class="ml-esfera${aqui ? ' atual' : ''}" href="/a/${encodeURIComponent(a.id)}" title="${esc(a.nome)}"` +
       `${aqui ? ' aria-current="page"' : ''}>` +
       `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
-      `<small>${esc(a.nome)}</small></a>`;
+      `${bolinhaMenu(a, aqui)}<small>${esc(a.nome)}</small></a>`;
   }
 
   function linksPainel(a) {
@@ -132,7 +167,7 @@
     return { tipo: 'sem', texto: 'Este navegador não oferece a instalação por aqui. No Chrome ou no Edge, abra o menu do navegador e procure Instalar app. No Firefox para computador, o recurso não existe.' };
   }
 
-  if (!raiz.document) return { ABAS_PAINEL, LINK_LEMBRETES, LINK_AVISOS, linkSessoes, itemAgente, linksPainel, linksExtras, comAgente, chaveDoHref, passosMenu, instrucaoInstalar };
+  if (!raiz.document) return { ABAS_PAINEL, LINK_LEMBRETES, LINK_AVISOS, linkSessoes, itemAgente, bolinhaMenu, totalNaoLidas, horaCurta, linksPainel, linksExtras, comAgente, chaveDoHref, passosMenu, instrucaoInstalar };
 
   /* ── Parte com DOM ─────────────────────────────────────────────────────── */
   const $ = id => document.getElementById(id);
@@ -191,7 +226,10 @@
       return;
     }
     const ordem = lista.filter(a => a.tipo === 'admin').concat(lista.filter(a => a.tipo !== 'admin'));
-    caixa.innerHTML = ordem.map(a => itemAgente(a, ag.id)).join('');
+    ultimaLista = { ag, lista };
+    const comNl = a => contagens[a.id] ? Object.assign({}, a, { nao_lidas: contagens[a.id].nao_lidas, mais: contagens[a.id].mais }) : a;
+    caixa.innerHTML = ordem.map(a => itemAgente(comNl(a), ag.id)).join('');
+    pintaTotalTroca(totalNaoLidas(lista, contagens, ag.id));
     // Crepúsculo: as esferas dos agentes trocam com um toque; o seletor fica só para o caso de erro
     troca.hidden = true;
     let esferas = $('mlEsferas');
@@ -205,8 +243,31 @@
     esferas.hidden = lista.length < 2;
     // o Admin (gestor da conta) fica sozinho em cima; a equipe, numa fileira abaixo
     const chefes = ordem.filter(a => a.tipo === 'admin'), equipe = ordem.filter(a => a.tipo !== 'admin');
-    esferas.innerHTML = (chefes.length ? `<div class="ml-esferas-topo">${chefes.map(a => esferaAgente(a, ag.id)).join('')}</div>` : '') +
-      `<div class="ml-esferas-equipe">${equipe.map(a => esferaAgente(a, ag.id)).join('')}</div>`;
+    esferas.innerHTML = (chefes.length ? `<div class="ml-esferas-topo">${chefes.map(a => esferaAgente(comNl(a), ag.id)).join('')}</div>` : '') +
+      `<div class="ml-esferas-equipe">${equipe.map(a => esferaAgente(comNl(a), ag.id)).join('')}</div>`;
+  }
+
+  /* A lista vem recolhida: sem o total no botão, a bolinha de cada agente só aparece depois do toque. */
+  function pintaTotalTroca(total) {
+    const btn = $('mlTrocaBtn');
+    if (!btn) return;
+    let marca = $('mlTrocaNl');
+    if (!marca) {
+      marca = document.createElement('span');
+      marca.id = 'mlTrocaNl'; marca.className = 'ml-nl'; marca.setAttribute('role', 'img');
+      btn.insertBefore(marca, btn.querySelector('.ml-seta'));
+    }
+    marca.style.display = total > 0 ? '' : 'none';
+    marca.textContent = total > 99 ? '99+' : String(total);
+    marca.setAttribute('aria-label', total + (total === 1 ? ' mensagem não lida' : ' mensagens não lidas') + ' em outros agentes');
+  }
+
+  /* Contagens de não lidas por agente (slug -> objeto do servidor). Guardadas aqui para a lista de 30 s
+     também pintar a bolinha, e repintada quando a tela entrega uma contagem nova. */
+  let contagens = {}, ultimaLista = null;
+  function defineNaoLidas(mapa) {
+    contagens = mapa && typeof mapa === 'object' ? mapa : {};
+    if (ultimaLista) pintaLista(ultimaLista.ag, ultimaLista.lista, null);
   }
 
   /* silencioso: nas buscas automáticas uma falha de rede passageira não troca a lista por um erro. */
@@ -373,5 +434,5 @@
     pintaInstalar();
   }
 
-  return { ABAS_PAINEL, LINK_LEMBRETES, LINK_AVISOS, linkSessoes, itemAgente, linksPainel, linksExtras, comAgente, chaveDoHref, passosMenu, instrucaoInstalar, inicia, marca, extras };
+  return { ABAS_PAINEL, LINK_LEMBRETES, LINK_AVISOS, linkSessoes, itemAgente, linksPainel, linksExtras, comAgente, chaveDoHref, passosMenu, instrucaoInstalar, inicia, marca, extras, defineNaoLidas, totalNaoLidas };
 });
