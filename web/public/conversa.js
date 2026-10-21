@@ -252,6 +252,7 @@ if (!caps.voz) document.documentElement.classList.add('sem-voz');
 function setEstado(txt, ehErro) {
   estadoEl.textContent = txt;
   estadoEl.style.color = ehErro ? '#d40000' : '';
+  estadoEl.dataset.sinal = txt === 'pronto' ? 'vivo' : '';   // Pretor: ponto verde pulsando (hitech.css)
   pintaAtividade();
 }
 
@@ -329,6 +330,7 @@ function pintaAtividade() {
   const est = foto && foto.agentes ? foto.agentes[AGENTE.id] : null;
   // sem o stream aberto a foto está velha: não acusa trabalho
   const mostra = !!est && est.estado !== 'ocioso' && streamAberto;
+  document.documentElement.classList.toggle('agente-trabalhando', mostra);   // Pretor: anel na foto (hitech.css)
   if (atividadeEl.hidden === mostra) {
     // a faixa entra e sai do fluxo e a área de mensagens muda de altura: o
     // observador de rolagem (acima) mantém quem estava no fim no fim e quem lia lá em cima parado

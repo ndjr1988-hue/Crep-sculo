@@ -1,0 +1,78 @@
+/* Pretor high-tech (pedido do Chefe em 21/10/2026, ideias 1 e 6), carregado depois dos temas.
+   1. Vidro fosco: cabeçalho, menu e barra de escrever translúcidos e desfocados sobre um fundo com
+      brilhos vermelhos; balões semitransparentes com borda fina e um reflexo no alto. O desfoque fica
+      só nas três faixas fixas, para não pesar no celular.
+   6. Sinais vivos: ponto verde pulsando ao lado de "pronto" e anel pulsando na foto do agente
+      enquanto ele trabalha (o conversa.js marca #estado[data-sinal] e html.agente-trabalhando). */
+
+/* ── fundo com brilhos (o que dá vida ao vidro) ── */
+html:not(.tema-claro) body{background:
+  radial-gradient(ellipse 60% 45% at 12% 8%,rgba(212,0,0,.20),transparent 70%),
+  radial-gradient(ellipse 55% 50% at 92% 92%,rgba(140,0,45,.24),transparent 70%),
+  radial-gradient(ellipse 40% 35% at 70% 30%,rgba(90,40,120,.10),transparent 70%),
+  #0d0d11 fixed}
+html.tema-claro body{background:
+  radial-gradient(ellipse 60% 45% at 12% 8%,rgba(212,0,0,.10),transparent 70%),
+  radial-gradient(ellipse 55% 50% at 92% 92%,rgba(163,18,42,.10),transparent 70%),
+  #f3f0f1 fixed}
+#chat,html:not(.tema-claro) #chat,html.tema-claro #chat{background:transparent}
+
+/* ── faixas de vidro: cabeçalho, menu, barra de escrever ── */
+header,html.casca #cabecalho,aside#menu,.barra{
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%)}
+html:not(.tema-claro) header,html:not(.tema-claro).casca #cabecalho,html:not(.tema-claro) .barra{
+  background:rgba(18,18,23,.58);border-color:rgba(255,255,255,.08)}
+html:not(.tema-claro) aside#menu{background:rgba(14,14,19,.62);border-right:1px solid rgba(255,255,255,.07);
+  --ml-painel:#121217}
+html.tema-claro header,html.tema-claro.casca #cabecalho,html.tema-claro .barra{
+  background:rgba(255,255,255,.62);border-color:rgba(0,0,0,.06)}
+html.tema-claro aside#menu{background:rgba(255,255,255,.66);border-right:1px solid rgba(0,0,0,.06)}
+
+/* ── balões de vidro ── */
+html:not(.tema-claro) .row.her .bub,html:not(.tema-claro) .row.cron .bub{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 18px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06)}
+html:not(.tema-claro) .row.me .bub{
+  background:linear-gradient(180deg,rgba(190,25,45,.62),rgba(120,12,30,.55));
+  border:1px solid rgba(255,90,100,.28);box-shadow:0 4px 18px rgba(80,0,10,.30),inset 0 1px 0 rgba(255,255,255,.10)}
+html.tema-claro .row.her .bub,html.tema-claro .row.cron .bub{
+  background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 16px rgba(60,20,25,.07)}
+html.tema-claro .row.me .bub{
+  background:rgba(247,222,225,.88);border:1px solid rgba(163,18,42,.14);box-shadow:0 4px 16px rgba(120,10,30,.08)}
+/* os balões de alerta (entrega/pedido) e os visuais continuam com a cor deles */
+.row.alerta-entrega .bub,.row.alerta-pedido .bub{background-image:none}
+
+/* campo de escrever e cartões de vidro */
+html:not(.tema-claro) #entrada{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10)}
+html:not(.tema-claro) #entrada:focus{border-color:rgba(255,60,60,.45);box-shadow:0 0 0 3px rgba(212,0,0,.15)}
+html:not(.tema-claro) .ml-tab.ativo{box-shadow:0 4px 16px rgba(212,0,0,.30),inset 0 1px 0 rgba(255,255,255,.18)}
+html:not(.tema-claro) .btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09)}
+
+/* ── ícones de traço fino (icones-traco.js troca os símbolos por estes desenhos) ── */
+.ico-traco{width:18px;height:18px;display:inline-block;vertical-align:-3px;
+  fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ml-ico .ico-traco{width:19px;height:19px}
+.btn .ico-traco{width:17px;height:17px;margin-right:2px}
+
+/* ── sinais vivos ── */
+#estado[data-sinal="vivo"]::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:#22c55e;margin-right:6px;vertical-align:1px;animation:sinalVivo 2s ease-out infinite}
+#estado[data-sinal="vivo"]{color:#4ade80!important}
+html.tema-claro #estado[data-sinal="vivo"]{color:#15803d!important}
+@keyframes sinalVivo{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+#av{position:relative}
+html.agente-trabalhando #av{animation:fotoTrabalhando 1.6s ease-in-out infinite}
+@keyframes fotoTrabalhando{0%,100%{box-shadow:0 0 0 2px rgba(255,42,42,.85),0 0 0 0 rgba(255,42,42,.45)}
+  50%{box-shadow:0 0 0 2px rgba(255,42,42,.85),0 0 0 8px rgba(255,42,42,0)}}
+/* sem desfoque aqui: o backdrop-filter quebra o brilho recortado no texto (background-clip:text) */
+html:not(.tema-claro) #atividade{background:rgba(18,18,23,.45);border-top:1px solid rgba(255,255,255,.06)}
+
+@media (prefers-reduced-motion:reduce){
+  #estado[data-sinal="vivo"]::before,html.agente-trabalhando #av{animation:none}
+  html.agente-trabalhando #av{box-shadow:0 0 0 2px rgba(255,42,42,.85)}}
+
+/* Computador: a conversa ocupa a largura toda, como no WhatsApp Web. As mensagens do Chefe encostam
+   à direita da tela e as do agente à esquerda, sem a coluna centralizada (pedido de 21/10/2026). */
+@media (min-width:1100px){
+  .wrap{max-width:none;padding:0 28px}
+}
