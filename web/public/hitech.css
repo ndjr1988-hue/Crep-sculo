@@ -75,4 +75,7 @@ html:not(.tema-claro) #atividade{background:rgba(18,18,23,.45);border-top:1px so
    à direita da tela e as do agente à esquerda, sem a coluna centralizada (pedido de 21/10/2026). */
 @media (min-width:1100px){
   .wrap{max-width:none;padding:0 28px}
+  /* e as respostas do agente também ficam à direita, logo abaixo das do Chefe; a cor separa quem falou */
+  .row.her,.row.cron{justify-content:flex-end}
+  .row.her .bub,.row.cron .bub{border-bottom-left-radius:18px;border-bottom-right-radius:5px}
 }
