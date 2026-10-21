@@ -167,7 +167,7 @@ html:where(:not(.tema-claro)).casca #tourCaixa button.pri{background:#d40000;bor
 :where(html:not(.tema-claro)) .fimnovas{color:#ffffff}
 :where(html:not(.tema-claro)) #atividade{background:#371c1e;color:#c7adaf;border-top:1px solid rgba(0,0,0,.05)}
 :where(html:not(.tema-claro)) .atv-pts i{background:#d40000}
-:where(html:not(.tema-claro)) #atividade .atv-txt{background:linear-gradient(90deg,#c7adaf 0%,#c7adaf 38%,#ff2a2a 50%,#c7adaf 62%,#c7adaf 100%)}
+:where(html:not(.tema-claro)) #atividade .atv-txt{background:linear-gradient(90deg,#c7adaf 0%,#c7adaf 38%,#ff2a2a 50%,#c7adaf 62%,#c7adaf 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
 :where(html:not(.tema-claro)) #atividade.atv-alerta .atv-pts i{background:#b7791f}
 :where(html:not(.tema-claro)) #atividade.atv-cinza .atv-pts i{background:#707070}
 :where(html:not(.tema-claro)) #atividade.atv-alerta .atv-txt{color:#f0c075}
