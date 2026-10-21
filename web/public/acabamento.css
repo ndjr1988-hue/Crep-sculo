@@ -1,0 +1,15 @@
+/* Crepúsculo: acabamento suave e balões mais leves (pedido do Chefe em 21/10/2026), vale nos dois temas.
+   Cantos mais redondos, sombras macias no lugar de bordas duras e transições curtas. */
+.btn,.dv-botao,button,.ml-tab,.ml-ag,select,input,textarea{
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .12s ease}
+.btn:active,.dv-botao:active,.ml-tab:active{transform:scale(.97)}
+.btn{border-radius:20px}
+.bub,.msg .bub,.bolha{border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06)}
+.ml-tab,.ml-ag{border-radius:12px}
+header{box-shadow:0 1px 10px rgba(0,0,0,.10)}
+html,body,header,#chat,.ml-painel,.ml-lado{transition:background-color .25s ease,color .25s ease}
+.ml-tema{width:100%;border:0;background:transparent;font:inherit;text-align:left;cursor:pointer}
+/* balões mais leves (ideia 3): mais respiro e letra um pouco maior */
+.row{margin-bottom:12px}
+.bub{font-size:16px;padding:10px 14px 8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

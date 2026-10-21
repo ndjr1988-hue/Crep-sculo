@@ -403,6 +403,15 @@
       `<span class="ml-ico" aria-hidden="true">${LINK_LEMBRETES.ico}</span>${LINK_LEMBRETES.nome}</a></div>`);
     $('mlTabs').insertAdjacentHTML('beforeend', `<div data-tour="gm-avisos"><a class="ml-tab" href="${comAgente(LINK_AVISOS.href, ag.id)}">` +
       `<span class="ml-ico" aria-hidden="true">${LINK_AVISOS.ico}</span>${LINK_AVISOS.nome}</a></div>`);
+    // Crepúsculo: alternar tema claro/escuro (tema.js guarda a escolha no aparelho)
+    if (window.CrepTema) {
+      $('mlTabs').insertAdjacentHTML('beforeend', '<div><button type="button" class="ml-tab ml-tema" id="mlTema"></button></div>');
+      const bt = $('mlTema');
+      const pinta = () => { const claro = window.CrepTema.claro();
+        bt.innerHTML = `<span class="ml-ico" aria-hidden="true">${claro ? '☾' : '☀'}</span>${claro ? 'Tema escuro' : 'Tema claro'}`; };
+      pinta();
+      bt.onclick = ev => { ev.stopPropagation(); window.CrepTema.alternar(); pinta(); };
+    }
     // a Mesa já está no HTML com href="/mesa": passa a levar o agente junto
     const mesa = document.querySelector('#mlTabs a[href="/mesa"]');
     if (mesa) mesa.setAttribute('href', comAgente('/mesa', ag.id));
