@@ -240,7 +240,7 @@ function pintaAvatar(el, a) {
   el.style.background = a.cor || '#d40000';
 }
 document.documentElement.style.setProperty('--accent', AGENTE.cor || '#d40000');
-document.title = AGENTE.nome + ' - Sentinela';
+document.title = AGENTE.nome + ' - Pretor';
 $('nomeAgente').textContent = AGENTE.nome;
 pintaAvatar(avEl, AGENTE);
 entrada.placeholder = 'Escrever para ' + AGENTE.nome;
@@ -2155,7 +2155,7 @@ function verificaBordas() {
 }
 chat.addEventListener('scroll', verificaBordas, { passive: true });
 
-/* Sentinelas fora do #wrap (o aplicaNos só mexe nos filhos dele). O evento de
+/* Pretors fora do #wrap (o aplicaNos só mexe nos filhos dele). O evento de
    scroll sozinho falha no iPhone: com a inércia e o scrollTop reposicionado ele
    deixa de disparar, e o observador pega o mesmo caso por outro caminho. */
 const sentTopo = document.createElement('div');
@@ -4052,7 +4052,7 @@ function passosTutorial() {
   }
   if (!$('mlConfig').hidden) {
     passos.push({ alvo: '#mlConfig', antes: abreM, titulo: 'Configurações',
-      oque: 'Hoje tem um item: Instalar o app, que coloca o Sentinela como aplicativo na tela inicial do aparelho.',
+      oque: 'Hoje tem um item: Instalar o app, que coloca o Pretor como aplicativo na tela inicial do aparelho.',
       como: 'No Android e no computador, com Chrome ou Edge, o toque abre o pedido de instalação do navegador. No iPhone e no iPad, o item mostra o caminho: Compartilhar e depois Adicionar à Tela de Início. O item some sozinho quando o app já está instalado.',
       porque: 'O app instalado abre sem a barra do navegador e fica a um toque, como qualquer outro aplicativo.' });
   }

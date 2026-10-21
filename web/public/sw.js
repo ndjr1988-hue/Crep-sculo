@@ -5,7 +5,7 @@
    abrir rápido e para o app instalado ter o que mostrar. NUNCA mexe em /api/,
    /p/, /login, /sair nem nas páginas de conversa (/a/...): conteúdo da conversa,
    painéis e sessão passam direto para a rede, sem cópia nenhuma. */
-const VERSAO = 'dgclaw-estaticos-v24-crepusculo-3';
+const VERSAO = 'dgclaw-estaticos-v24-crepusculo-4';
 const ESTATICOS = [
   '/conversa.css', '/chat.css', '/conversa.js', '/menu-lado.js', '/menu-lado.css', '/casca.js', '/casca.css', '/login-cartao.js', '/login-expirado.js', '/login-expirado.css', '/trilha-tela.js', '/rolagem.js', '/conversa-puro.js', '/tour.js',
   '/onboarding.js', '/onboarding.css',
@@ -70,7 +70,7 @@ self.addEventListener('push', ev => {
     try { cru = ev.data.text(); } catch (e) { console.warn('sw: não consegui ler o texto do aviso:', e.message); }
     try { d = JSON.parse(cru); } catch (e) { console.warn('sw: o aviso não veio em JSON, mostro o texto cru:', e.message); }
   }
-  if (!d || typeof d !== 'object') d = { titulo: 'Sentinela', corpo: cru || 'Você tem um aviso novo.' };
+  if (!d || typeof d !== 'object') d = { titulo: 'Pretor', corpo: cru || 'Você tem um aviso novo.' };
   const acoes = Array.isArray(d.acoes) ? d.acoes.filter(a => a && a.acao && a.titulo).slice(0, 2) : [];
   const opcoes = {
     body: d.corpo || '',
@@ -83,7 +83,7 @@ self.addEventListener('push', ev => {
   };
   if (d.tag) opcoes.tag = d.tag;
   if (d.imagem) opcoes.image = d.imagem;
-  ev.waitUntil(self.registration.showNotification(d.titulo || 'Sentinela', opcoes));
+  ev.waitUntil(self.registration.showNotification(d.titulo || 'Pretor', opcoes));
 });
 
 /* Foca uma janela já aberta do DG Claw e leva para a url; sem janela, abre uma. */

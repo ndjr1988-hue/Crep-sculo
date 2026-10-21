@@ -40,7 +40,7 @@
     '<header data-tour="casca-cabecalho" id="cabecalho">' +
     '<button class="btn ghost" id="btnMenu" type="button" aria-label="Abrir o menu" data-tour="casca-menu">☰</button>' +
     '<div class="av" id="av" aria-hidden="true"></div>' +
-    '<div class="who" id="who" data-tour="casca-titulo"><b id="nomeAgente">Sentinela</b><span id="estado"></span></div>' +
+    '<div class="who" id="who" data-tour="casca-titulo"><b id="nomeAgente">Pretor</b><span id="estado"></span></div>' +
     '<a class="btn" id="btnSessoes" href="#" hidden data-tour="casca-sessoes" aria-label="Abrir as Sessões deste agente" title="Sessões de trabalho deste agente">🖥 <span class="lbl">Sessões</span></a>' +
     '<button class="btn" id="btnTutorial" type="button" title="Visita guiada desta tela: o que é cada parte e por que está aqui">Tutorial</button>' +
     '</header>';
@@ -52,7 +52,7 @@
     '<button class="fechar" id="btnFechaMenu" type="button" aria-label="Fechar o menu">✕</button>' +
     '<div class="ml-marca" data-tour="gm-marca">' +
     '<div class="ml-moldura" id="mlMoldura" aria-hidden="true"></div>' +
-    '<div class="ml-nome" id="mlNome">Sentinela</div>' +
+    '<div class="ml-nome" id="mlNome">Pretor</div>' +
     '<div class="ml-sub" id="mlSub"></div>' +
     '<button type="button" class="gm-tut" id="gmTutorial" title="Visita guiada do menu: o que é cada parte e por que está aqui">Tutorial</button>' +
     '<div class="ml-troca" id="mlTroca" data-tour="agentes" hidden>' +
@@ -94,7 +94,7 @@
 
   function pintaCabecalho(ag) {
     document.documentElement.style.setProperty('--accent', ag.cor || '#d40000');
-    $('nomeAgente').textContent = ag.nome || 'Sentinela';
+    $('nomeAgente').textContent = ag.nome || 'Pretor';
     const av = $('av');
     const img = ag.avatar_img || (/^https:\/\//i.test(ag.avatar || '') ? ag.avatar : '');
     av.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(ag.avatar || (ag.nome || '?').slice(0, 1));
@@ -198,7 +198,7 @@
         est.lista = lista;
         let ag = escolheAgente(lista, ctx);
         const slug = (/^\/p\/([^/]+)/.exec(location.pathname) || [])[1] || new URLSearchParams(location.search).get('a') || guardado || '';
-        if (!ag) ag = { id: erro ? slug : '', nome: 'Sentinela', cor: '#d40000', avatar: 'D' };
+        if (!ag) ag = { id: erro ? slug : '', nome: 'Pretor', cor: '#d40000', avatar: 'D' };
         est.agente = ag;
         pintaCabecalho(ag);
         if (!erro) guardaAgente(ag.id);
