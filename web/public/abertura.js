@@ -31,7 +31,7 @@
   function aviso() {
     const el = document.createElement('div');
     el.className = 'abertura';
-    el.innerHTML = '<span>🌘 abertura</span>' +
+    el.innerHTML = '<span>♪ abertura</span>' +
       '<button type="button" class="abertura-nunca" title="Não tocar mais neste navegador">não tocar mais</button>' +
       '<button type="button" class="abertura-fecha" aria-label="Parar a vinheta">✕</button>';
     const some = () => { audio.pause(); el.remove(); };

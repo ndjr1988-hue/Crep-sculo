@@ -13,7 +13,7 @@ body{margin:0;color:var(--txt);display:flex;align-items:center;justify-content:c
 .cartao{width:100%;max-width:380px;background:#000000;border-radius:18px;padding:26px 22px 24px;
   box-shadow:0 4px 22px rgba(0,0,0,.16)}
 .marca{display:flex;align-items:center;gap:10px}
-.marca .emoji{font-size:34px;line-height:1}
+.marca .emoji{font-size:34px;line-height:1;width:38px;height:38px}
 .marca h1{margin:0;font-size:24px;font-weight:700}
 .sub{margin:6px 0 16px;color:var(--muted);font-size:14.5px}
 .erro{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#1f0404;color:#8f2f2f;
