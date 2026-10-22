@@ -65,6 +65,7 @@ html:where(.tema-claro)[data-tema="escuro"] .cmd-saida.erro{color:#352220}
 html:where(.tema-claro).casca #cabecalho,:where(html.tema-claro) aside#menu{--line:rgba(0,0,0,.08);--muted:#816c6e;--txt:#1b1011}
 html:where(.tema-claro).casca #cabecalho{background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 html:where(.tema-claro).casca #cabecalho .av{color:#ffffff;background:linear-gradient(180deg,#f40000,#ae0000)}
+html:where(.tema-claro).casca #cabecalho .av:has(>img){background:#e3e3e3}
 html:where(.tema-claro).casca #cabecalho .who span{color:var(--accent,#ae0000)}
 html:where(.tema-claro).casca #cabecalho .btn{background:#f6f2f2;color:#52383a}
 :where(html.tema-claro) #overlayMenu{background:rgba(21,13,13,.45)}
@@ -148,6 +149,7 @@ html:where(.tema-claro).casca #tourCaixa button.pri{background:#ae0000;border-co
 :where(html.tema-claro) #faixaErro{background:#f2e9e9;color:#752727;border:1px solid #e0cccc}
 :where(html.tema-claro) #faixaAviso{background:#edeae0;color:#574d34;border:1px solid #d8d3bf}
 :where(html.tema-claro) #faixaAudio{background:#edeae0;color:#574d34;border:1px solid #d8d3bf}
+:where(html.tema-claro) #btnMenu.precisa .bolinha-menu{background:#be700a;color:#ffffff}
 :where(html.tema-claro) #btnMenu .bolinha-menu{background:#b2271e;border:2px solid var(--header,#ffffff)}
 :where(html.tema-claro) .tools a.btn{color:#52383a}
 :where(html.tema-claro) #btnContinua.on{color:#ffffff}
@@ -173,9 +175,12 @@ html:where(.tema-claro).casca #tourCaixa button.pri{background:#ae0000;border-co
 :where(html.tema-claro) #atividade.atv-alerta .atv-txt{color:#eaa63b}
 :where(html.tema-claro) #atividade.atv-cinza .atv-txt{color:#757575}
 :where(html.tema-claro) .erroconfig p{color:#614a4c}
-@media (max-width:600px){:where(html.tema-claro) .troca-baixo .bolinha-nl{background:#b2271e;color:#ffffff;border:2px solid var(--header,#ffffff)}}
+@media (max-width:600px){:where(html.tema-claro) .troca-baixo .selo-aten{background:#be700a;color:#ffffff;border:2px solid var(--header,#ffffff)}
+:where(html.tema-claro) .troca-baixo .selo-trab{background:#f40000;border:2px solid var(--header,#ffffff)}
+:where(html.tema-claro) .troca-baixo .bolinha-nl{background:#b2271e;color:#ffffff;border:2px solid var(--header,#ffffff)}}
 :where(html.tema-claro) #overlayMenu{background:rgba(21,13,13,.45)}
 :where(html.tema-claro) aside#menu{background:#ffffff;box-shadow:2px 0 14px rgba(0,0,0,.2)}
+:where(html.tema-claro) .av:has(>img){background:#e3e3e3 !important}
 :where(html.tema-claro) .lnkbaixa{border:1px solid rgba(184,109,114,.35);background:#f5eff0;color:#b86d72}
 :where(html.tema-claro) .midbx{background:rgba(21,13,13,.62);color:#ffffff}
 :where(html.tema-claro) .midbx:active{background:rgba(21,13,13,.85)}
@@ -239,6 +244,11 @@ html:where(.tema-claro)[data-tema="escuro"] .pc-erro{background:#3f2826;color:#1
 @media(prefers-color-scheme:nunca){html:where(.tema-claro):not([data-tema="claro"]) .pc{background:#363121;color:#221f15;border-color:#daaa20}
 html:where(.tema-claro):not([data-tema="claro"]) .pc-nega{color:#1b1110;border-color:#efe5e4}
 html:where(.tema-claro):not([data-tema="claro"]) .pc-erro{background:#3f2826;color:#1b1110}}
+:where(html.tema-claro) .pq-cabecalho{background:rgba(0,0,0,.1)}
+:where(html.tema-claro) .pq-opcao:active{background:rgba(0,0,0,.07)}
+:where(html.tema-claro) .pq-texto{border:1px solid #8b6300;background:#ebebeb;color:#1b1011}
+html:where(.tema-claro)[data-tema="escuro"] .pq-texto{background:#e8e5da;color:#221f15;border-color:#daaa20}
+@media(prefers-color-scheme:dark){html:where(.tema-claro):not([data-tema="claro"]) .pq-texto{background:#e8e5da;color:#221f15;border-color:#daaa20}}
 :where(html.tema-claro) .meta.fila{color:#564a34}
 :where(html.tema-claro) .cartaoarq{background:#e9e9e9;color:#52383a}
 :where(html.tema-claro) .cartaoarq-info{color:#7f6b6d}
@@ -308,6 +318,7 @@ html:where(.tema-claro)[data-tema="escuro"]{--dv-fundo:#1a1112;--dv-superficie:#
 :where(html.tema-claro) body.lp #tourCaixa .tour-acoes{background:#ffffff}
 :where(html.tema-claro) body.lp #tourCaixa button{background:#ffffff;color:#52383a}
 :where(html.tema-claro) body.lp #tourCaixa button.pri{color:#ffffff}
+:where(html.tema-claro) .lp-check{color:#392729}
 /* login-expirado.css */
 :where(html.tema-claro) #dlgLoginExpirado{color:#3d2a2c;background:#ffffff;box-shadow:0 10px 36px rgba(0,0,0,.28)}
 :where(html.tema-claro) #dlgLoginExpirado::backdrop{background:rgba(0,0,0,.45)}
@@ -333,7 +344,13 @@ html:where(.tema-claro)[data-tema="escuro"]{--dv-fundo:#1a1112;--dv-superficie:#
 :where(html.tema-claro) .ml-lista{box-shadow:0 8px 24px rgba(21,23,35,.14)}
 :where(html.tema-claro) .ml-mini{color:#ffffff}
 :where(html.tema-claro) .ml-nl{background:#b2271e;color:#ffffff}
+:where(html.tema-claro) .ml-aten{background:#be700a;color:#ffffff}
+:where(html.tema-claro) .ml-ag.precisa .ml-quem small{color:#e78e12}
+:where(html.tema-claro) .ml-trab i{background:#ae0000}
 :where(html.tema-claro) .ml-tab.ativo{color:#ffffff;box-shadow:0 1px 2px rgba(21,23,35,.06),0 8px 24px rgba(21,23,35,.08)}
+:where(html.tema-claro) .ml-uso-bar i{background:#27824d}
+:where(html.tema-claro) .ml-uso-bar.ambar i{background:#b2710f}
+:where(html.tema-claro) .ml-uso-bar.vermelho i{background:#b93126}
 :where(html.tema-claro) .sx-bol{background:#c82b1f}
 /* mesa.css */
 :root:where(.tema-claro){--fundo:#f4eced;--cartao:#ffffff;--txt:#1b1011;--muted:#735d5f;--accent:#ae0000;--line:rgba(0,0,0,.1);--header:#ffffff;--suave:#f6f2f2;--c-esperando:#8b6300;--b-esperando:#f2f0e9;--c-travada:#931f19;--b-travada:#f6f1f1;--c-parada:#564a34;--b-parada:#f0ece5;--c-fazendo:#b86d72;--b-fazendo:#f1e8e9;--c-fechada:#735d5f;--b-fechada:#eee9e9}
