@@ -59,7 +59,8 @@ html:where(:not(.tema-claro))[data-tema="escuro"] .cmd-saida.erro{color:#ffb3aa}
 :where(html:not(.tema-claro)) .dgcofre{background:rgba(0,0,0,.045)}
 :where(html:not(.tema-claro)) .dgc-nome{background:rgba(0,0,0,.075)}
 :where(html:not(.tema-claro)) .dgc-valor{background:#121214}
-:where(html:not(.tema-claro)) .dgc-salvar{color:#ffffff}
+:where(html:not(.tema-claro)) .dgc-salvar,:where(html:not(.tema-claro)) .dgc-cancelar,:where(html:not(.tema-claro)) .dgc-olho{color:#ffffff}
+:where(html:not(.tema-claro)) .viscofre-cheia{background:var(--bg,#ffffff)}
 :where(html:not(.tema-claro)) .dgc-msg{color:#b3261e}
 /* casca.css */
 html:where(:not(.tema-claro)).casca #cabecalho,:where(html:not(.tema-claro)) aside#menu{--line:rgba(0,0,0,.08);--muted:#937e80;--txt:#f0e3e4}
