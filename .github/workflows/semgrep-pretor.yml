@@ -1,0 +1,43 @@
+# Semgrep no Pretor (fork): segunda opinião de análise estática, ao lado do CodeQL do seguranca.yml.
+# Pedido do Chefe em 24/10/2026. Arquivo só do fork (o seguranca.yml é do upstream e fica intacto,
+# para o merge das atualizações não conflitar).
+# Só relata: os achados vão para a aba Security > Code scanning do GitHub; o job só falha se o
+# Semgrep quebrar. Imagem fixada pelo digest (versão no comentário).
+name: Semgrep
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "41 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semgrep-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: semgrep
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    container:
+      image: semgrep/semgrep@sha256:529ee8a277ec8adc5b534d7c74eea0a47e9de21d62852b6ba7ac6ba9566845c3 # 1.180.0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: varredura
+        env:
+          SEMGREP_SEND_METRICS: "off"
+        run: semgrep scan --config p/default --config p/secrets --sarif --output semgrep.sarif --metrics off .
+      - uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4
+        if: always() && hashFiles('semgrep.sarif') != ''
+        with:
+          sarif_file: semgrep.sarif
+          category: semgrep
