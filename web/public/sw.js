@@ -5,7 +5,7 @@
    abrir rápido e para o app instalado ter o que mostrar. NUNCA mexe em /api/,
    /p/, /login, /sair nem nas páginas de conversa (/a/...): conteúdo da conversa,
    painéis e sessão passam direto para a rede, sem cópia nenhuma. */
-const VERSAO = 'dgclaw-estaticos-v29-crepusculo-1';
+const VERSAO = 'dgclaw-estaticos-v29-crepusculo-2';
 const ESTATICOS = [
   '/conversa.css', '/chat.css', '/conversa.js', '/menu-lado.js', '/menu-lado.css', '/casca.js', '/casca.css', '/login-cartao.js', '/login-expirado.js', '/login-expirado.css', '/trilha-tela.js', '/rolagem.js', '/conversa-puro.js', '/tour.js',
   '/onboarding.js', '/onboarding.css',
@@ -16,7 +16,7 @@ const ESTATICOS = [
   '/lembretes-faixa.js', '/lembretes.js', '/lembretes.css',
   '/atualizacao-faixa.js', '/atualizacao-faixa.css',
   '/foco-tela.js', '/foco-tela.css',
-  '/abertura.js', '/tema.js', '/tema-claro.css', '/tema-grafite.css', '/acabamento.css', '/hitech.css', '/icones-traco.js',
+  '/abertura.js', '/tema.js', '/tema-claro.css', '/tema-grafite.css', '/acabamento.css', '/hitech.css', '/icones-traco.js', '/painel-cotacoes.js',
   '/login.css', '/login.js', '/sem-zoom.css', '/sem-zoom.js',
   '/manifest.webmanifest',
   '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png', '/icons/marca.svg',
