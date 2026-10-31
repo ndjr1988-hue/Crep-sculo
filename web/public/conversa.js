@@ -237,9 +237,9 @@ function pintaAvatar(el, a) {
   if (!el) return;
   const img = a.avatar_img || (/^https:\/\//i.test(a.avatar || '') ? a.avatar : '');
   el.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(a.avatar || (a.nome || '?').slice(0, 1));
-  el.style.background = a.cor || '#d40000';
+  el.style.background = a.cor || '#2f8bff';
 }
-document.documentElement.style.setProperty('--accent', AGENTE.cor || '#d40000');
+document.documentElement.style.setProperty('--accent', AGENTE.cor || '#2f8bff');
 document.title = AGENTE.nome + ' - Pretor';
 $('nomeAgente').textContent = AGENTE.nome;
 pintaAvatar(avEl, AGENTE);
@@ -251,7 +251,7 @@ if (!caps.voz) document.documentElement.classList.add('sem-voz');
 /* ── Texto de estado, faixas, utilidades ──────────────────────────────────── */
 function setEstado(txt, ehErro) {
   estadoEl.textContent = txt;
-  estadoEl.style.color = ehErro ? '#d40000' : '';
+  estadoEl.style.color = ehErro ? '#2f8bff' : '';
   estadoEl.dataset.sinal = txt === 'pronto' ? 'vivo' : '';   // Pretor: ponto verde pulsando (hitech.css)
   pintaAtividade();
 }
@@ -1477,13 +1477,13 @@ function metaPendente(p) {
     return `<span class="meta" title="entregue">✓ ${esc(p.hhmm)}</span>`;
   }
   if (p.estado === 'falhou' && p.recusado) {   // comando recusado: reenviar daria o mesmo erro
-    return `<span class="meta"><span style="color:#d40000;font-weight:600">recusado</span> ` +
+    return `<span class="meta"><span style="color:#2f8bff;font-weight:600">recusado</span> ` +
            `${esc(p.erro || 'motivo desconhecido')} ` +
            `<button class="mini descartar" data-pend="${p.n}">descartar</button></span>`;
   }
   if (p.estado === 'falhou') {
     const ocupado = p.conferindo ? ' disabled' : '';
-    return `<span class="meta"><span style="color:#d40000;font-weight:600" ` +
+    return `<span class="meta"><span style="color:#2f8bff;font-weight:600" ` +
            `title="${esc(p.erro || 'motivo desconhecido')}">não foi enviada</span> ` +
            `<button class="mini reenviar" data-pend="${p.n}"${ocupado}>reenviar</button> ` +
            `<button class="mini descartar" data-pend="${p.n}"${ocupado}>descartar</button></span>`;
@@ -3445,8 +3445,8 @@ function pintaTrocaBaixo() {
       : selo.tipo === 'marcada' ? '<span class="bolinha-nl ponto" aria-hidden="true"></span>'
       : '<span class="selo-trab" aria-hidden="true"></span>';
     return `<a href="/a/${encodeURIComponent(a.id)}" title="${esc(rot)}" ` +
-      (atual ? `class="atual" aria-current="page" style="--cor-troca:${esc(a.cor || '#d40000')}" ` : '') +
-      `aria-label="Abrir a conversa com ${esc(rot + aviso)}"><div class="av" style="background:${esc(a.cor || '#d40000')}">${av}</div>` +
+      (atual ? `class="atual" aria-current="page" style="--cor-troca:${esc(a.cor || '#2f8bff')}" ` : '') +
+      `aria-label="Abrir a conversa com ${esc(rot + aviso)}"><div class="av" style="background:${esc(a.cor || '#2f8bff')}">${av}</div>` +
       `${marcaSelo}</a>`;
   }).join('');
   centralizaTrocaBaixo();

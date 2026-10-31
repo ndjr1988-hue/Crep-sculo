@@ -21,27 +21,27 @@
 
   const css = `
 #pcQuadro{position:fixed;top:84px;left:262px;width:250px;z-index:5;display:none;font:13px/1.35 system-ui,sans-serif;
-  color:#f0e3e4;background:rgba(10,6,7,.82);border:1px solid rgba(212,0,0,.35);border-radius:16px;padding:14px 14px 10px;
+  color:#e3e8f0;background:rgba(6,8,10,.82);border:1px solid rgba(47,139,255,.35);border-radius:16px;padding:14px 14px 10px;
   box-shadow:0 8px 28px rgba(0,0,0,.25);backdrop-filter:blur(8px)}
 @media (min-width:1700px){#pcQuadro{display:block}#pcQuadro.oculto{display:none}#pcMostra{display:block}#pcMostra.some{display:none}}
-#pcQuadro h4{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#ff4d4d;display:flex;justify-content:space-between;align-items:center}
+#pcQuadro h4{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7fc0ff;display:flex;justify-content:space-between;align-items:center}
 #pcQuadro h4 button{background:none;border:0;color:inherit;cursor:pointer;font-size:15px;padding:0 2px;opacity:.7}
 #pcQuadro .pc-hora{font-size:30px;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-#pcQuadro .pc-data{color:#a8959a;margin-bottom:10px}
+#pcQuadro .pc-data{color:#959da8;margin-bottom:10px}
 #pcQuadro .pc-sec{border-top:1px solid rgba(255,255,255,.08);padding-top:8px;margin-top:8px}
 #pcQuadro .pc-lin{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:3px 0}
-#pcQuadro .pc-lin span:first-child{color:#c8b6ba}
+#pcQuadro .pc-lin span:first-child{color:#b6bec8}
 #pcQuadro .pc-val{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
 #pcQuadro .pc-var{font-size:11px;font-weight:600;margin-left:4px}
 #pcQuadro .sobe{color:#4ade80}#pcQuadro .desce{color:#ff5a5a}
-#pcQuadro .pc-pe{color:#8a777b;font-size:11px;margin-top:8px}
-#pcMostra{display:none;position:fixed;top:84px;left:262px;z-index:5;background:rgba(10,6,7,.8);color:#f0e3e4;border:1px solid rgba(212,0,0,.35);
+#pcQuadro .pc-pe{color:#777f8a;font-size:11px;margin-top:8px}
+#pcMostra{display:none;position:fixed;top:84px;left:262px;z-index:5;background:rgba(6,8,10,.8);color:#e3e8f0;border:1px solid rgba(47,139,255,.35);
   border-radius:12px;padding:6px 10px;cursor:pointer;font:13px system-ui}
-html.tema-claro #pcQuadro,html.tema-claro #pcMostra{color:#1c1c1c;background:rgba(255,255,255,.85);border-color:rgba(192,0,0,.25)}
-html.tema-claro #pcQuadro h4{color:#c00000}
+html.tema-claro #pcQuadro,html.tema-claro #pcMostra{color:#1c1c1c;background:rgba(255,255,255,.85);border-color:rgba(31,111,224,.25)}
+html.tema-claro #pcQuadro h4{color:#1f6fe0}
 html.tema-claro #pcQuadro .pc-data,html.tema-claro #pcQuadro .pc-lin span:first-child{color:#5f5f68}
 html.tema-claro #pcQuadro .pc-sec{border-top-color:rgba(0,0,0,.08)}
-html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{color:#c00000}`;
+html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{color:#1f6fe0}`;
 
   const quadro = document.createElement('aside');
   quadro.id = 'pcQuadro';

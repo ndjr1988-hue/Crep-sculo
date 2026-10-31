@@ -17,10 +17,10 @@
 .barra-msg.erro{color:#a8281c}
 .barra-aviso{margin:2px 8px 4px;padding:8px 10px;border-radius:10px;font-size:13px;line-height:1.4;
   background:#241d00;color:#fff3c4;border:1px solid #aa7900;overflow-wrap:anywhere}
-html[data-tema="escuro"] .barra-motivo,html[data-tema="escuro"] .barra-msg.erro{color:#ffb3aa}
+html[data-tema="escuro"] .barra-motivo,html[data-tema="escuro"] .barra-msg.erro{color:#aacdff}
 html[data-tema="escuro"] .barra-aviso{background:#e4dcc3;color:#fff3c8;border-color:#e5bd4c}
 @media(prefers-color-scheme:nunca){
-  html:not([data-tema="claro"]) .barra-motivo,html:not([data-tema="claro"]) .barra-msg.erro{color:#ffb3aa}
+  html:not([data-tema="claro"]) .barra-motivo,html:not([data-tema="claro"]) .barra-msg.erro{color:#aacdff}
   html:not([data-tema="claro"]) .barra-aviso{background:#e4dcc3;color:#fff3c8;border-color:#e5bd4c}
 }
 
@@ -33,5 +33,5 @@ html[data-tema="escuro"] .barra-aviso{background:#e4dcc3;color:#fff3c8;border-co
   font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;
   box-sizing:border-box;overflow:hidden}
 .cmd-saida.erro{color:#a8281c}
-html[data-tema="escuro"] .cmd-saida.erro{color:#ffb3aa}
-@media(prefers-color-scheme:nunca){html:not([data-tema="claro"]) .cmd-saida.erro{color:#ffb3aa}}
+html[data-tema="escuro"] .cmd-saida.erro{color:#aacdff}
+@media(prefers-color-scheme:nunca){html:not([data-tema="claro"]) .cmd-saida.erro{color:#aacdff}}

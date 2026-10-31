@@ -2,24 +2,24 @@
    ficam em colunas. Não usa o chat.css (aquele trava a página em 100% de altura). */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --fundo:#130b0c;--cartao:#000000;--txt:#f0e3e4;--muted:#a28c8e;--accent:#d40000;--line:rgba(0,0,0,.1);
-  --header:#000000;--suave:#0d0909;
-  --c-esperando:#aa7900;--b-esperando:#241d00;--c-travada:#b3261e;--b-travada:#150402;
-  --c-parada:#ffcf75;--b-parada:#291b00;--c-fazendo:#cd989c;--b-fazendo:#190c0d;
-  --c-fechada:#a28c8e;--b-fechada:#161111;
+  --fundo:#0b0e13;--cartao:#000000;--txt:#e3e8f0;--muted:#8c95a2;--accent:#2f8bff;--line:rgba(0,0,0,.1);
+  --header:#000000;--suave:#090b0d;
+  --c-esperando:#aa7900;--b-esperando:#241d00;--c-travada:#b3261e;--b-travada:#020a15;
+  --c-parada:#ffcf75;--b-parada:#291b00;--c-fazendo:#98aecd;--b-fazendo:#0c1119;
+  --c-fechada:#8c95a2;--b-fechada:#111316;
 }
 html[data-tema="escuro"]{
-  --fundo:#f0e8e9;--cartao:#e7dbdc;--txt:#1a0d0e;--muted:#644a4c;--line:rgba(0,0,0,.14);
-  --header:#ebdfe0;--suave:#ddcdce;
-  --c-esperando:#f0c75a;--b-esperando:#e4dcc3;--c-travada:#680800;--b-travada:#dfb8b5;
-  --c-parada:#f0c75a;--b-parada:#e7ddc5;--c-fazendo:#d97f86;--b-fazendo:#e4c7c9;--b-fechada:#d9cccd;
+  --fundo:#e8ebf0;--cartao:#dbe0e7;--txt:#0d121a;--muted:#4a5564;--line:rgba(0,0,0,.14);
+  --header:#dfe4eb;--suave:#cdd4dd;
+  --c-esperando:#f0c75a;--b-esperando:#e4dcc3;--c-travada:#680800;--b-travada:#b5c6df;
+  --c-parada:#f0c75a;--b-parada:#e7ddc5;--c-fazendo:#d97f86;--b-fazendo:#c7d3e4;--b-fechada:#ccd1d9;
 }
 @media(prefers-color-scheme:nunca){
   html:not([data-tema="claro"]){
-    --fundo:#f0e8e9;--cartao:#e7dbdc;--txt:#1a0d0e;--muted:#644a4c;--line:rgba(0,0,0,.14);
-    --header:#ebdfe0;--suave:#ddcdce;
-    --c-esperando:#f0c75a;--b-esperando:#e4dcc3;--c-travada:#680800;--b-travada:#dfb8b5;
-    --c-parada:#f0c75a;--b-parada:#e7ddc5;--c-fazendo:#d97f86;--b-fazendo:#e4c7c9;--b-fechada:#d9cccd;
+    --fundo:#e8ebf0;--cartao:#dbe0e7;--txt:#0d121a;--muted:#4a5564;--line:rgba(0,0,0,.14);
+    --header:#dfe4eb;--suave:#cdd4dd;
+    --c-esperando:#f0c75a;--b-esperando:#e4dcc3;--c-travada:#680800;--b-travada:#b5c6df;
+    --c-parada:#f0c75a;--b-parada:#e7ddc5;--c-fazendo:#d97f86;--b-fazendo:#c7d3e4;--b-fechada:#ccd1d9;
   }
 }
 html,body{margin:0;min-height:100%;overflow-x:hidden}
@@ -157,19 +157,19 @@ a{color:#1f7ac2}
 /* Visita guiada (tour.js) */
 #tourFundo{position:fixed;inset:0;z-index:90}
 #tourLuz{position:fixed;z-index:91;border-radius:10px;pointer-events:none;
-  box-shadow:0 0 0 9999px rgba(244,232,233,.66);outline:2px solid #000000}
+  box-shadow:0 0 0 9999px rgba(232,237,244,.66);outline:2px solid #000000}
 #tourCaixa{position:fixed;z-index:92;left:12px;right:12px;max-width:400px;margin:0 auto;background:#000000;
-  color:#f0e3e4;border-radius:14px;padding:14px 16px;box-shadow:0 6px 28px rgba(0,0,0,.35);
+  color:#e3e8f0;border-radius:14px;padding:14px 16px;box-shadow:0 6px 28px rgba(0,0,0,.35);
   font-size:14px;line-height:1.45;max-height:70dvh;overflow-y:auto}
 #tourCaixa:focus{outline:none}
 #tourCaixa h4{margin:0 0 2px;font-size:15.5px}
-#tourCaixa .tour-n{font-size:11.5px;color:#937e80;margin-bottom:6px}
+#tourCaixa .tour-n{font-size:11.5px;color:#7e8793;margin-bottom:6px}
 #tourCaixa p{margin:0 0 6px}
-#tourCaixa p b{color:#cd989c}
+#tourCaixa p b{color:#98aecd}
 #tourCaixa .tour-acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap;position:sticky;bottom:0;background:#000000;padding:8px 0 0}
 #tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid rgba(0,0,0,.1);
-  background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#c7adaf}
-#tourCaixa button.pri{background:#d40000;border-color:#d40000;color:#ffffff}
+  background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#adb8c7}
+#tourCaixa button.pri{background:#2f8bff;border-color:#2f8bff;color:#ffffff}
 #tourCaixa button:disabled{opacity:.4;cursor:default}
 #tourCaixa .tour-x{margin-right:auto}
 

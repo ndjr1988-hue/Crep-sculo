@@ -94,12 +94,12 @@
   };
 
   function pintaCabecalho(ag) {
-    document.documentElement.style.setProperty('--accent', ag.cor || '#d40000');
+    document.documentElement.style.setProperty('--accent', ag.cor || '#2f8bff');
     $('nomeAgente').textContent = ag.nome || 'Pretor';
     const av = $('av');
     const img = ag.avatar_img || (/^https:\/\//i.test(ag.avatar || '') ? ag.avatar : '');
     av.innerHTML = img ? `<img src="${esc(img)}" alt="">` : esc(ag.avatar || (ag.nome || '?').slice(0, 1));
-    av.style.background = ag.cor || '#d40000';
+    av.style.background = ag.cor || '#2f8bff';
   }
 
   function pintaTitulo() {
@@ -224,7 +224,7 @@
         est.lista = lista;
         let ag = escolheAgente(lista, ctx);
         const slug = (/^\/p\/([^/]+)/.exec(location.pathname) || [])[1] || new URLSearchParams(location.search).get('a') || guardado || '';
-        if (!ag) ag = { id: erro ? slug : '', nome: 'Pretor', cor: '#d40000', avatar: 'D' };
+        if (!ag) ag = { id: erro ? slug : '', nome: 'Pretor', cor: '#2f8bff', avatar: 'D' };
         est.agente = ag;
         pintaCabecalho(ag);
         if (!erro) guardaAgente(ag.id);

@@ -1,5 +1,5 @@
 /* avisos.css: a tela do quadro de avisos (classes av-). Celular primeiro. */
-.av-raiz{--av-linha:#1e1718;--av-texto:#f0e3e4;--av-fraco:#937e80;--av-fundo2:#0f0b0b;--av-acento:#d40000;
+.av-raiz{--av-linha:#171a1e;--av-texto:#e3e8f0;--av-fraco:#7e8793;--av-fundo2:#0b0d0f;--av-acento:#2f8bff;
   max-width:760px;margin:0 auto;padding:12px 12px 40px;color:var(--av-texto);box-sizing:border-box;
   overflow-wrap:anywhere;word-break:break-word}
 .av-raiz *{box-sizing:border-box}
@@ -14,7 +14,7 @@
 .av-btn:disabled{opacity:.5;cursor:default}
 .av-primario{background:var(--av-acento);border-color:var(--av-acento);color:#ffffff;font-weight:600;min-height:40px}
 .av-primario:hover{background:#88272f}
-.av-perigo{background:#d40000;border-color:#d40000;color:#ffffff}
+.av-perigo{background:#2f8bff;border-color:#2f8bff;color:#ffffff}
 .av-perigo:hover{background:#a93226}
 .av-mini{min-height:32px;padding:0 12px;font-size:13px}
 .av-ajuda{width:32px;height:32px;border-radius:50%;border:1px solid var(--av-linha);background:#000000;
@@ -34,27 +34,27 @@
 .av-check input{width:18px;height:18px;margin:0}
 .av-fraco{color:var(--av-fraco);font-size:13px}
 .av-cont{margin:0;text-align:right;font-size:12px;color:var(--av-fraco)}
-.av-cont.av-passou{color:#d40000;font-weight:700}
-.av-erro{margin:0;font-size:13px;color:#d40000}
+.av-cont.av-passou{color:#2f8bff;font-weight:700}
+.av-erro{margin:0;font-size:13px;color:#2f8bff}
 .av-erro[hidden],.av-resposta[hidden],.av-escolha[hidden]{display:none}
-.av-resposta{margin:0;padding:8px 10px;border-radius:10px;background:#160b0c;color:#d2a3a7;font-size:14px}
+.av-resposta{margin:0;padding:8px 10px;border-radius:10px;background:#0b1016;color:#a3b7d2;font-size:14px}
 .av-status{margin:6px 0 0;font-size:13px;min-height:0}
 .av-status:empty{display:none}
-.av-status.av-erro{color:#d40000}
-.av-status.av-ok{color:#d2a3a7}
+.av-status.av-erro{color:#2f8bff}
+.av-status.av-ok{color:#a3b7d2}
 .av-vazio{margin:0;padding:18px 8px;text-align:center;color:var(--av-fraco);font-size:14px}
-.av-erro-bloco{color:#d40000}
+.av-erro-bloco{color:#2f8bff}
 .av-dia-t{margin:14px 0 6px;font-size:13px;color:var(--av-fraco);font-weight:700}
 .av-dia:first-child .av-dia-t{margin-top:0}
-.av-aviso{border:1px solid var(--av-linha);border-left:4px solid var(--av-cor,#937e80);border-radius:10px;
+.av-aviso{border:1px solid var(--av-linha);border-left:4px solid var(--av-cor,#7e8793);border-radius:10px;
   padding:10px 12px;margin-bottom:8px;background:#000000}
-.av-t-decisao{--av-cor:#2f6fd0}.av-t-preferencia{--av-cor:#8e44ad}.av-t-entrega{--av-cor:#d40000}
+.av-t-decisao{--av-cor:#2f6fd0}.av-t-preferencia{--av-cor:#8e44ad}.av-t-entrega{--av-cor:#2f8bff}
 .av-t-aprendizado{--av-cor:#d68910}.av-t-referencia{--av-cor:#16a0a0}.av-t-pedido{--av-cor:#d35400}
-.av-t-resumo_do_dia{--av-cor:#937e80}
+.av-t-resumo_do_dia{--av-cor:#7e8793}
 .av-apagado{opacity:.55;background:var(--av-fundo2)}
 .av-apagado .av-texto{text-decoration:line-through}
 .av-topo{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:13px}
-.av-tipo{padding:1px 9px;border-radius:10px;background:var(--av-cor,#937e80);color:#ffffff;font-size:12px;font-weight:600}
+.av-tipo{padding:1px 9px;border-radius:10px;background:var(--av-cor,#7e8793);color:#ffffff;font-size:12px;font-weight:600}
 .av-hora,.av-para{color:var(--av-fraco)}
 .av-texto{margin:6px 0 0;font-size:15px;line-height:1.45;white-space:pre-line}
 .av-linha{margin:6px 0 0;font-size:13px;display:flex;flex-wrap:wrap;gap:4px 8px}
@@ -64,8 +64,8 @@
 .av-situacao{margin:6px 0 0;font-size:13px;color:#f0b175;font-style:italic}
 .av-entregas{list-style:none;margin:6px 0 0;padding:0;font-size:12.5px;color:var(--av-fraco)}
 .av-entregas li{padding:1px 0}
-.av-e-falha{color:#d40000;font-weight:600}
-.av-e-recado{color:#d2a3a7}
+.av-e-falha{color:#2f8bff;font-weight:600}
+.av-e-recado{color:#a3b7d2}
 .av-acoes{margin-top:8px;display:flex;justify-content:flex-end}
 .av-retirada{margin-top:8px;display:flex;flex-direction:column;gap:8px;font-size:13px}
 .av-retirada label{display:flex;flex-direction:column;gap:4px;font-weight:600}
@@ -79,19 +79,19 @@
 /* Visita guiada (tour.js): mesmas regras da conversa, com as variáveis daqui */
 #tourFundo{position:fixed;inset:0;z-index:90}
 #tourLuz{position:fixed;z-index:91;border-radius:10px;pointer-events:none;
-  box-shadow:0 0 0 9999px rgba(244,232,233,.66);outline:2px solid #000000}
+  box-shadow:0 0 0 9999px rgba(232,237,244,.66);outline:2px solid #000000}
 #tourCaixa{position:fixed;z-index:92;left:12px;right:12px;max-width:400px;margin:0 auto;background:#000000;
-  color:#f0e3e4;border-radius:14px;padding:14px 16px;box-shadow:0 6px 28px rgba(0,0,0,.35);
+  color:#e3e8f0;border-radius:14px;padding:14px 16px;box-shadow:0 6px 28px rgba(0,0,0,.35);
   font-size:14px;line-height:1.45;max-height:70dvh;overflow-y:auto}
 #tourCaixa:focus{outline:none}
 #tourCaixa h4{margin:0 0 2px;font-size:15.5px}
-#tourCaixa .tour-n{font-size:11.5px;color:#937e80;margin-bottom:6px}
+#tourCaixa .tour-n{font-size:11.5px;color:#7e8793;margin-bottom:6px}
 #tourCaixa p{margin:0 0 6px}
-#tourCaixa p b{color:#cd989c}
+#tourCaixa p b{color:#98aecd}
 #tourCaixa .tour-acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap;position:sticky;bottom:0;background:#000000;padding:8px 0 0}
-#tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #1e1718;
-  background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#c7adaf}
-#tourCaixa button.pri{background:#d40000;border-color:#d40000;color:#ffffff}
+#tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #171a1e;
+  background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#adb8c7}
+#tourCaixa button.pri{background:#2f8bff;border-color:#2f8bff;color:#ffffff}
 #tourCaixa button:disabled{opacity:.4;cursor:default}
 #tourCaixa .tour-x{margin-right:auto}
 [hidden]{display:none !important}

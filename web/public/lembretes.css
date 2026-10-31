@@ -16,14 +16,14 @@
 .lf-acoes{display:flex;gap:6px;flex:0 0 auto}
 .lf button{font:inherit;font-size:13.5px;font-weight:600;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #e0c870;background:#000000;color:#ffe9a5;cursor:pointer}
 .lf button:disabled{opacity:.5;cursor:default}
-.lf-feito{background:#d40000!important;border-color:#d40000!important;color:#ffffff!important}
+.lf-feito{background:#2f8bff!important;border-color:#2f8bff!important;color:#ffffff!important}
 .lf-menu{flex:1 1 100%;display:flex;gap:6px;flex-wrap:wrap}
 .lf-menu[hidden]{display:none}
 .lf-erro{margin:4px 0 2px;color:#a01818;font-size:13px;overflow-wrap:anywhere}
 .lf-erro[hidden]{display:none}
 
 /* ── Tela /lembretes ───────────────────────────────────────────────────── */
-body.lp{--lp-txt:#f0e3e4;--lp-fraco:#a08a8c;--lp-linha:#201819;--lp-acento:#d40000;--lp-fundo:#0c0909;
+body.lp{--lp-txt:#e3e8f0;--lp-fraco:#8a93a0;--lp-linha:#181b20;--lp-acento:#2f8bff;--lp-fundo:#090a0c;
   margin:0;background:var(--lp-fundo);color:var(--lp-txt);overflow:auto;height:auto;
   font:15.5px/1.46 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   -webkit-text-size-adjust:100%}
@@ -36,8 +36,8 @@ body.lp *{box-sizing:border-box}
 .lp-sec{background:#000000;border:1px solid var(--lp-linha);border-radius:14px;padding:14px;min-width:0}
 .lp-sec h2{font-size:16.5px;margin:0 0 8px;display:flex;align-items:center;gap:8px}
 .lp-sec h2 span{flex:1;min-width:0}
-.lp-ajuda{width:34px;height:34px;border-radius:50%;border:1px solid var(--lp-linha);background:#0d0909;color:#c7adaf;font-weight:700;cursor:pointer;flex:0 0 auto}
-.lp-btn{font:inherit;font-size:14px;font-weight:600;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--lp-linha);background:#0d0909;color:#c7adaf;cursor:pointer}
+.lp-ajuda{width:34px;height:34px;border-radius:50%;border:1px solid var(--lp-linha);background:#090b0d;color:#adb8c7;font-weight:700;cursor:pointer;flex:0 0 auto}
+.lp-btn{font:inherit;font-size:14px;font-weight:600;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--lp-linha);background:#090b0d;color:#adb8c7;cursor:pointer}
 .lp-btn.pri{background:var(--lp-acento);border-color:var(--lp-acento);color:#ffffff}
 .lp-btn.perigo{color:#a01818;border-color:#471919;background:#000000}
 .lp-btn:disabled{opacity:.5;cursor:default}
@@ -45,7 +45,7 @@ body.lp *{box-sizing:border-box}
 .lp-fraco{color:var(--lp-fraco);font-size:13.5px}
 .lp-msg{margin:8px 0 0;font-size:14px;overflow-wrap:anywhere}
 .lp-msg.erro{color:#a01818}
-.lp-msg.ok{color:#cd989c}
+.lp-msg.ok{color:#98aecd}
 .lp-msg[hidden]{display:none}
 .lp-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .lp-form label{display:flex;flex-direction:column;gap:3px;font-size:13.5px;font-weight:600;min-width:0}
@@ -65,11 +65,11 @@ body.lp *{box-sizing:border-box}
 .lp-tabela td{padding:8px;border-bottom:1px solid var(--lp-linha);vertical-align:top;overflow-wrap:anywhere}
 .lp-tabela td.acoes{display:flex;gap:6px;flex-wrap:wrap}
 .lp-regra{display:block;color:var(--lp-fraco);font-size:13px}
-.lp-chip{display:inline-block;padding:1px 9px;border-radius:12px;font-size:12.5px;font-weight:600;background:#170e0f;color:#cd989c}
+.lp-chip{display:inline-block;padding:1px 9px;border-radius:12px;font-size:12.5px;font-weight:600;background:#0e1217;color:#98aecd}
 .lp-chip.pausado,.lp-chip.adiada{background:#2f2100;color:#ffdf85}
 .lp-chip.encerrado,.lp-chip.feito,.lp-chip.cancelada,.lp-chip.perdida{background:#121212;color:#a4a4a4}
-.lp-chip.insistindo,.lp-chip.sem_resposta{background:#1f0000;color:#a01818}
-.lp-hist td{background:#050303}
+.lp-chip.insistindo,.lp-chip.sem_resposta{background:#000d1f;color:#a01818}
+.lp-hist td{background:#030405}
 .lp-hist ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .lp-hist li{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px}
 .lp-vazio{padding:14px;text-align:center;color:var(--lp-fraco)}
@@ -88,21 +88,21 @@ body.lp *{box-sizing:border-box}
 
 /* visita guiada (tour.js) na tela de lembretes */
 body.lp #tourFundo{position:fixed;inset:0;z-index:90}
-body.lp #tourLuz{position:fixed;z-index:91;border-radius:10px;pointer-events:none;box-shadow:0 0 0 9999px rgba(244,232,233,.66);outline:2px solid #000000}
+body.lp #tourLuz{position:fixed;z-index:91;border-radius:10px;pointer-events:none;box-shadow:0 0 0 9999px rgba(232,237,244,.66);outline:2px solid #000000}
 body.lp #tourCaixa{position:fixed;z-index:92;left:12px;right:12px;max-width:400px;margin:0 auto;background:#000000;color:var(--lp-txt);
   border-radius:14px;padding:14px 16px;box-shadow:0 6px 28px rgba(0,0,0,.35);font-size:14px;line-height:1.45;max-height:70dvh;overflow-y:auto}
 body.lp #tourCaixa:focus{outline:none}
 body.lp #tourCaixa h4{margin:0 0 2px;font-size:15.5px}
 body.lp #tourCaixa .tour-n{font-size:11.5px;color:var(--lp-fraco);margin-bottom:6px}
 body.lp #tourCaixa p{margin:0 0 6px}
-body.lp #tourCaixa p b{color:#cd989c}
+body.lp #tourCaixa p b{color:#98aecd}
 body.lp #tourCaixa .tour-acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap;position:sticky;bottom:0;background:#000000;padding:8px 0 0}
-body.lp #tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--lp-linha);background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#c7adaf}
+body.lp #tourCaixa button{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--lp-linha);background:#000000;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:#adb8c7}
 body.lp #tourCaixa button.pri{background:var(--lp-acento);border-color:var(--lp-acento);color:#ffffff}
 body.lp #tourCaixa button:disabled{opacity:.4;cursor:default}
 body.lp #tourCaixa .tour-x{margin-right:auto}
 
 /* interruptores dos avisos de atenção dos agentes */
 .lp-prefs{display:flex;flex-direction:column;gap:2px;margin:10px 0 2px}
-.lp-check{display:flex;align-items:center;gap:10px;min-height:36px;font-size:14px;color:#d8c6c8;cursor:pointer}
+.lp-check{display:flex;align-items:center;gap:10px;min-height:36px;font-size:14px;color:#c6ced8;cursor:pointer}
 .lp-check input{width:20px;height:20px;flex:0 0 20px;accent-color:var(--lp-acento)}

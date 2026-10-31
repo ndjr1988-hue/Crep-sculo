@@ -252,7 +252,7 @@
       };
       host.querySelector('#nasGerarFoto').onclick = () => {
         const c = document.createElement('canvas'); c.width = c.height = 320;
-        const x = c.getContext('2d'), cores = [['#231314','#b88a8e'],['#110c1d','#7a7a7a'],['#29170a','#b57750'],['#0c1a23','#497c9a']];
+        const x = c.getContext('2d'), cores = [['#131a23','#8a9db8'],['#110c1d','#7a7a7a'],['#29170a','#b57750'],['#0c1a23','#497c9a']];
         const cor = cores[crypto.getRandomValues(new Uint8Array(1))[0] % cores.length];
         x.fillStyle = cor[0]; x.fillRect(0,0,320,320);
         x.fillStyle = cor[1]; x.beginPath(); x.roundRect(70,82,180,158,55); x.fill();

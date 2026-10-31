@@ -29,10 +29,10 @@
 .foco-texto{flex:1;min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .foco-item.feito .foco-caixa{background:var(--accent)}
 .foco-item.feito .foco-texto{text-decoration:line-through;color:var(--muted)}
-.foco-aviso{margin:8px 0 0;padding:6px 8px;border-radius:8px;background:#150402;color:#8a2a1f;font-size:13px;overflow-wrap:anywhere}
+.foco-aviso{margin:8px 0 0;padding:6px 8px;border-radius:8px;background:#020a15;color:#8a2a1f;font-size:13px;overflow-wrap:anywhere}
 .foco-aviso[hidden]{display:none}
 /* Tudo ticado: a barra dá lugar ao aviso com o botão Concluir. `.foco .foco-conclui` pesa mais que `.foco button`. */
-.foco-ok{margin:2px 0 8px;padding:8px 10px;border-radius:10px;background:#241213;color:#78232a;font-weight:700;
+.foco-ok{margin:2px 0 8px;padding:8px 10px;border-radius:10px;background:#121924;color:#78232a;font-weight:700;
          font-size:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center}
 .foco-ok[hidden]{display:none}
 .foco .foco-conclui{min-height:32px;padding:0 14px;border-radius:16px;background:var(--accent);color:#ffffff;

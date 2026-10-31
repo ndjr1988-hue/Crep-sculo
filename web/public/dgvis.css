@@ -9,14 +9,14 @@
 :root,
 html[data-tema="claro"] {
   --dv-fundo: transparent;
-  --dv-superficie: #0a0606;
-  --dv-superficie-2: #170f10;
-  --dv-texto: #f0e3e4;
-  --dv-suave: #a08a8c;
-  --dv-linha: #231819;
-  --dv-acento: #d40000;
+  --dv-superficie: #06080a;
+  --dv-superficie-2: #0f1217;
+  --dv-texto: #e3e8f0;
+  --dv-suave: #8a93a0;
+  --dv-linha: #181d23;
+  --dv-acento: #2f8bff;
   --dv-acento-forte: #81232b;
-  --dv-c1: #d40000;
+  --dv-c1: #2f8bff;
   --dv-c2: #3b7dd8;
   --dv-c3: #e0922f;
   --dv-c4: #8a5cd0;
@@ -26,32 +26,32 @@ html[data-tema="claro"] {
   --dv-alerta: #c97a10;
   --dv-perigo: #d64550;
   --dv-info: #3b7dd8;
-  --dv-tip-fundo: #f0e3e4;
+  --dv-tip-fundo: #e3e8f0;
   --dv-tip-texto: #000000;
-  --dv-sombra: 0 1px 2px rgba(240,227,228,.05), 0 8px 20px -12px rgba(240,227,228,.18);
+  --dv-sombra: 0 1px 2px rgba(227,232,240,.05), 0 8px 20px -12px rgba(227,232,240,.18);
   color-scheme: light;
 }
 html[data-tema="escuro"] {
-  --dv-fundo: #eee5e6;
-  --dv-superficie: #e5dadb;
-  --dv-superficie-2: #dbcdce;
-  --dv-texto: #170e0f;
-  --dv-suave: #6c5658;
-  --dv-linha: #d3c3c4;
-  --dv-acento: #c34c56;
-  --dv-acento-forte: #cd989c;
-  --dv-c1: #c34c56;
+  --dv-fundo: #e5e9ee;
+  --dv-superficie: #dadfe5;
+  --dv-superficie-2: #cdd3db;
+  --dv-texto: #0e1217;
+  --dv-suave: #565f6c;
+  --dv-linha: #c3cad3;
+  --dv-acento: #4f86dc;
+  --dv-acento-forte: #98aecd;
+  --dv-c1: #4f86dc;
   --dv-c2: #6aa3f0;
   --dv-c3: #f0ae55;
   --dv-c4: #aa86e6;
   --dv-c5: #ee7f9f;
   --dv-c6: #4cc4d0;
-  --dv-ok: #c34c56;
+  --dv-ok: #4f86dc;
   --dv-alerta: #f0ae55;
   --dv-perigo: #f0707a;
   --dv-info: #6aa3f0;
-  --dv-tip-fundo: #170e0f;
-  --dv-tip-texto: #eee5e6;
+  --dv-tip-fundo: #0e1217;
+  --dv-tip-texto: #e5e9ee;
   --dv-sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 20px -12px rgba(0, 0, 0, .6);
   color-scheme: dark;
 }
@@ -406,7 +406,7 @@ html[data-tema="escuro"] .dv-pt { stroke: var(--dv-superficie); }
 .dv-cartao.dv-info { --cor: var(--dv-info); }
 .dv-cartao.dv-destaque {
   color: #ffffff; border: 0;
-  background: linear-gradient(135deg, var(--dv-acento-forte), color-mix(in srgb, var(--dv-acento-forte) 52%, #f2e5e6));
+  background: linear-gradient(135deg, var(--dv-acento-forte), color-mix(in srgb, var(--dv-acento-forte) 52%, #e5eaf2));
   box-shadow: 0 14px 28px -16px color-mix(in srgb, var(--dv-acento-forte) 85%, transparent);
 }
 .dv-cartao.dv-destaque .dv-ico { background: rgba(0,0,0,.2); }

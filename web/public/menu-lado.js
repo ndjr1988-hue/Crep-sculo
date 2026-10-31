@@ -145,7 +145,7 @@
       : (a.subtitulo || [a.provedor, a.modelo].filter(Boolean).join(' · '));
     const link = `<a class="ml-ag${aqui ? ' atual' : ''}${selo && selo.tipo === 'precisa' ? ' precisa' : ''}" role="menuitem" href="/a/${encodeURIComponent(a.id)}"` +
       `${aqui ? ' aria-current="page"' : ''}>` +
-      `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
+      `<span class="ml-mini" style="background:${esc(a.cor || '#2f8bff')}">${fotoDe(a)}</span>` +
       `<span class="ml-quem"><b>${esc(a.nome)}</b><small>${esc(sub)}</small></span>` +
       `${aqui ? '<span class="ml-aqui">aqui</span>' : ''}` +
       `${horaCurta(a.ultima_ts) ? `<span class="ml-hora">${esc(horaCurta(a.ultima_ts))}</span>` : ''}` +
@@ -190,7 +190,7 @@
     const aqui = a.id === atualId;
     return `<a class="ml-esfera${aqui ? ' atual' : ''}" href="/a/${encodeURIComponent(a.id)}" title="${esc(a.nome)}"` +
       `${aqui ? ' aria-current="page"' : ''}>` +
-      `<span class="ml-mini" style="background:${esc(a.cor || '#d40000')}">${fotoDe(a)}</span>` +
+      `<span class="ml-mini" style="background:${esc(a.cor || '#2f8bff')}">${fotoDe(a)}</span>` +
       `${bolinhaMenu(a, aqui)}<small>${esc(a.nome)}</small></a>`;
   }
 
@@ -564,7 +564,7 @@
   /* opcoes: { agente, agentes (a lista já carregada), fecha() (fecha a gaveta), ativo (chave da página aberta; padrão 'conversa'), extras (itens extras do painel), erroLista (texto: a lista de agentes falhou) } */
   function inicia(opcoes) {
     const ag = opcoes.agente;
-    $('mlMoldura').innerHTML = `<span class="ml-foto" style="background:${esc(ag.cor || '#d40000')}">${fotoDe(ag)}</span>`;
+    $('mlMoldura').innerHTML = `<span class="ml-foto" style="background:${esc(ag.cor || '#2f8bff')}">${fotoDe(ag)}</span>`;
     $('mlNome').textContent = ag.nome;
     $('mlSub').textContent = ag.tipo === 'admin' ? 'administrador do servidor'
       : (ag.subtitulo || [ag.provedor, ag.modelo].filter(Boolean).join(' · '));

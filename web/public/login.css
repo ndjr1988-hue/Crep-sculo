@@ -1,14 +1,14 @@
 /* login.css: a tela de entrada do DG Claw (celular primeiro, mesma paleta da conversa). */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--accent:#d40000;--txt:#f0e3e4;--muted:#937e80;--line:rgba(0,0,0,.12)}
+:root{--accent:#2f8bff;--txt:#e3e8f0;--muted:#7e8793;--line:rgba(0,0,0,.12)}
 html,body{height:100%}
 body{margin:0;color:var(--txt);display:flex;align-items:center;justify-content:center;
   padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right))
           max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
   font:15.5px/1.46 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   background:
-    radial-gradient(ellipse at 90% 100%,rgba(212,0,0,.20),transparent 55%),
-    linear-gradient(165deg,#050505 0%,#080808 60%,#0c0606 100%);
+    radial-gradient(ellipse at 90% 100%,rgba(47,139,255,.20),transparent 55%),
+    linear-gradient(165deg,#050505 0%,#080808 60%,#06080c 100%);
   background-attachment:fixed}
 .cartao{width:100%;max-width:380px;background:#000000;border-radius:18px;padding:26px 22px 24px;
   box-shadow:0 4px 22px rgba(0,0,0,.16)}
@@ -16,12 +16,12 @@ body{margin:0;color:var(--txt);display:flex;align-items:center;justify-content:c
 .marca .emoji{font-size:34px;line-height:1;width:38px;height:38px}
 .marca h1{margin:0;font-size:24px;font-weight:700}
 .sub{margin:6px 0 16px;color:var(--muted);font-size:14.5px}
-.erro{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#1f0404;color:#8f2f2f;
+.erro{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#040f1f;color:#8f2f2f;
   border:1px solid #430f0f;font-size:14px;line-height:1.4}
 .erro[hidden]{display:none}
-label{display:block;margin:12px 0 5px;font-size:13px;font-weight:600;color:#c7adaf}
+label{display:block;margin:12px 0 5px;font-size:13px;font-weight:600;color:#adb8c7}
 input[type=text],input[type=password]{width:100%;min-height:46px;padding:11px 14px;border:1px solid var(--line);
-  border-radius:12px;font:inherit;font-size:16px;background:#0b0707;color:var(--txt);outline:none}
+  border-radius:12px;font:inherit;font-size:16px;background:#07090b;color:var(--txt);outline:none}
 input:focus{border-color:var(--accent);background:#000000}
 button{width:100%;margin-top:20px;min-height:48px;border:0;border-radius:24px;background:var(--accent);
   color:#ffffff;font:inherit;font-size:16px;font-weight:700;cursor:pointer}

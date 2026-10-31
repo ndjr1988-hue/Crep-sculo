@@ -10,7 +10,7 @@
 
 :root{
   --raio:14px;
-  --acento1:#d40000; --acento2:#ff2a2a;
+  --acento1:#2f8bff; --acento2:#5aa7ff;
   --bg:#f6f7fb; --painel:#ffffff; --fundo2:#f0f2f8; --linha:#e6e8f0;
   --texto:#1a1c25; --fraco:#6b7185;
   --sombra:0 1px 2px rgba(16,20,40,.04), 0 8px 24px rgba(16,20,40,.06);
@@ -30,14 +30,14 @@ html[data-tema="escuro"]{
   --bg:#0a0a0a; --painel:#141414; --fundo2:#1b1b1b; --linha:#2a2a2a;
   --texto:#ededed; --fraco:#a3a3a3;
   --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
-  --ok:#3ddc9a; --erro:#ff6b81; --espera:#f0b429; --neutro:#7d8497;
+  --ok:#3ddc9a; --erro:#7fb2ff; --espera:#f0b429; --neutro:#7d8497;
 }
 @media (prefers-color-scheme:dark){
   html:not([data-tema="claro"]){
     --bg:#0a0a0a; --painel:#141414; --fundo2:#1b1b1b; --linha:#2a2a2a;
     --texto:#ededed; --fraco:#a3a3a3;
     --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
-    --ok:#3ddc9a; --erro:#ff6b81; --espera:#f0b429; --neutro:#7d8497;
+    --ok:#3ddc9a; --erro:#7fb2ff; --espera:#f0b429; --neutro:#7d8497;
   }
 }
 
@@ -648,7 +648,7 @@ html.casca .faixa-estado .header-status{flex:0 1 auto;margin-left:auto}
 }
 /* fonte e cor: as da casca (a pilha --fonte do casca.css e a cor do agente, --accent). Sem isto o painel seria roxo e de outra fonte. */
 html.casca body{font-family:var(--fonte)}
-html.casca{--acento1:var(--accent,#d40000);--acento2:color-mix(in srgb,var(--accent,#d40000) 70%,#ff2a2a)}
+html.casca{--acento1:var(--accent,#2f8bff);--acento2:color-mix(in srgb,var(--accent,#2f8bff) 70%,#5aa7ff)}
 /* o Tutorial da aba é o do cabeçalho da casca (que clica neste botão); dois botões iguais confundem */
 html.casca .btn-tutorial-aba{display:none!important}
 

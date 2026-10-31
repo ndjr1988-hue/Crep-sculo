@@ -40,7 +40,7 @@
     if (!j || !j.sem_senha) return;
     const caixa = document.getElementById('erro');
     caixa.textContent = j.mensagem || 'Use o link de primeiro acesso que apareceu no fim da instalação.';
-    caixa.style.background = '#170c0d'; caixa.style.color = '#d6aaae'; caixa.style.borderColor = '#432326';
+    caixa.style.background = '#0c1117'; caixa.style.color = '#aabcd6'; caixa.style.borderColor = '#233043';
     caixa.hidden = false;
   }).catch(() => { /* sem aviso, o login segue normal */ });
 })();
