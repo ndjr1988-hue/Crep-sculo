@@ -52,7 +52,8 @@
       const fala = s.est === 'falando' ? Math.abs(Math.sin(t / 120) * Math.sin(t / 47 + 1)) : 0;
       pulso += ((s.est === 'pensando' ? .35 + .25 * Math.sin(t / 240) : fala) - pulso) * .18;
       const A = s.claro ? ARTE.claro : ARTE.escuro;
-      const R = Math.min(W, H) * .46, cx = s.cx * W, cy = s.cy * H, incl = .46;
+      const R = s.raio || Math.min(W, H) * .46, cx = s.cx * W, cy = s.cy * H, incl = .46;
+      if (R < 40) { c.clearRect(0, 0, W, H); return; }
       c.clearRect(0, 0, W, H);
       c.globalCompositeOperation = A.modo;
       const respira = 1 + .05 * Math.sin(t / 1400) + pulso * .35;
@@ -102,12 +103,41 @@
       ['pause', 'ended', 'emptied'].forEach(ev => player.addEventListener(ev, () => { voz = false; }));
     }
     const raiz = document.documentElement;
+    /* Mede o espaço vazio entre o quadro de cotações e as mensagens que estão na tela. */
+    const MARGEM = 28, INCL = .55;
+    let alvo = {x: 0, y: 0, r: 0}, pos = null, medidoEm = -1e9;
+    function mede() {
+      const W = cv.width, H = cv.height, sobe = 58, esq = 240;
+      let limite = W - MARGEM;
+      document.querySelectorAll('#chat .bub, #chat .row, #chat .lc, #chat .pc').forEach(el => {
+        const alvoEl = el.classList.contains('row') ? (el.querySelector('.bub') || null) : el;
+        if (!alvoEl) return;
+        const r = alvoEl.getBoundingClientRect();
+        if (r.width && r.bottom > sobe && r.top < sobe + H) limite = Math.min(limite, r.left - esq - MARGEM);
+      });
+      const q = document.getElementById('pcQuadro');
+      const box = q && getComputedStyle(q).display !== 'none' ? q.getBoundingClientRect() : null;
+      const op = [];
+      const cabe = (x0, y0, x1, y1) => {
+        const w = x1 - x0, h = y1 - y0;
+        if (w > 0 && h > 0) op.push({x: (x0 + x1) / 2, y: (y0 + y1) / 2, r: Math.min(w / 2, h / 2 / INCL)});
+      };
+      if (box) {
+        cabe(box.right - esq + MARGEM, MARGEM, limite, H - 70);
+        cabe(MARGEM, box.bottom - sobe + MARGEM, limite, H - 70);
+      } else cabe(MARGEM, MARGEM, limite, H - 70);
+      op.sort((a, b) => b.r - a.r);
+      alvo = op[0] ? {x: op[0].x, y: op[0].y, r: Math.min(op[0].r, 420)} : {x: 0, y: 0, r: 0};
+      if (!pos) pos = {...alvo};
+    }
     const quadro = window.PretorGalaxia(cv, () => {
+      const agora = performance.now();
+      if (agora - medidoEm > 700) { medidoEm = agora; mede(); }
+      pos.x += (alvo.x - pos.x) * .06; pos.y += (alvo.y - pos.y) * .06; pos.r += (alvo.r - pos.r) * .06;
       return {
         est: voz ? 'falando' : raiz.classList.contains('agente-trabalhando') ? 'pensando' : 'livre',
         claro: raiz.classList.contains('tema-claro'),
-        cx: cv.width > 1300 ? .34 : .5,
-        cy: .56,
+        cx: pos.x / cv.width, cy: pos.y / cv.height, raio: pos.r,
       };
     });
     if (parado) { quadro(0); return; }
