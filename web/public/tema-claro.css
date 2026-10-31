@@ -404,6 +404,58 @@ html:where(.tema-claro)[data-tema="escuro"]{--fundo:#170f10;--cartao:#241819;--t
 :where(html.tema-claro) .nas-pilula:focus-visible{outline:3px solid #ffffff}
 :where(html.tema-claro) .nas-reabrir{border:1px solid #583538;color:#583538}
 :where(html.tema-claro) .nas-reabrir:focus-visible{outline:3px solid #72353a}
+/* ronda-aviso.css */
+:where(html.tema-claro) .rp-caixa-verm{border-top:6px solid #931f19}
+:where(html.tema-claro) .rp-caixa-verm .sb-cab h2{color:#931f19}
+:where(html.tema-claro) .rp-caixa-verm .rp-aviso{color:#433b28}
+:where(html.tema-claro) .rp-caixa-verm .rp-fato dt{color:#595959}
+:where(html.tema-claro) .rp-caixa-verm .rp-fato a{color:#194e8f}
+:where(html.tema-claro) .rp-caixa-verm .rp-agenda input{border:1px solid #d2d2d2}
+:where(html.tema-claro) .rp-caixa-verm .sb-btn.rp-perigo{border-color:#d2b6b4;color:#931f19}
+:where(html.tema-claro) .rp-caixa-verm .sb-btn.sb-pri{background:#931f19;border-color:#931f19}
+:where(html.tema-claro) .rp-msg-verm.erro{color:#831414}
+/* seguranca-aviso.css */
+:where(html.tema-claro) .sb-selo{border:1px solid #d8aa46;background:#f3f1ec;color:#433b28}
+:where(html.tema-claro) .sb-fundo{background:rgba(21,26,34,.55)}
+:where(html.tema-claro) .sb-caixa{background:#ffffff;color:#272727;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+:where(html.tema-claro) .sb-ajuda{border:1px solid #d2d2d2;background:#ffffff;color:#272727}
+:where(html.tema-claro) .sb-detalhe-aberto{background:#f6f6f6}
+:where(html.tema-claro) .sb-fato dt{color:#595959}
+:where(html.tema-claro) .sb-fato a{color:#194e8f}
+:where(html.tema-claro) .sb-detalhe summary{color:#194e8f}
+:where(html.tema-claro) .sb-detalhe p{background:#f6f6f6}
+:where(html.tema-claro) .sb-erro{color:#7f1717}
+:where(html.tema-claro) .sb-btn{border:1px solid #d2d2d2;background:#ffffff;color:#272727}
+:where(html.tema-claro) .sb-btn.sb-pri{background:#194e8f;border-color:#194e8f;color:#ffffff}
+/* seguranca.css */
+:where(html.tema-claro) body.rp{--rp-txt:#1b1011;--rp-fraco:#755f61;--rp-linha:#e7dfe0;--rp-acento:#ae0000;--rp-fundo:#f6f3f3;--rp-verm:#931f19}
+:where(html.tema-claro) .rp-sec{background:#ffffff}
+:where(html.tema-claro) .rp-sec.rp-destaque{outline:3px solid #d2b6b4}
+:where(html.tema-claro) .rp-sec-emergencia{border-color:#dbc3c3}
+:where(html.tema-claro) .rp-ajuda{background:#f6f2f2;color:#52383a}
+:where(html.tema-claro) .rp-amarela{background:#f3f1ec;border:1px solid #d8aa46;color:#433b28}
+:where(html.tema-claro) .rp-vermelha{background:#f6f1f1;border:1px solid #d2b6b4;color:#731814}
+:where(html.tema-claro) .rp-sem-novidade{background:#f4eced;border:1px solid #d8bdc0;color:#563336}
+:where(html.tema-claro) .rp-n2{border-color:#d2b6b4;background:#fdfcfc}
+:where(html.tema-claro) .rp-tag{background:#f2eeee;color:#52383a}
+:where(html.tema-claro) .rp-grav-critical{background:#f6f1f1;color:#731814}
+:where(html.tema-claro) .rp-grav-high{background:#f2eee9;color:#564634}
+:where(html.tema-claro) .rp-tag-ok{background:#f4eced;color:#563336}
+:where(html.tema-claro) .rp-aviso{color:#433b28}
+:where(html.tema-claro) .rp-fato dt{color:#595959}
+:where(html.tema-claro) .rp-fato a{color:#194e8f}
+:where(html.tema-claro) .rp-detalhe summary{color:#194e8f}
+:where(html.tema-claro) .rp-btn{background:#f6f2f2;color:#52383a}
+:where(html.tema-claro) .rp-btn.rp-pri{color:#ffffff}
+:where(html.tema-claro) .rp-btn.rp-perigo{background:#ffffff;border-color:#d2b6b4}
+:where(html.tema-claro) .rp-btn.rp-perigo:not(:disabled):hover{background:#f6f1f1}
+:where(html.tema-claro) .rp-msg.erro{color:#831414}
+:where(html.tema-claro) .rp-msg.ok{color:#b86d72}
+:where(html.tema-claro) .rp-alerta{background:#f6f1f1;border:1px solid #d2b6b4;color:#731814}
+:where(html.tema-claro) .rp-bloqueio{background:#f6f6f6;border:1px solid #dddddd;color:#414141}
+:where(html.tema-claro) .rp-plano{background:#f6f6f6}
+:where(html.tema-claro) .rp-aviso-lista{color:#433b28}
+:where(html.tema-claro) .rp-codigo{background:#f6f1f1;color:#731814}
 /* sigilo.css */
 :where(html.tema-claro) #btnSigilo.on{color:#ffffff}
 :where(html.tema-claro) #sigAviso > button,:where(html.tema-claro) #sigAviso > p{background:#f2f0e9;color:#393322;border:1px solid #daaa20}
