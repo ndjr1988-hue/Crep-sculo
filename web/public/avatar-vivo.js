@@ -19,7 +19,7 @@ float prof(vec2 p){
  float testa=.10*exp(-(sq((p.x-.5)/.15)+sq((p.y-.27)/.12)));
  float ombro=.22*smoothstep(.56,.72,p.y)*smoothstep(.40,.0,abs(p.x-.5));
  return max(d*.8+nariz*step(r,1.)+testa*step(r,1.),ombro);}
-void main(){vec2 q=u;for(int i=0;i<5;i++)q=u-m*prof(q)*.055;gl_FragColor=texture2D(t,q);}`;
+void main(){vec2 q=u;for(int i=0;i<5;i++)q=u-m*prof(q)*.10;gl_FragColor=texture2D(t,q);}`;
   const VS = 'attribute vec2 a;varying vec2 u;void main(){u=vec2(a.x*.5+.5,.5-a.y*.5);gl_Position=vec4(a,0.,1.);}';
 
   const vizinhos = PONTOS.map(p => PONTOS.map((q, j) => [(p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2, j])
@@ -84,7 +84,7 @@ void main(){vec2 q=u;for(int i=0;i<5;i++)q=u-m*prof(q)*.055;gl_FragColor=texture
   }
 
   function desliga() {
-    if (vivo) vivo.caixa.querySelectorAll('canvas').forEach(c => c.remove());
+    if (vivo) { vivo.caixa.querySelectorAll('canvas').forEach(c => c.remove()); vivo.caixa.style.transform = ''; }
     vivo = null;
   }
 
@@ -99,8 +99,11 @@ void main(){vec2 q=u;for(int i=0;i<5;i++)q=u-m*prof(q)*.055;gl_FragColor=texture
       const seguindo = olhar && t - olharEm < 2500;
       const ax = seguindo ? olhar[0] : Math.sin(t / 2600) * .7, ay = seguindo ? olhar[1] : Math.sin(t / 3700) * .25;
       mx += (ax - mx) * .08; my += (ay - my) * .08;
-      if (vivo.desenhaFoto) vivo.desenhaFoto(mx, my);
-      const d = vivo.desenhaFoto ? .044 : 0, pos = p => [(p[0] + mx * d) * W, (p[1] + my * d) * W];
+      if (vivo.desenhaFoto) {
+        vivo.desenhaFoto(mx, my);
+        vivo.caixa.style.transform = `perspective(260px) rotateY(${(mx * 13).toFixed(2)}deg) rotateX(${(-my * 9).toFixed(2)}deg)`;
+      }
+      const d = vivo.desenhaFoto ? .08 : 0, pos = p => [(p[0] + mx * d) * W, (p[1] + my * d) * W];
       for (let i = 0; i < brilho.length; i++) brilho[i] *= .92;
       for (let i = 0; i < e.n; i++) {
         const s = sinais[i];
