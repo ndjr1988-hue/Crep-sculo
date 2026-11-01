@@ -27,7 +27,7 @@
 #pcQuadro::before,#pcQuadro::after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--c)}
 #pcQuadro::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
 #pcQuadro::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-@media (min-width:1500px){#pcQuadro{display:block}#pcQuadro.oculto{display:none}#pcMostra{display:block}#pcMostra.some{display:none}}
+@media (min-width:1100px){#pcQuadro{display:block}#pcQuadro.oculto,#pcQuadro.cobre{display:none}#pcMostra{display:block}#pcMostra.some,#pcMostra.cobre{display:none}}
 #pcQuadro h4{margin:0 0 6px;font:600 10.5px/1 ui-monospace,monospace;letter-spacing:.32em;color:var(--c);display:flex;justify-content:space-between;align-items:center}
 #pcQuadro h4 button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;padding:0}
 #pcQuadro .pc-hora{font-size:30px;font-weight:300;letter-spacing:.06em;font-variant-numeric:tabular-nums}
@@ -131,7 +131,7 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
     setInterval(indicadores, 6 * 3600000);
   }
 
-  const larga = window.matchMedia('(min-width:1500px)');
+  const larga = window.matchMedia('(min-width:1100px)');
   const oculto = () => { try { return localStorage.getItem(CHAVE) === '1'; } catch (e) { return false; } };
   function aplica() {
     const esc = oculto();
@@ -148,6 +148,18 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
     aplica();
   });
 
+  /* Some só se alguma mensagem na tela chegar até o quadro; volta quando ela sair. */
+  function desvia() {
+    let bate = false;
+    const fim = 262 + 236 + 16, H = window.innerHeight;
+    document.querySelectorAll('#chat .bub').forEach(b => {
+      const r = b.getBoundingClientRect();
+      if (r.width && r.left < fim && r.top < 84 + 380 && r.bottom > 84 && r.top < H) bate = true;
+    });
+    quadro.classList.toggle('cobre', bate);
+    mostra.classList.toggle('cobre', bate);
+  }
+
   function monta() {
     const estilo = document.createElement('style');
     estilo.textContent = css;
@@ -156,6 +168,7 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
     document.body.appendChild(mostra);
     aplica();
     if (larga.addEventListener) larga.addEventListener('change', aplica);
+    setInterval(desvia, 1000);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monta); else monta();
 })();
