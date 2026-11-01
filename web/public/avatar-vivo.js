@@ -78,7 +78,8 @@
       fx.clearRect(0, 0, W, W);
       fx.globalCompositeOperation = 'lighter';
       for (let i = 0; i < PONTOS.length; i++) {
-        const b = Math.min(1, brilho[i] + f * .45);
+        const pisca = .28 + .3 * Math.sin(t / 620 + i * 2.4) * Math.sin(t / 1730 + i);
+        const b = Math.min(1, brilho[i] + f * .45 + Math.max(0, pisca));
         if (b < .03) continue;
         const q = pos(PONTOS[i]), r = W * .024 * (1 + b), h = fx.createRadialGradient(q[0], q[1], 0, q[0], q[1], r);
         h.addColorStop(0, `rgba(255,255,255,${b.toFixed(3)})`);
