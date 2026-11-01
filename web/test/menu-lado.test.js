@@ -43,10 +43,10 @@ test('seletor: nome com HTML não vira marcação', () => {
   assert.doesNotMatch(h, /<b>"x"/);
 });
 
-test('páginas do painel: 13 links com #aba=, e nenhum sem painel', () => {
+test('páginas do painel: 14 links com #aba=, e nenhum sem painel', () => {
   const l = M.linksPainel({ id: 'ana', tem_painel: true, painel_url: '/p/ana/' });
   assert.deepEqual(l.map(x => x.href.split('#aba=')[1]),
-    ['status', 'skills', 'rotinas', 'cofre', 'arquivos', 'memory', 'operations', 'costs', 'como', 'identity', 'personality', 'apps', 'socorro']);
+    ['status', 'skills', 'rotinas', 'cofre', 'arquivos', 'memory', 'operations', 'costs', 'como', 'identity', 'personality', 'apps', 'tela', 'socorro']);
   assert.ok(l.every(x => x.href.startsWith('/p/ana/#aba=')));
   assert.deepEqual(M.linksPainel({ id: 'admin', tem_painel: false }), []);
 });
