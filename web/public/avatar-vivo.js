@@ -1,22 +1,29 @@
-/* Pretor: avatar vivo do Jasper no alto do menu (pedido do Chefe em 31/10/2026).
+/* Pretor: avatar vivo dos agentes no alto do menu (pedido do Chefe em 31/10/2026).
    A foto fica parada e sinais de luz correm pelos pontos do cérebro. Calmo quando livre, acelerado
    com html.agente-trabalhando, pulsando enquanto o #player toca a voz. No celular, a 20 quadros.
-   Qualquer falha tira o efeito e deixa a foto normal. Os pontos valem para a imagem jasper.jpg. */
+   Qualquer falha tira o efeito e deixa a foto normal. Cada lista de pontos vale para uma imagem: trocou a foto, refaça os pontos. */
 (function () {
   'use strict';
   if (window.PretorAvatarVivo) return;
   window.PretorAvatarVivo = true;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-  const PONTOS = [[0.5,0.3655],[0.5011,0.2705],[0.6216,0.2838],[0.3409,0.3258],[0.4823,0.2208],[0.5607,0.2495],[0.5199,0.2097],[0.4326,0.1876],[0.6547,0.3268],[0.4801,0.3302],[0.5972,0.328],[0.384,0.2926],[0.3409,0.2783],[0.6304,0.2142],[0.4204,0.3545],[0.363,0.2484],[0.4724,0.3025],[0.4525,0.3666],[0.5342,0.3014],[0.447,0.1987],[0.4448,0.3014],[0.5917,0.1788],[0.5265,0.2429],[0.6282,0.2484],[0.4934,0.181],[0.3873,0.3644],[0.5387,0.223],[0.595,0.2583],[0.3884,0.2384],[0.5652,0.3567],[0.5177,0.328],[0.4724,0.202],[0.6249,0.35],[0.6072,0.3644],[0.4569,0.2749],[0.4238,0.2616],[0.4216,0.2396],[0.4072,0.2296],[0.4061,0.328],[0.3762,0.2639],[0.658,0.3555],[0.342,0.2396],[0.6083,0.2174],[0.5387,0.371],[0.5829,0.3169],[0.5552,0.3423],[0.5431,0.2849],[0.6602,0.2451],[0.5807,0.3655],[0.5685,0.3136],[0.4702,0.3523],[0.3784,0.3467],[0.447,0.2418]];
+  const PONTOS_DE = {
+    admin: [[0.5,0.3655],[0.5011,0.2705],[0.6216,0.2838],[0.3409,0.3258],[0.4823,0.2208],[0.5607,0.2495],[0.5199,0.2097],[0.4326,0.1876],[0.6547,0.3268],[0.4801,0.3302],[0.5972,0.328],[0.384,0.2926],[0.3409,0.2783],[0.6304,0.2142],[0.4204,0.3545],[0.363,0.2484],[0.4724,0.3025],[0.4525,0.3666],[0.5342,0.3014],[0.447,0.1987],[0.4448,0.3014],[0.5917,0.1788],[0.5265,0.2429],[0.6282,0.2484],[0.4934,0.181],[0.3873,0.3644],[0.5387,0.223],[0.595,0.2583],[0.3884,0.2384],[0.5652,0.3567],[0.5177,0.328],[0.4724,0.202],[0.6249,0.35],[0.6072,0.3644],[0.4569,0.2749],[0.4238,0.2616],[0.4216,0.2396],[0.4072,0.2296],[0.4061,0.328],[0.3762,0.2639],[0.658,0.3555],[0.342,0.2396],[0.6083,0.2174],[0.5387,0.371],[0.5829,0.3169],[0.5552,0.3423],[0.5431,0.2849],[0.6602,0.2451],[0.5807,0.3655],[0.5685,0.3136],[0.4702,0.3523],[0.3784,0.3467],[0.447,0.2418]],
+    marcus: [[0.3281,0.2125],[0.3516,0.1469],[0.6578,0.1594],[0.6609,0.1875],[0.3187,0.1906],[0.6562,0.3156],[0.3328,0.1688],[0.4344,0.1562],[0.5594,0.2891],[0.2984,0.2344],[0.3094,0.2125],[0.4859,0.2703],[0.4766,0.2453],[0.5047,0.2297],[0.6281,0.2156],[0.4969,0.2453],[0.4734,0.2984],[0.6781,0.1891],[0.4953,0.2016],[0.4938,0.1375],[0.5453,0.1578],[0.5172,0.2],[0.45,0.2797],[0.5281,0.1781],[0.55,0.2578],[0.3281,0.25],[0.3688,0.15],[0.4297,0.2781],[0.5328,0.2109],[0.4078,0.2359],[0.5547,0.1734],[0.5828,0.2828],[0.5,0.1062],[0.4906,0.1656],[0.6031,0.2203],[0.4375,0.2203],[0.4422,0.2453],[0.6062,0.2609],[0.5766,0.2641],[0.3828,0.2531],[0.4781,0.1906],[0.6,0.2406],[0.5375,0.2938],[0.4656,0.1437],[0.5312,0.3109],[0.5875,0.2],[0.5625,0.225],[0.5281,0.2781],[0.5906,0.1609],[0.3891,0.275],[0.5453,0.1172],[0.5734,0.1781],[0.5047,0.3078],[0.4437,0.1844],[0.4344,0.2031],[0.3828,0.2313],[0.5172,0.1406],[0.3578,0.3234],[0.5219,0.1094],[0.5328,0.2391],[0.6141,0.1187],[0.4766,0.2219],[0.3547,0.2203],[0.6156,0.3125],[0.4016,0.2141],[0.5078,0.1578],[0.6062,0.1938],[0.4047,0.1688],[0.4969,0.2891],[0.4484,0.0969]],
+  };
   const ESTADOS = {livre: {n: 7, v: .012}, pensando: {n: 28, v: .04}, falando: {n: 16, v: .022}};
-  const vizinhos = PONTOS.map(p => PONTOS.map((q, j) => [(p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2, j])
-    .sort((a, b) => a[0] - b[0]).slice(1, 4).map(x => x[1]));
-  const brilho = PONTOS.map(() => 0);
-  const sinais = Array.from({length: 30}, () => {
-    const a = Math.floor(Math.random() * PONTOS.length);
-    return {a, b: vizinhos[a][0], t: Math.random()};
-  });
+  let PONTOS = [], vizinhos = [], brilho = [], sinais = [];
+  function prepara(lista) {
+    PONTOS = lista;
+    vizinhos = PONTOS.map(p => PONTOS.map((q, j) => [(p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2, j])
+      .sort((a, b) => a[0] - b[0]).slice(1, 4).map(x => x[1]));
+    brilho = PONTOS.map(() => 0);
+    sinais = Array.from({length: 30}, () => {
+      const a = Math.floor(Math.random() * PONTOS.length);
+      return {a, b: vizinhos[a][0], t: Math.random()};
+    });
+  }
 
   let vivo = null, voz = false;
   const player = document.getElementById('player');
@@ -91,10 +98,12 @@
     const mold = document.getElementById('mlMoldura');
     const caixa = mold && mold.querySelector('.ml-foto');
     const img = caixa && caixa.querySelector('img');
-    const ehJasper = img && /\/agents\/admin\/|\/jasper\.jpg/.test(img.src);
-    if (vivo && (vivo.caixa !== caixa || !ehJasper)) desliga();
-    if (vivo || !ehJasper) return;
-    const pronto = () => { try { if (!vivo && img.isConnected) liga(caixa, img); } catch (e) { desliga(); } };
+    const achado = img && (/\/agents\/([^/]+)\//.exec(img.src) || /\/(jasper|marcus)\.jpg/.exec(img.src));
+    const slug = achado ? (achado[1] === 'jasper' && /\.jpg/.test(achado[0]) ? 'admin' : achado[1]) : null;
+    const lista = slug && PONTOS_DE[slug];
+    if (vivo && (vivo.caixa !== caixa || !lista)) desliga();
+    if (vivo || !lista) return;
+    const pronto = () => { try { if (!vivo && img.isConnected) { prepara(lista); liga(caixa, img); } } catch (e) { desliga(); } };
     if (img.complete && img.naturalWidth) pronto(); else img.addEventListener('load', pronto, {once: true});
   }
 
