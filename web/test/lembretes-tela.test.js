@@ -85,3 +85,21 @@ test('página: cada estado dos avisos no aparelho tem frase e botões, inclusive
   assert.equal(Tela.fmt('2026-10-20T14:30:00-03:00'), '20/10/2026 14:30');
   assert.equal(Tela.fmt(null), '-');
 });
+
+test('calendário: cada regra cai nos dias certos e a repetição só aparece de hoje em diante', () => {
+  const L = [
+    { id: 'u', estado: 'encerrado', regra: { tipo: 'unico', data: '2026-11-03', hora: '10:00' } },
+    { id: 'd', estado: 'ativo', fim: '2026-11-06', regra: { tipo: 'diario', hora: '09:00' } },
+    { id: 's', estado: 'pausado', regra: { tipo: 'semanal', dias: ['seg', 'sex'], hora: '08:00' } },
+    { id: 'n', estado: 'ativo', regra: { tipo: 'a_cada_n_dias', n: 10, inicio: '2026-10-25', hora: '07:30' } },
+    { id: 'x', estado: 'encerrado', regra: { tipo: 'diario', hora: '11:00' } },
+  ];
+  const d = Tela.diasDoMes(L, 2026, 10, '2026-11-04');
+  const ids = dia => (d[dia] || []).map(l => l.id);
+  assert.deepEqual(ids('2026-11-03'), ['u'], 'único aparece mesmo já passado; repetição não aparece antes de hoje');
+  assert.deepEqual(ids('2026-11-04'), ['n', 'd'], 'a cada 10 dias, contando de 25/10, e o diário a partir de hoje');
+  assert.deepEqual(ids('2026-11-06'), ['s', 'd'], 'sexta do semanal e último dia do diário, em ordem de hora');
+  assert.deepEqual(ids('2026-11-07'), [], 'passou do fim do diário');
+  assert.deepEqual(ids('2026-11-09'), ['s'], 'segunda do semanal');
+  assert.deepEqual(ids('2026-11-14'), ['n']);
+});

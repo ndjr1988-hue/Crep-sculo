@@ -80,6 +80,37 @@
     }
   }
 
+  const COD_DIA = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+  const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  const isoDia = (a, m, d) => a + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  const diaUtc = iso => Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10));
+
+  /* O lembrete toca neste dia? A conta sai da regra, com a data em texto para não depender do fuso do aparelho.
+     Regra que repete só aparece de hoje em diante: o que já tocou fica no Histórico, com o que aconteceu de fato. */
+  function tocaNoDia(l, dia, hoje) {
+    const r = l.regra || {};
+    if (r.tipo === 'unico') return r.data === dia;
+    if (l.estado === 'encerrado' || dia < hoje || (l.fim && dia > l.fim)) return false;
+    if (r.tipo === 'diario') return true;
+    if (r.tipo === 'semanal') return (r.dias || []).includes(COD_DIA[new Date(diaUtc(dia)).getUTCDay()]);
+    if (r.tipo === 'a_cada_n_dias') {
+      const passados = Math.round((diaUtc(dia) - diaUtc(r.inicio)) / 86400000);
+      return passados >= 0 && passados % r.n === 0;
+    }
+    return false;
+  }
+
+  /* Lembretes do mês (mes de 0 a 11), por dia: { 'AAAA-MM-DD': [lembrete...] }, em ordem de hora. */
+  function diasDoMes(lembretes, ano, mes, hoje) {
+    const total = new Date(Date.UTC(ano, mes + 1, 0)).getUTCDate(), dias = {};
+    for (let d = 1; d <= total; d++) {
+      const iso = isoDia(ano, mes, d);
+      const doDia = lembretes.filter(l => tocaNoDia(l, iso, hoje));
+      if (doDia.length) dias[iso] = doDia.sort((a, b) => String(a.regra.hora).localeCompare(String(b.regra.hora)));
+    }
+    return dias;
+  }
+
   const PASSOS = {
     avisos: {
       alvo: '#secAvisos', titulo: 'Avisos neste aparelho',
@@ -95,13 +126,13 @@
     },
     lista: {
       alvo: '#secLista', titulo: 'Seus lembretes',
-      oque: 'Todos os lembretes, com a regra em português, a próxima vez que tocam e o estado (ativo, pausado ou encerrado).',
-      como: 'A próxima vez é calculada pelo servidor na regra e no fuso dele. Pausar não acumula nada: ao retomar, vale a próxima hora a partir de agora. O Histórico mostra cada vez que o lembrete tocou e como terminou.',
+      oque: 'Todos os lembretes, no calendário do mês ou em lista, com a regra em português, a próxima vez que tocam e o estado (ativo, pausado ou encerrado).',
+      como: 'No calendário, toque num dia para ver os lembretes dele ou criar um novo naquela data. Quem repete aparece de hoje em diante; o que já tocou fica no Histórico. A próxima vez é calculada pelo servidor na regra e no fuso dele. Pausar não acumula nada: ao retomar, vale a próxima hora a partir de agora. O Histórico mostra cada vez que o lembrete tocou e como terminou.',
       porque: 'Para você ver o que está agendado, pausar o que não vale mais e conferir se algum aviso ficou sem resposta.',
     },
   };
 
-  if (!raiz.document) return { montaCorpo, fmt, fraseAvisos, ROTULO_ESTADO, PASSOS };
+  if (!raiz.document) return { montaCorpo, fmt, fraseAvisos, diasDoMes, ROTULO_ESTADO, PASSOS };
 
   /* ── Parte com DOM ─────────────────────────────────────────────────────── */
   const $ = id => document.getElementById(id);
@@ -196,6 +227,84 @@
     if (trabalho.length) sel.value = trabalho[0].id;
   }
 
+  // ── calendário ──
+  const CHAVE_VISTA = 'pretor-lembretes-vista';
+  const hojeIso = () => { const h = new Date(); return isoDia(h.getFullYear(), h.getMonth(), h.getDate()); };
+  const agoraCal = new Date();
+  const cal = { ano: agoraCal.getFullYear(), mes: agoraCal.getMonth(), dia: hojeIso() };
+  const leVista = () => { try { return localStorage.getItem(CHAVE_VISTA) === 'lista' ? 'lista' : 'calendario'; } catch (e) { return 'calendario'; } };
+  function aplicaVista(v) {
+    $('calendario').hidden = v !== 'calendario';
+    $('lista').hidden = v === 'calendario';
+    $('vistaCal').setAttribute('aria-pressed', String(v === 'calendario'));
+    $('vistaLista').setAttribute('aria-pressed', String(v === 'lista'));
+  }
+  function trocaVista(v) {
+    try { localStorage.setItem(CHAVE_VISTA, v); } catch (e) { /* aba privada: vale só nesta visita */ }
+    aplicaVista(v);
+  }
+
+  function celulaHtml(iso, n, itens, hoje) {
+    const cls = 'lc-dia' + (iso === hoje ? ' hoje' : '') + (iso === cal.dia ? ' escolhido' : '') + (iso < hoje ? ' passou' : '');
+    const nomes = itens.slice(0, 3).map(l =>
+      `<span class="lc-item ${esc(l.estado)}">${esc(l.regra.hora)} ${esc(l.texto)}</span>`).join('');
+    const mais = itens.length > 3 ? `<span class="lc-mais">+${itens.length - 3}</span>` : '';
+    const pontos = itens.length ? `<span class="lc-pontos" aria-hidden="true">${'<i></i>'.repeat(Math.min(itens.length, 4))}</span>` : '';
+    const rot = n + ' de ' + MESES[cal.mes] + (itens.length ? ', ' + itens.length + (itens.length === 1 ? ' lembrete' : ' lembretes') : ', sem lembretes');
+    return `<button type="button" class="${cls}" data-dia="${iso}" aria-label="${esc(rot)}" aria-pressed="${iso === cal.dia}"><b>${n}</b>${nomes}${mais}${pontos}</button>`;
+  }
+
+  function acoesDe(l) {
+    if (l.estado === 'encerrado') return `<button type="button" class="lp-btn perigo" data-apagar="${esc(l.id)}">Apagar</button>`;
+    return (l.estado === 'pausado'
+      ? `<button type="button" class="lp-btn" data-retomar="${esc(l.id)}">Retomar</button>`
+      : `<button type="button" class="lp-btn" data-pausar="${esc(l.id)}">Pausar</button>`) +
+      `<button type="button" class="lp-btn perigo" data-apagar="${esc(l.id)}">Apagar</button>`;
+  }
+
+  function pintaCalendario() {
+    const hoje = hojeIso(), dias = diasDoMes(ultimaLista, cal.ano, cal.mes, hoje);
+    const inicio = new Date(Date.UTC(cal.ano, cal.mes, 1)).getUTCDay();
+    const total = new Date(Date.UTC(cal.ano, cal.mes + 1, 0)).getUTCDate();
+    let grade = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'].map(d => `<span class="lc-sem">${d}</span>`).join('');
+    grade += '<span class="lc-vazio"></span>'.repeat(inicio);
+    for (let d = 1; d <= total; d++) { const iso = isoDia(cal.ano, cal.mes, d); grade += celulaHtml(iso, d, dias[iso] || [], hoje); }
+    $('calTitulo').textContent = MESES[cal.mes].charAt(0).toUpperCase() + MESES[cal.mes].slice(1) + ' de ' + cal.ano;
+    $('calGrade').innerHTML = grade;
+    const doDia = (cal.dia.slice(0, 7) === isoDia(cal.ano, cal.mes, 1).slice(0, 7) && dias[cal.dia]) || [];
+    const titulo = cal.dia.slice(8, 10) + '/' + cal.dia.slice(5, 7) + '/' + cal.dia.slice(0, 4);
+    $('calDia').innerHTML = `<div class="lc-dia-topo"><b>${titulo}</b>` +
+      (cal.dia >= hoje ? `<button type="button" class="lp-btn pri" data-novo-dia="${cal.dia}">Novo lembrete neste dia</button>` : '') + '</div>' +
+      (doDia.length ? '<ul>' + doDia.map(l =>
+        `<li><div class="lc-txt"><b>${esc(l.regra.hora)}</b> ${esc(l.texto)}<span class="lp-regra">${esc(l.agente_nome || l.agente)} · ${esc(l.regra_texto)}</span></div>` +
+        `<span class="lp-chip ${esc(l.estado)}">${esc(ROTULO_ESTADO[l.estado] || l.estado)}</span><div class="lc-acoes">${acoesDe(l)}</div></li>`).join('') + '</ul>'
+        : '<p class="lp-fraco">Nenhum lembrete neste dia.</p>');
+  }
+
+  function mudaMes(delta) {
+    const d = new Date(Date.UTC(cal.ano, cal.mes + delta, 1));
+    cal.ano = d.getUTCFullYear(); cal.mes = d.getUTCMonth();
+    pintaCalendario();
+  }
+  function vaiHoje() {
+    const h = new Date();
+    cal.ano = h.getFullYear(); cal.mes = h.getMonth(); cal.dia = hojeIso();
+    pintaCalendario();
+  }
+  function novoNoDia(dia) {
+    $('fQuando').value = 'unico';
+    $('fData').value = dia;
+    mostraCampos();
+    $('secNovo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('fTexto').focus({ preventScroll: true });
+  }
+  function aoClicarGrade(ev) {
+    const b = ev.target.closest('button[data-dia]');
+    if (!b) return;
+    cal.dia = b.dataset.dia;
+    pintaCalendario();
+  }
+
   function linhaHtml(l) {
     const aberto = abertos.has(l.id);
     const acoes = `<button type="button" class="lp-btn" data-hist="${esc(l.id)}">${aberto ? 'Esconder histórico' : 'Histórico'}</button>` +
@@ -213,6 +322,7 @@
 
   function pintaLista(itens) {
     ultimaLista = itens;
+    pintaCalendario();
     if (!itens.length) {
       $('lista').innerHTML = '<p class="lp-vazio">Nenhum lembrete por aqui. Crie o primeiro no formulário acima, ou peça ao agente na conversa.</p>';
       return;
@@ -269,6 +379,7 @@
     const b = ev.target.closest('button');
     if (!b) return;
     const d = b.dataset;
+    if (d.novoDia) { novoNoDia(d.novoDia); return; }
     if (d.hist) {
       if (abertos.has(d.hist)) abertos.delete(d.hist); else abertos.add(d.hist);
       pintaLista(ultimaLista);
@@ -348,6 +459,15 @@
     $('fQuando').onchange = mostraCampos;
     $('formNovo').addEventListener('submit', criar);
     $('lista').addEventListener('click', aoClicarLista);
+    $('calDia').addEventListener('click', aoClicarLista);
+    $('calGrade').addEventListener('click', aoClicarGrade);
+    $('calAntes').onclick = () => mudaMes(-1);
+    $('calDepois').onclick = () => mudaMes(1);
+    $('calHoje').onclick = vaiHoje;
+    $('vistaCal').onclick = () => trocaVista('calendario');
+    $('vistaLista').onclick = () => trocaVista('lista');
+    aplicaVista(leVista());
+    pintaCalendario();
     $('filtroAgente').onchange = carrega;
     $('filtroEstado').onchange = carrega;
     const hoje = new Date();
@@ -363,5 +483,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inicia);
   else inicia();
 
-  return { montaCorpo, fmt, fraseAvisos, ROTULO_ESTADO, PASSOS };
+  return { montaCorpo, fmt, fraseAvisos, diasDoMes, ROTULO_ESTADO, PASSOS };
 });

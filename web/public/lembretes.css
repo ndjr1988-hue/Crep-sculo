@@ -50,7 +50,7 @@ body.lp *{box-sizing:border-box}
 .lp-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .lp-form label{display:flex;flex-direction:column;gap:3px;font-size:13.5px;font-weight:600;min-width:0}
 .lp-form .larga{grid-column:1/-1}
-.lp-form input,.lp-form select,.lp-form textarea{font:inherit;font-weight:400;min-height:38px;padding:6px 10px;border:1px solid var(--lp-linha);border-radius:10px;width:100%;min-width:0;background:#000000}
+.lp-form input,.lp-form select,.lp-form textarea{color:var(--lp-txt);font:inherit;font-weight:400;min-height:38px;padding:6px 10px;border:1px solid var(--lp-linha);border-radius:10px;width:100%;min-width:0;background:#000000}
 .lp-form textarea{min-height:64px;resize:vertical}
 .lp-form .dias{display:flex;gap:6px;flex-wrap:wrap}
 .lp-form .dias label{flex-direction:row;align-items:center;gap:4px;font-weight:500;min-height:36px;padding:0 8px;border:1px solid var(--lp-linha);border-radius:18px}
@@ -59,7 +59,7 @@ body.lp *{box-sizing:border-box}
 .lp-form .marca input{width:auto;min-height:0}
 .lp-form [hidden]{display:none}
 .lp-filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.lp-filtros select{font:inherit;min-height:36px;padding:0 8px;border:1px solid var(--lp-linha);border-radius:10px;background:#000000;max-width:100%}
+.lp-filtros select{color:var(--lp-txt);font:inherit;min-height:36px;padding:0 8px;border:1px solid var(--lp-linha);border-radius:10px;background:#000000;max-width:100%}
 .lp-tabela{width:100%;border-collapse:collapse}
 .lp-tabela th{text-align:left;font-size:12.5px;color:var(--lp-fraco);padding:6px 8px;border-bottom:1px solid var(--lp-linha)}
 .lp-tabela td{padding:8px;border-bottom:1px solid var(--lp-linha);vertical-align:top;overflow-wrap:anywhere}
@@ -84,6 +84,44 @@ body.lp *{box-sizing:border-box}
   .lp-tabela td.acoes::before{content:""}
   .lp-tabela tr.lp-hist{border:0;padding:0;margin:-6px 0 10px}
   .lp-tabela tr.lp-hist td::before{content:none}
+}
+
+/* calendário dos lembretes: fica no topo da tela; a lista continua como segunda vista */
+#msgGeral{order:-2}
+#secLista{order:-1}
+#calendario[hidden],#lista[hidden]{display:none}
+.lc-vista{display:inline-flex;border:1px solid var(--lp-linha);border-radius:10px;overflow:hidden}
+.lc-vista button{font:inherit;font-size:13.5px;font-weight:600;min-height:36px;padding:0 13px;border:0;background:transparent;color:var(--lp-fraco);cursor:pointer}
+.lc-vista button[aria-pressed="true"]{background:var(--lp-acento);color:#ffffff}
+.lc-topo{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.lc-topo h3{flex:1;min-width:0;margin:0;font-size:17px;text-align:center}
+.lc-seta{width:38px;padding:0;font-size:19px;line-height:1}
+.lc-grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.lc-sem{padding:2px 4px;font-size:12px;font-weight:600;color:var(--lp-fraco);text-transform:uppercase}
+.lc-dia{font:inherit;display:flex;flex-direction:column;align-items:stretch;gap:2px;min-width:0;min-height:96px;padding:5px;text-align:left;color:inherit;
+  background:rgba(127,160,210,.07);border:1px solid var(--lp-linha);border-radius:9px;cursor:pointer;overflow:hidden}
+.lc-dia:hover{border-color:var(--lp-acento)}
+.lc-dia>b{font-size:13px;font-weight:600}
+.lc-dia.passou{opacity:.55}
+.lc-dia.hoje>b{align-self:flex-start;min-width:23px;padding:1px 5px;border-radius:12px;text-align:center;background:var(--lp-acento);color:#ffffff}
+.lc-dia.escolhido{border-color:var(--lp-acento);box-shadow:inset 0 0 0 1px var(--lp-acento)}
+.lc-item{display:block;padding:1px 5px;border-radius:5px;font-size:11.5px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(47,139,255,.18)}
+.lc-item.pausado,.lc-item.encerrado{background:transparent;color:var(--lp-fraco);border:1px dashed var(--lp-linha)}
+.lc-mais{font-size:11px;color:var(--lp-fraco);padding:0 5px}
+.lc-pontos{display:none;gap:3px;margin-top:auto}
+.lc-pontos i{width:6px;height:6px;border-radius:50%;background:var(--lp-acento)}
+.lc-painel{margin-top:12px;padding-top:10px;border-top:1px solid var(--lp-linha)}
+.lc-dia-topo{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.lc-painel ul{list-style:none;margin:0;padding:0}
+.lc-painel li{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:8px 0;border-top:1px solid var(--lp-linha)}
+.lc-txt{flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
+.lc-acoes{display:flex;gap:6px}
+@media (max-width:640px){
+  .lc-grade{gap:3px}
+  .lc-dia{min-height:50px;align-items:center;padding:4px 2px}
+  .lc-item,.lc-mais{display:none}
+  .lc-pontos{display:flex}
+  .lc-dia.hoje>b{align-self:center}
 }
 
 /* visita guiada (tour.js) na tela de lembretes */

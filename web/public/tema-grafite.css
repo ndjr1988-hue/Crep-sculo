@@ -313,6 +313,10 @@ html:where(:not(.tema-claro))[data-tema="escuro"]{--dv-fundo:#e5e9ee;--dv-superf
 :where(html:not(.tema-claro)) .lp-chip.insistindo,:where(html:not(.tema-claro)) .lp-chip.sem_resposta{background:#000d1f;color:#a01818}
 :where(html:not(.tema-claro)) .lp-hist td{background:#151518}
 @media (max-width:640px){:where(html:not(.tema-claro)) .lp-tabela tr{background:#121214}}
+:where(html:not(.tema-claro)) .lc-vista button[aria-pressed="true"]{color:#ffffff}
+:where(html:not(.tema-claro)) .lc-dia{background:rgba(127,160,210,.07)}
+:where(html:not(.tema-claro)) .lc-dia.hoje>b{color:#ffffff}
+:where(html:not(.tema-claro)) .lc-item{background:rgba(47,139,255,.18)}
 :where(html:not(.tema-claro)) body.lp #tourLuz{box-shadow:0 0 0 9999px rgba(232,237,244,.66);outline:2px solid #121214}
 :where(html:not(.tema-claro)) body.lp #tourCaixa{background:#121214;box-shadow:0 6px 28px rgba(0,0,0,.35)}
 :where(html:not(.tema-claro)) body.lp #tourCaixa p b{color:#98aecd}

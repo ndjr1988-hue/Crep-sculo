@@ -98,13 +98,26 @@
   <section class="lp-sec" id="secLista" data-tour="lista" aria-label="Seus lembretes">
     <h2><span>Seus lembretes</span><button type="button" class="lp-ajuda" data-ajuda="lista" aria-label="Tutorial da lista de lembretes">?</button></h2>
     <div class="lp-filtros">
+      <div class="lc-vista" role="group" aria-label="Como mostrar os lembretes">
+        <button type="button" id="vistaCal" aria-pressed="true">Calendário</button><button type="button" id="vistaLista" aria-pressed="false">Lista</button>
+      </div>
       <select id="filtroAgente" aria-label="Filtrar por agente"><option value="">Todos os agentes</option></select>
       <select id="filtroEstado" aria-label="Filtrar por estado">
         <option value="">Todos os estados</option><option value="ativo">Ativos</option>
         <option value="pausado">Pausados</option><option value="encerrado">Encerrados</option>
       </select>
     </div>
-    <div id="lista"><p class="lp-vazio">Carregando…</p></div>
+    <div id="calendario">
+      <div class="lc-topo">
+        <button type="button" class="lp-btn lc-seta" id="calAntes" aria-label="Mês anterior">‹</button>
+        <h3 id="calTitulo" aria-live="polite"></h3>
+        <button type="button" class="lp-btn lc-seta" id="calDepois" aria-label="Próximo mês">›</button>
+        <button type="button" class="lp-btn" id="calHoje">Hoje</button>
+      </div>
+      <div class="lc-grade" id="calGrade"></div>
+      <div class="lc-painel" id="calDia"></div>
+    </div>
+    <div id="lista" hidden><p class="lp-vazio">Carregando…</p></div>
     <p class="lp-agendador" id="agendador"></p>
   </section>
 </main>
