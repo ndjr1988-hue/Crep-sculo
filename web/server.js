@@ -905,6 +905,13 @@ function criarServidor(opcoes) {
       if (servirArquivo(req, res, path.join(config.dataDir, 'abertura', 'vinheta.mp3'), 'private, max-age=3600')) return undefined;
       return H.erroJson(res, 404, 'Ainda não há vinheta de abertura.');
     }
+    // Pretor: quadro de informações de um agente, conferido e copiado da casa dele por um timer do host.
+    const quadroAg = /^\/quadros\/([a-z0-9-]+\.json)$/.exec(p);
+    if (quadroAg && (m === 'GET' || m === 'HEAD')) {
+      if (!sessao) return H.erroJson(res, 401, 'Entre no painel para ver o quadro.');
+      if (servirArquivo(req, res, path.join(config.dataDir, 'quadros', quadroAg[1]), 'no-cache')) return undefined;
+      return H.erroJson(res, 404, 'Quadro ainda sem dados.');
+    }
     const retrato = /^\/avatares\/([a-z0-9-]+\.(?:png|jpe?g|webp))$/.exec(p);
     if (retrato && (m === 'GET' || m === 'HEAD')) {
       if (!sessao) return H.erroJson(res, 401, 'Entre no painel para ver os retratos.');
