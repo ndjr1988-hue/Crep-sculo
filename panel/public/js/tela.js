@@ -384,6 +384,16 @@
       }, 0);
       if (!carregou) { carregou = true; carregar(); } else atualizar();
     });
+    // Pretor: quem chega pelo menu lateral ou pelo endereço (#aba=tela) não clica no botão.
+    const pelaUrl = () => {
+      if (!/#aba=tela\b/.test(location.hash) || carregou) return;
+      carregou = true;
+      const sub = document.getElementById('subtitulo-aba');
+      if (sub) sub.textContent = SUBTITULO;
+      carregar();
+    };
+    window.addEventListener('hashchange', pelaUrl);
+    setTimeout(pelaUrl, 0);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pendurar);
