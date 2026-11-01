@@ -1684,7 +1684,14 @@ def fonte_osv(cfg, inv, ctx):
     detalhes, falhas = {}, 0
 
     def pega(vid):
-        return vid, http_json(f"{base}/v1/vulns/{urllib.parse.quote(vid)}", timeout=30)
+        d = http_json(f"{base}/v1/vulns/{urllib.parse.quote(vid)}", timeout=30)
+        # Pretor: registro do kernel traz centenas de pacotes que não estão aqui e chega a 300 KB; guardar 3000
+        # inteiros passava de 3 GB. Fica só o bloco dos pacotes instalados.
+        nomes = {c[1] for c in achados_por_id[vid]}
+        meus = [af for af in d.get("affected") or [] if (af.get("package") or {}).get("name") in nomes]
+        if meus:
+            d["affected"] = meus
+        return vid, d
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
         for fu in [ex.submit(pega, vid) for vid in ids]:
             try:
