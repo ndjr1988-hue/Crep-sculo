@@ -1,5 +1,5 @@
 /* Pretor: quadro de cotações no espaço vazio à esquerda da conversa do Aro (pedido do Chefe em 28/10/2026;
-   desde 1/11/2026 só no Aro, com traços finos). Só no computador com tela larga, onde sobra espaço.
+   desde 1/11/2026 só no Aro, como painel de indicadores). Só no computador com tela larga, onde sobra espaço.
    Busca direto do navegador em APIs públicas e gratuitas; nada da conversa sai daqui. */
 (function () {
   'use strict';
@@ -10,38 +10,31 @@
   const FONTES = {
     cambio: 'https://api.coinbase.com/v2/exchange-rates?currency=USD',
     cripto: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true',
-    tempo: 'https://api.open-meteo.com/v1/forecast?latitude=-23.62&longitude=-46.79&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FSao_Paulo&forecast_days=1',
+    tempo: 'https://api.open-meteo.com/v1/forecast?latitude=-23.62&longitude=-46.79&current=temperature_2m&timezone=America%2FSao_Paulo',
     selic: 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json',
     ipca: 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json',
   };
-  const TEMPO = {0: ['☀️', 'céu limpo'], 1: ['🌤️', 'poucas nuvens'], 2: ['⛅', 'parcialmente nublado'], 3: ['☁️', 'nublado'],
-    45: ['🌫️', 'neblina'], 48: ['🌫️', 'neblina'], 51: ['🌦️', 'garoa'], 53: ['🌦️', 'garoa'], 55: ['🌦️', 'garoa forte'],
-    61: ['🌧️', 'chuva fraca'], 63: ['🌧️', 'chuva'], 65: ['🌧️', 'chuva forte'], 80: ['🌦️', 'pancadas'], 81: ['🌧️', 'pancadas'],
-    82: ['⛈️', 'pancadas fortes'], 95: ['⛈️', 'trovoadas'], 96: ['⛈️', 'trovoadas'], 99: ['⛈️', 'trovoadas']};
+  const L = 272, ESQ = 262, TOPO = 84;
 
   const css = `
-#pcQuadro{--c:#7fc0ff;--f:#d6ecff;--s:#8fa6c4;--l:rgba(127,192,255,.32);
-  position:fixed;top:84px;left:262px;width:236px;z-index:5;display:none;padding:14px 16px 10px;
-  font:12.5px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--f);background:transparent;
-  border:1px solid var(--l);border-radius:2px}
-#pcQuadro::before,#pcQuadro::after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--c)}
-#pcQuadro::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
-#pcQuadro::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+#pcQuadro{--a:#7fc0ff;--f:#e4f1ff;--s:#9db3cf;--l:rgba(127,192,255,.2);--bg:rgba(13,26,52,.6);--bo:rgba(127,192,255,.28);--so:0 10px 28px rgba(0,0,0,.35);--t:rgba(255,255,255,.06);
+  position:fixed;top:${TOPO}px;left:${ESQ}px;width:${L}px;box-sizing:border-box;z-index:5;display:none;padding:15px;
+  font:12.5px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--f);background:var(--bg);
+  backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--bo);border-radius:16px;box-shadow:var(--so)}
 @media (min-width:1100px){#pcQuadro{display:block}#pcQuadro.oculto,#pcQuadro.cobre{display:none}#pcMostra{display:block}#pcMostra.some,#pcMostra.cobre{display:none}}
-#pcQuadro h4{margin:0 0 6px;font:600 10.5px/1 ui-monospace,monospace;letter-spacing:.32em;color:var(--c);display:flex;justify-content:space-between;align-items:center}
-#pcQuadro h4 button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;padding:0}
-#pcQuadro .pc-hora{font-size:30px;font-weight:300;letter-spacing:.06em;font-variant-numeric:tabular-nums}
-#pcQuadro .pc-data{color:var(--s);font-size:11px;margin-bottom:8px}
-#pcQuadro .pc-sec{border-top:1px solid var(--l);padding-top:7px;margin-top:7px}
-#pcQuadro .pc-lin{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:3px 0}
-#pcQuadro .pc-lin span:first-child{color:var(--s);font-size:11px;letter-spacing:.04em}
-#pcQuadro .pc-val{font-weight:400;font-variant-numeric:tabular-nums;text-align:right}
-#pcQuadro .pc-var{font-size:10.5px;margin-left:4px}
-#pcQuadro .sobe{color:#4ade80}#pcQuadro .desce{color:#ff5a5a}
-#pcQuadro .pc-pe{color:var(--s);font-size:10px;margin-top:8px;letter-spacing:.04em}
-#pcMostra{display:none;position:fixed;top:84px;left:262px;z-index:5;background:transparent;color:#7fc0ff;border:1px solid rgba(127,192,255,.4);
-  border-radius:2px;padding:6px 10px;cursor:pointer;font:12px ui-monospace,monospace}
-html.tema-claro #pcQuadro{--c:#1262d6;--f:#16233a;--s:#46566e;--l:rgba(18,98,214,.34)}
+#pcQuadro .pc-sup{display:flex;align-items:baseline;gap:8px;font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--a)}
+#pcQuadro .pc-sup span{margin-left:auto;font-weight:400;letter-spacing:0;color:var(--s);font-variant-numeric:tabular-nums}
+#pcQuadro .pc-sup button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;line-height:1;padding:0}
+#pcQuadro .pc-dia{font-size:20px;font-weight:600;line-height:1.15;margin:3px 0 10px}
+#pcQuadro .pc-blocos{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+#pcQuadro .pc-bloco{min-width:0;background:var(--t);border:1px solid var(--l);border-radius:10px;padding:8px 9px}
+#pcQuadro .pc-bloco small{display:block;color:var(--s);font-size:10.5px}
+#pcQuadro .pc-bloco b{display:block;font-size:15px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+#pcQuadro .pc-var{display:block;font-size:10px}
+#pcQuadro .sobe{color:#4ade80}#pcQuadro .desce{color:#ff7a7a}
+#pcMostra{display:none;position:fixed;top:${TOPO}px;left:${ESQ}px;z-index:5;background:transparent;color:#7fc0ff;border:1px solid rgba(127,192,255,.4);
+  border-radius:10px;padding:6px 10px;cursor:pointer;font:600 11px system-ui,sans-serif}
+html.tema-claro #pcQuadro{--a:#1262d6;--f:#16233a;--s:#4d5c73;--l:rgba(22,35,58,.12);--bg:rgba(255,255,255,.66);--bo:rgba(255,255,255,.8);--so:0 10px 26px rgba(30,50,90,.16);--t:rgba(255,255,255,.72)}
 html.tema-claro #pcMostra{color:#1262d6;border-color:rgba(18,98,214,.4)}
 html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{color:#c00000}`;
 
@@ -49,24 +42,16 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
   quadro.id = 'pcQuadro';
   quadro.setAttribute('aria-label', 'Cotações e tempo');
   quadro.innerHTML = `
-<h4>MERCADO <button type="button" title="Esconder o quadro" aria-label="Esconder o quadro">×</button></h4>
-<div class="pc-hora" data-k="hora">--:--</div><div class="pc-data" data-k="data"></div>
-<div class="pc-lin"><span data-k="tempoTxt">Taboão da Serra</span><span class="pc-val" data-k="tempo">…</span></div>
-<div class="pc-lin"><span>máx / mín</span><span class="pc-val" data-k="maxmin">…</span></div>
-<div class="pc-sec">
-<div class="pc-lin"><span>Dólar</span><span class="pc-val" data-k="usd">…</span></div>
-<div class="pc-lin"><span>Euro</span><span class="pc-val" data-k="eur">…</span></div>
-</div>
-<div class="pc-sec">
-<div class="pc-lin"><span>Bitcoin</span><span class="pc-val" data-k="btc">…</span></div>
-<div class="pc-lin"><span></span><span class="pc-val" data-k="btcusd" style="font-weight:400">…</span></div>
-<div class="pc-lin"><span>Ethereum</span><span class="pc-val" data-k="eth">…</span></div>
-</div>
-<div class="pc-sec">
-<div class="pc-lin"><span>Selic</span><span class="pc-val" data-k="selic">…</span></div>
-<div class="pc-lin"><span>IPCA 12 meses</span><span class="pc-val" data-k="ipca">…</span></div>
-</div>
-<div class="pc-pe" data-k="pe">atualizando…</div>`;
+<div class="pc-sup">MERCADO <span data-k="agora">--:--</span><button type="button" title="Esconder o quadro" aria-label="Esconder o quadro">×</button></div>
+<div class="pc-dia" data-k="data"></div>
+<div class="pc-blocos">
+<div class="pc-bloco"><small>Dólar</small><b data-k="usd">…</b></div>
+<div class="pc-bloco"><small>Euro</small><b data-k="eur">…</b></div>
+<div class="pc-bloco"><small>Bitcoin</small><b data-k="btc">…</b><span data-k="btcv"></span></div>
+<div class="pc-bloco"><small>Ethereum</small><b data-k="eth">…</b><span data-k="ethv"></span></div>
+<div class="pc-bloco"><small>Selic</small><b data-k="selic">…</b></div>
+<div class="pc-bloco"><small>IPCA 12 meses</small><b data-k="ipca">…</b></div>
+</div>`;
   const mostra = document.createElement('button');
   mostra.id = 'pcMostra';
   mostra.type = 'button';
@@ -83,11 +68,12 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
   const busca = url => fetch(url, {cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer'})
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
 
+  let temperatura = '';
   function relogio() {
-    const agora = new Date();
-    poe('hora', agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo'}));
-    const d = agora.toLocaleDateString('pt-BR', {weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Sao_Paulo'});
-    poe('data', d.charAt(0).toUpperCase() + d.slice(1));
+    const agora = new Date(), z = {timeZone: 'America/Sao_Paulo'};
+    poe('agora', agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit', ...z}) + temperatura);
+    const dia = agora.toLocaleDateString('pt-BR', {weekday: 'long', ...z}).split('-')[0];
+    poe('data', dia.charAt(0).toUpperCase() + dia.slice(1) + ', ' + agora.toLocaleDateString('pt-BR', {day: 'numeric', month: 'numeric', ...z}));
   }
 
   function cotacoes() {
@@ -97,26 +83,22 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
       poe('eur', brl(+r.BRL / +r.EUR, 3));
     }).catch(() => {});
     busca(FONTES.cripto).then(j => {
-      poe('btc', brl(j.bitcoin.brl, 0) + variacao(j.bitcoin.brl_24h_change));
-      poe('btcusd', 'US$ ' + Number(j.bitcoin.usd).toLocaleString('en-US', {maximumFractionDigits: 0}));
-      poe('eth', brl(j.ethereum.brl, 0) + variacao(j.ethereum.brl_24h_change));
+      poe('btc', brl(j.bitcoin.brl, 0));
+      poe('btcv', variacao(j.bitcoin.brl_24h_change));
+      poe('eth', brl(j.ethereum.brl, 0));
+      poe('ethv', variacao(j.ethereum.brl_24h_change));
     }).catch(() => {});
-    poe('pe', 'atualizado às ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo'}));
   }
 
   function tempo() {
     busca(FONTES.tempo).then(j => {
-      const [ic, txt] = TEMPO[j.current.weather_code] || ['🌡️', ''];
-      poe('tempoTxt', 'Taboão: ' + txt);
-      poe('tempo', ic + ' ' + Math.round(j.current.temperature_2m) + '°C');
-      const chuva = j.daily.precipitation_probability_max ? j.daily.precipitation_probability_max[0] : null;
-      poe('maxmin', Math.round(j.daily.temperature_2m_max[0]) + '° / ' + Math.round(j.daily.temperature_2m_min[0]) + '°' +
-        (chuva != null ? ` <span class="pc-var" style="color:inherit;opacity:.7">💧${chuva}%</span>` : ''));
+      temperatura = ' · ' + Math.round(j.current.temperature_2m) + '°C';
+      relogio();
     }).catch(() => {});
   }
 
   function indicadores() {
-    busca(FONTES.selic).then(j => poe('selic', Number(j[0].valor).toLocaleString('pt-BR') + '% a.a.')).catch(() => {});
+    busca(FONTES.selic).then(j => poe('selic', Number(j[0].valor).toLocaleString('pt-BR') + '%')).catch(() => {});
     busca(FONTES.ipca).then(j => poe('ipca', Number(j[0].valor).toLocaleString('pt-BR') + '%')).catch(() => {});
   }
 
@@ -139,7 +121,7 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
     mostra.classList.toggle('some', !esc);
     if (larga.matches && !esc) liga();
   }
-  quadro.querySelector('h4 button').addEventListener('click', () => {
+  quadro.querySelector('.pc-sup button').addEventListener('click', () => {
     try { localStorage.setItem(CHAVE, '1'); } catch (e) { /* aba privada */ }
     aplica();
   });
@@ -151,10 +133,10 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
   /* Some só se alguma mensagem na tela chegar até o quadro; volta quando ela sair. */
   function desvia() {
     let bate = false;
-    const fim = 262 + 236 + 16, H = window.innerHeight;
+    const fim = ESQ + L + 16, H = window.innerHeight, alt = quadro.offsetHeight || 340;
     document.querySelectorAll('#chat .bub').forEach(b => {
       const r = b.getBoundingClientRect();
-      if (r.width && r.left < fim && r.top < 84 + 380 && r.bottom > 84 && r.top < H) bate = true;
+      if (r.width && r.left < fim && r.top < TOPO + alt && r.bottom > TOPO && r.top < H) bate = true;
     });
     quadro.classList.toggle('cobre', bate);
     mostra.classList.toggle('cobre', bate);
