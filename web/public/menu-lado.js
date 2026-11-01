@@ -20,7 +20,7 @@
     ['cofre', '⚿', 'Cofre (chaves)'], ['arquivos', '▢', 'Pasta do agente'],
     ['memory', '▤', 'Memória'], ['operations', '⚙', 'Operações'], ['costs', '◇', 'Custos'],
     ['como', '◎', 'Como funciona'], ['identity', '◈', 'Identidade'], ['personality', '◐', 'Personalidade'],
-    ['apps', '▨', 'Apps'], ['socorro', '✚', 'Socorro'],
+    ['apps', '▨', 'Apps'], ['tela', '▭', 'Tela'], ['socorro', '✚', 'Socorro'],
   ];
 
 
