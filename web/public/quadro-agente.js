@@ -5,39 +5,54 @@
   'use strict';
   const m = /^\/a\/([a-z0-9-]+)\/?$/.exec(location.pathname);
   const NOMES = {marcus: 'SERVENTIAS'};
+  const TITULOS = {marcus: 'Serventias'};
   if (window.PretorQuadro || !m || !NOMES[m[1]]) return;
   window.PretorQuadro = true;
   const slug = m[1], CHAVE = 'pretor-quadro-oculto', L = 300, ESQ = 262, TOPO = 84;
 
   const css = `
-#qaQuadro{--c:#7fc0ff;--f:#d6ecff;--s:#8fa6c4;--l:rgba(127,192,255,.32);position:fixed;top:${TOPO}px;left:${ESQ}px;width:${L}px;
-  max-height:calc(100vh - 210px);overflow-y:auto;z-index:5;display:none;padding:14px 16px 10px;box-sizing:border-box;
-  font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--f);background:transparent;border:1px solid var(--l);border-radius:2px}
+#qaQuadro{--c:#7fc0ff;--f:#e4f1ff;--s:#8fa6c4;--l:rgba(127,192,255,.3);position:fixed;top:${TOPO}px;left:${ESQ}px;width:${L}px;
+  max-height:calc(100vh - 210px);overflow-y:auto;z-index:5;display:none;padding:15px 16px 12px;box-sizing:border-box;
+  font:12.5px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--f);background:transparent;border:1px solid var(--l);border-radius:2px}
 @media (min-width:1100px){#qaQuadro{display:block}#qaQuadro.oculto,#qaQuadro.cobre{display:none}#qaMostra{display:block}#qaMostra.some,#qaMostra.cobre{display:none}}
-#qaQuadro h4{margin:0 0 8px;font:600 10.5px/1 ui-monospace,monospace;letter-spacing:.32em;color:var(--c);display:flex;justify-content:space-between}
-#qaQuadro h4 button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;padding:0}
-#qaQuadro h5{margin:10px 0 4px;padding-top:7px;border-top:1px solid var(--l);font:600 10px/1.2 ui-monospace,monospace;letter-spacing:.14em;color:var(--c);text-transform:uppercase}
-#qaQuadro ul{margin:0;padding:0;list-style:none}
-#qaQuadro li{margin:4px 0}
-#qaQuadro a{color:var(--f);text-decoration:none;border-bottom:1px solid var(--l)}
-#qaQuadro a:hover{color:var(--c)}
-#qaQuadro .qa-pe{color:var(--s);font-size:10px;margin-top:10px}
+#qaQuadro .qa-sup{display:flex;justify-content:space-between;align-items:center;font:600 9.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.3em;color:var(--c)}
+#qaQuadro .qa-sup button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;line-height:1;padding:0}
+#qaQuadro .qa-nome{font-size:25px;line-height:1.15;font-weight:300;letter-spacing:.015em;margin:7px 0 7px}
+#qaQuadro .qa-data{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:2px solid var(--c);border-bottom:1px solid var(--l);
+  font:10.5px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--s)}
+#qaQuadro h5{margin:15px 0 3px;font:600 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:var(--c);text-transform:uppercase}
+#qaQuadro article{padding:8px 0;border-bottom:1px solid var(--l)}
+#qaQuadro article:last-child{border-bottom:0}
+#qaQuadro .qa-et{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;font:10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--s)}
+#qaQuadro .qa-et b{font-weight:600;color:var(--c);letter-spacing:.05em}
+#qaQuadro .qa-tit{display:block;margin:0;font-size:13px;line-height:1.3;font-weight:600;color:var(--f);text-decoration:none}
+#qaQuadro a.qa-tit:hover{color:var(--c);text-decoration:underline}
+#qaQuadro .qa-res{margin:3px 0 0;color:var(--s);font-size:12px;line-height:1.4}
+#qaQuadro article.qa-manchete .qa-tit{font-size:15.5px;line-height:1.28;font-weight:600}
+#qaQuadro article.qa-manchete .qa-res{color:var(--f);opacity:.85;font-size:12.5px}
+#qaQuadro .qa-pe{margin-top:9px;padding-top:7px;border-top:1px solid var(--l);color:var(--s);font-size:10px}
 #qaMostra{display:none;position:fixed;top:${TOPO}px;left:${ESQ}px;z-index:5;background:transparent;color:#7fc0ff;border:1px solid rgba(127,192,255,.4);
   border-radius:2px;padding:6px 10px;cursor:pointer;font:12px ui-monospace,monospace}
-html.tema-claro #qaQuadro{--c:#1262d6;--f:#16233a;--s:#46566e;--l:rgba(18,98,214,.34)}
+html.tema-claro #qaQuadro{--c:#1262d6;--f:#16233a;--s:#46566e;--l:rgba(18,98,214,.3)}
 html.tema-claro #qaMostra{color:#1262d6;border-color:rgba(18,98,214,.4)}`;
 
   const q = document.createElement('aside');
   q.id = 'qaQuadro';
   q.setAttribute('aria-label', 'Quadro de informações');
-  const cab = document.createElement('h4');
-  cab.textContent = NOMES[slug];
+  const cab = document.createElement('div');
+  cab.className = 'qa-sup';
+  cab.textContent = 'BOLETIM';
   const fecha = document.createElement('button');
   fecha.type = 'button'; fecha.textContent = '×'; fecha.title = 'Esconder o quadro';
   cab.appendChild(fecha);
+  const nome = document.createElement('div');
+  nome.className = 'qa-nome';
+  nome.textContent = TITULOS[slug];
+  const faixa = document.createElement('div');
+  faixa.className = 'qa-data';
   const corpo = document.createElement('div');
   corpo.textContent = 'aguardando a primeira coleta';
-  q.append(cab, corpo);
+  q.append(cab, nome, faixa, corpo);
   const mostra = document.createElement('button');
   mostra.id = 'qaMostra'; mostra.type = 'button'; mostra.textContent = '+ ' + NOMES[slug];
 
@@ -50,27 +65,39 @@ html.tema-claro #qaMostra{color:#1262d6;border-color:rgba(18,98,214,.4)}`;
   fecha.addEventListener('click', () => { try { localStorage.setItem(CHAVE, '1'); } catch (e) { /* aba privada */ } aplica(); });
   mostra.addEventListener('click', () => { try { localStorage.removeItem(CHAVE); } catch (e) { /* aba privada */ } aplica(); });
 
+  /* 'AAAA-MM-DD HH:MM' vira a data por extenso do cabeçalho; sem esse formato, mostra o texto como veio. */
+  function dataDe(t) {
+    const r = /^(\d{4})-(\d{2})-(\d{2})(?: (\d{2}:\d{2}))?/.exec(t || '');
+    if (!r) return [t || '', ''];
+    const d = new Date(+r[1], +r[2] - 1, +r[3]).toLocaleDateString('pt-BR', {weekday: 'long', day: 'numeric', month: 'long'});
+    return [d.charAt(0).toUpperCase() + d.slice(1), r[4] || ''];
+  }
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; };
+  function noticia(i, manchete) {
+    const art = el('article', manchete ? 'qa-manchete' : '');
+    if (i.etiqueta || i.data) {
+      const et = el('div', 'qa-et');
+      et.append(el('b', '', i.etiqueta || ''), el('span', '', i.data || ''));
+      art.appendChild(et);
+    }
+    const tit = i.titulo || i.texto || '';
+    const link = /^https:\/\//.test(i.link || '');
+    const t = el(link ? 'a' : 'div', 'qa-tit', tit);
+    if (link) { t.href = i.link; t.target = '_blank'; t.rel = 'noopener noreferrer'; }
+    art.appendChild(t);
+    if (i.titulo && i.texto) art.appendChild(el('p', 'qa-res', i.texto));
+    return art;
+  }
   function pinta(d) {
+    const [dia, hora] = dataDe(d.atualizado);
+    faixa.textContent = '';
+    faixa.append(el('span', '', dia), el('span', '', hora));
     corpo.textContent = '';
-    (d.secoes || []).forEach(s => {
-      const h = document.createElement('h5');
-      h.textContent = s.titulo;
-      const ul = document.createElement('ul');
-      (s.itens || []).forEach(i => {
-        const li = document.createElement('li');
-        if (/^https:\/\//.test(i.link || '')) {
-          const a = document.createElement('a');
-          a.href = i.link; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = i.texto;
-          li.appendChild(a);
-        } else li.textContent = i.texto;
-        ul.appendChild(li);
-      });
-      corpo.append(h, ul);
+    (d.secoes || []).forEach((s, n) => {
+      corpo.appendChild(el('h5', '', s.titulo));
+      (s.itens || []).forEach((i, k) => corpo.appendChild(noticia(i, n === 0 && k === 0 && !!i.titulo)));
     });
-    const pe = document.createElement('div');
-    pe.className = 'qa-pe';
-    pe.textContent = 'coleta de ' + (d.atualizado || '?');
-    corpo.appendChild(pe);
+    if (d.fontes) corpo.appendChild(el('div', 'qa-pe', 'Fontes: ' + d.fontes));
   }
   function busca() {
     fetch('/quadros/' + slug + '.json', {cache: 'no-store', credentials: 'same-origin'})
