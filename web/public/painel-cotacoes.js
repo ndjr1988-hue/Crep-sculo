@@ -1,9 +1,9 @@
-/* Pretor: quadro de cotações no espaço vazio à esquerda da conversa (pedido do Chefe em 28/10/2026).
-   Só aparece no computador com tela larga, onde sobra espaço entre o menu e a conversa.
+/* Pretor: quadro de cotações no espaço vazio à esquerda da conversa do Aro (pedido do Chefe em 28/10/2026;
+   desde 1/11/2026 só no Aro, com traços finos). Só no computador com tela larga, onde sobra espaço.
    Busca direto do navegador em APIs públicas e gratuitas; nada da conversa sai daqui. */
 (function () {
   'use strict';
-  if (window.PretorCotacoes) return;
+  if (window.PretorCotacoes || !/^\/a\/jasper\/?$/.test(location.pathname)) return;
   window.PretorCotacoes = true;
 
   const CHAVE = 'pretor-cotacoes-oculto';
@@ -20,34 +20,36 @@
     82: ['⛈️', 'pancadas fortes'], 95: ['⛈️', 'trovoadas'], 96: ['⛈️', 'trovoadas'], 99: ['⛈️', 'trovoadas']};
 
   const css = `
-#pcQuadro{position:fixed;top:84px;left:262px;width:250px;z-index:5;display:none;font:13px/1.35 system-ui,sans-serif;
-  color:#e3e8f0;background:rgba(6,8,10,.82);border:1px solid rgba(47,139,255,.35);border-radius:16px;padding:14px 14px 10px;
-  box-shadow:0 8px 28px rgba(0,0,0,.25);backdrop-filter:blur(8px)}
-@media (min-width:1700px){#pcQuadro{display:block}#pcQuadro.oculto{display:none}#pcMostra{display:block}#pcMostra.some{display:none}}
-#pcQuadro h4{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7fc0ff;display:flex;justify-content:space-between;align-items:center}
-#pcQuadro h4 button{background:none;border:0;color:inherit;cursor:pointer;font-size:15px;padding:0 2px;opacity:.7}
-#pcQuadro .pc-hora{font-size:30px;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-#pcQuadro .pc-data{color:#959da8;margin-bottom:10px}
-#pcQuadro .pc-sec{border-top:1px solid rgba(255,255,255,.08);padding-top:8px;margin-top:8px}
+#pcQuadro{--c:#7fc0ff;--f:#d6ecff;--s:#8fa6c4;--l:rgba(127,192,255,.32);
+  position:fixed;top:84px;left:262px;width:236px;z-index:5;display:none;padding:14px 16px 10px;
+  font:12.5px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--f);background:transparent;
+  border:1px solid var(--l);border-radius:2px}
+#pcQuadro::before,#pcQuadro::after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--c)}
+#pcQuadro::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+#pcQuadro::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+@media (min-width:1500px){#pcQuadro{display:block}#pcQuadro.oculto{display:none}#pcMostra{display:block}#pcMostra.some{display:none}}
+#pcQuadro h4{margin:0 0 6px;font:600 10.5px/1 ui-monospace,monospace;letter-spacing:.32em;color:var(--c);display:flex;justify-content:space-between;align-items:center}
+#pcQuadro h4 button{background:none;border:0;color:var(--s);cursor:pointer;font-size:14px;padding:0}
+#pcQuadro .pc-hora{font-size:30px;font-weight:300;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+#pcQuadro .pc-data{color:var(--s);font-size:11px;margin-bottom:8px}
+#pcQuadro .pc-sec{border-top:1px solid var(--l);padding-top:7px;margin-top:7px}
 #pcQuadro .pc-lin{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:3px 0}
-#pcQuadro .pc-lin span:first-child{color:#b6bec8}
-#pcQuadro .pc-val{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
-#pcQuadro .pc-var{font-size:11px;font-weight:600;margin-left:4px}
+#pcQuadro .pc-lin span:first-child{color:var(--s);font-size:11px;letter-spacing:.04em}
+#pcQuadro .pc-val{font-weight:400;font-variant-numeric:tabular-nums;text-align:right}
+#pcQuadro .pc-var{font-size:10.5px;margin-left:4px}
 #pcQuadro .sobe{color:#4ade80}#pcQuadro .desce{color:#ff5a5a}
-#pcQuadro .pc-pe{color:#777f8a;font-size:11px;margin-top:8px}
-#pcMostra{display:none;position:fixed;top:84px;left:262px;z-index:5;background:rgba(6,8,10,.8);color:#e3e8f0;border:1px solid rgba(47,139,255,.35);
-  border-radius:12px;padding:6px 10px;cursor:pointer;font:13px system-ui}
-html.tema-claro #pcQuadro,html.tema-claro #pcMostra{color:#1c1c1c;background:rgba(255,255,255,.85);border-color:rgba(31,111,224,.25)}
-html.tema-claro #pcQuadro h4{color:#1f6fe0}
-html.tema-claro #pcQuadro .pc-data,html.tema-claro #pcQuadro .pc-lin span:first-child{color:#5f5f68}
-html.tema-claro #pcQuadro .pc-sec{border-top-color:rgba(0,0,0,.08)}
-html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{color:#1f6fe0}`;
+#pcQuadro .pc-pe{color:var(--s);font-size:10px;margin-top:8px;letter-spacing:.04em}
+#pcMostra{display:none;position:fixed;top:84px;left:262px;z-index:5;background:transparent;color:#7fc0ff;border:1px solid rgba(127,192,255,.4);
+  border-radius:2px;padding:6px 10px;cursor:pointer;font:12px ui-monospace,monospace}
+html.tema-claro #pcQuadro{--c:#1262d6;--f:#16233a;--s:#46566e;--l:rgba(18,98,214,.34)}
+html.tema-claro #pcMostra{color:#1262d6;border-color:rgba(18,98,214,.4)}
+html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{color:#c00000}`;
 
   const quadro = document.createElement('aside');
   quadro.id = 'pcQuadro';
   quadro.setAttribute('aria-label', 'Cotações e tempo');
   quadro.innerHTML = `
-<h4>Hoje <button type="button" title="Esconder o quadro" aria-label="Esconder o quadro">×</button></h4>
+<h4>MERCADO <button type="button" title="Esconder o quadro" aria-label="Esconder o quadro">×</button></h4>
 <div class="pc-hora" data-k="hora">--:--</div><div class="pc-data" data-k="data"></div>
 <div class="pc-lin"><span data-k="tempoTxt">Taboão da Serra</span><span class="pc-val" data-k="tempo">…</span></div>
 <div class="pc-lin"><span>máx / mín</span><span class="pc-val" data-k="maxmin">…</span></div>
@@ -68,7 +70,7 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
   const mostra = document.createElement('button');
   mostra.id = 'pcMostra';
   mostra.type = 'button';
-  mostra.textContent = '💲 Cotações';
+  mostra.textContent = '+ MERCADO';
 
   const campo = k => quadro.querySelector(`[data-k="${k}"]`);
   const poe = (k, v) => { const e = campo(k); if (e) e.innerHTML = v; };
@@ -129,7 +131,7 @@ html.tema-claro #pcQuadro .sobe{color:#1f7a3a}html.tema-claro #pcQuadro .desce{c
     setInterval(indicadores, 6 * 3600000);
   }
 
-  const larga = window.matchMedia('(min-width:1700px)');
+  const larga = window.matchMedia('(min-width:1500px)');
   const oculto = () => { try { return localStorage.getItem(CHAVE) === '1'; } catch (e) { return false; } };
   function aplica() {
     const esc = oculto();
