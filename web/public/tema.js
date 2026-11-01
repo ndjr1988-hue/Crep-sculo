@@ -8,6 +8,8 @@
   const grava = v => { try { localStorage.setItem(CHAVE, v); } catch (e) { /* aba privada: vale só nesta visita */ } };
   const aplica = claro => raiz.classList.toggle('tema-claro', claro);
   aplica(le() === 'claro');
+  /* Pretor: conversa de agente (não a do Jasper) ganha o tema metálico no claro; ver tema-metal.css. */
+  raiz.classList.toggle('conversa-agente', /^\/a\/(?!admin\/?$)[^/]+\/?$/.test(location.pathname));
   window.CrepTema = {
     claro: () => raiz.classList.contains('tema-claro'),
     alternar() { const claro = !this.claro(); aplica(claro); grava(claro ? 'claro' : 'escuro'); },

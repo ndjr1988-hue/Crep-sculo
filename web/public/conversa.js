@@ -1477,13 +1477,13 @@ function metaPendente(p) {
     return `<span class="meta" title="entregue">✓ ${esc(p.hhmm)}</span>`;
   }
   if (p.estado === 'falhou' && p.recusado) {   // comando recusado: reenviar daria o mesmo erro
-    return `<span class="meta"><span style="color:#2f8bff;font-weight:600">recusado</span> ` +
+    return `<span class="meta"><span style="color:#d93025;font-weight:600">recusado</span> ` +
            `${esc(p.erro || 'motivo desconhecido')} ` +
            `<button class="mini descartar" data-pend="${p.n}">descartar</button></span>`;
   }
   if (p.estado === 'falhou') {
     const ocupado = p.conferindo ? ' disabled' : '';
-    return `<span class="meta"><span style="color:#2f8bff;font-weight:600" ` +
+    return `<span class="meta"><span style="color:#d93025;font-weight:600" ` +
            `title="${esc(p.erro || 'motivo desconhecido')}">não foi enviada</span> ` +
            `<button class="mini reenviar" data-pend="${p.n}"${ocupado}>reenviar</button> ` +
            `<button class="mini descartar" data-pend="${p.n}"${ocupado}>descartar</button></span>`;
