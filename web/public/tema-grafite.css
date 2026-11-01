@@ -11,16 +11,16 @@
 :where(html:not(.tema-claro)) .av-btn{background:#121214}
 :where(html:not(.tema-claro)) .av-primario{color:#ffffff}
 :where(html:not(.tema-claro)) .av-primario:hover{background:#88272f}
-:where(html:not(.tema-claro)) .av-perigo{background:#2f8bff;border-color:#2f8bff;color:#ffffff}
+:where(html:not(.tema-claro)) .av-perigo{background:#d93025;border-color:#d93025;color:#ffffff}
 :where(html:not(.tema-claro)) .av-perigo:hover{background:#a93226}
 :where(html:not(.tema-claro)) .av-ajuda{background:#121214}
 :where(html:not(.tema-claro)) .av-raiz select,:where(html:not(.tema-claro)) .av-raiz input[type=text],:where(html:not(.tema-claro)) .av-raiz input[type=url],:where(html:not(.tema-claro)) .av-raiz textarea{background:#121214}
 :where(html:not(.tema-claro)) .av-cont.av-passou{color:#2f8bff}
-:where(html:not(.tema-claro)) .av-erro{color:#2f8bff}
+:where(html:not(.tema-claro)) .av-erro{color:#d93025}
 :where(html:not(.tema-claro)) .av-resposta{background:#1f1f23;color:#a3b7d2}
-:where(html:not(.tema-claro)) .av-status.av-erro{color:#2f8bff}
+:where(html:not(.tema-claro)) .av-status.av-erro{color:#d93025}
 :where(html:not(.tema-claro)) .av-status.av-ok{color:#a3b7d2}
-:where(html:not(.tema-claro)) .av-erro-bloco{color:#2f8bff}
+:where(html:not(.tema-claro)) .av-erro-bloco{color:#d93025}
 :where(html:not(.tema-claro)) .av-aviso{border-left:4px solid var(--av-cor,#7e8793);background:#121214}
 :where(html:not(.tema-claro)) .av-t-decisao{--av-cor:#2f6fd0}
 :where(html:not(.tema-claro)) .av-t-preferencia{--av-cor:#8e44ad}
@@ -32,7 +32,7 @@
 :where(html:not(.tema-claro)) .av-tipo{background:var(--av-cor,#7e8793);color:#ffffff}
 :where(html:not(.tema-claro)) .av-link{color:#1d5fc4}
 :where(html:not(.tema-claro)) .av-situacao{color:#f0b175}
-:where(html:not(.tema-claro)) .av-e-falha{color:#2f8bff}
+:where(html:not(.tema-claro)) .av-e-falha{color:#d93025}
 :where(html:not(.tema-claro)) .av-e-recado{color:#a3b7d2}
 :where(html:not(.tema-claro)) #tourLuz{box-shadow:0 0 0 9999px rgba(232,237,244,.66);outline:2px solid #121214}
 :where(html:not(.tema-claro)) #tourCaixa{background:#121214;color:#e3e8f0;box-shadow:0 6px 28px rgba(0,0,0,.35)}
@@ -128,7 +128,7 @@ html:where(:not(.tema-claro)).casca #tourCaixa button.pri{background:#2f8bff;bor
 :where(html:not(.tema-claro)) .anxx{background:rgba(232,237,244,.7);color:#ffffff}
 :where(html:not(.tema-claro)) .anxde{border:1px solid #51201a;background:#1b1b1f;color:#a3271b}
 :where(html:not(.tema-claro)) #anexoInfo{color:#8f98a4}
-:where(html:not(.tema-claro)) #anexoInfo.erro{color:#2f8bff}
+:where(html:not(.tema-claro)) #anexoInfo.erro{color:#d93025}
 :where(html:not(.tema-claro)) .mid{background:#2a2a30}
 :where(html:not(.tema-claro)) .midfb{color:#adb8c7}
 :where(html:not(.tema-claro)) .mid .lupa{background:rgba(232,237,244,.62);color:#ffffff}
@@ -460,6 +460,16 @@ html:where(:not(.tema-claro))[data-tema="escuro"]{--fundo:#e8ebf0;--cartao:#dbe0
 :where(html:not(.tema-claro)) #btnSigilo.on{color:#ffffff}
 :where(html:not(.tema-claro)) #sigAviso > button,:where(html:not(.tema-claro)) #sigAviso > p{background:#241d00;color:#ffe7a4;border:1px solid #e5bd4c}
 html:where(:not(.tema-claro))[data-tema="escuro"] #sigAviso > button,html:where(:not(.tema-claro))[data-tema="escuro"] #sigAviso > p{background:#e4dcc3;color:#fff3c8;border-color:#e5bd4c}
+/* tema-metal.css */
+html:where(:not(.tema-claro)).tema-claro.conversa-agente,html:where(:not(.tema-claro)).tema-claro.conversa-agente body{background:repeating-linear-gradient(92deg,rgba(255,255,255,.045) 0 1px,rgba(0,0,0,.025) 1px 3px),
+  radial-gradient(ellipse 70% 55% at 16% 10%,rgba(255,255,255,.75),transparent 70%),
+  radial-gradient(ellipse 60% 55% at 88% 90%,rgba(47,139,255,.14),transparent 70%),
+  linear-gradient(135deg,#c4c9d2 0%,#dfe2e8 34%,#b6bcc7 62%,#d5d9e0 100%) fixed}
+html:where(:not(.tema-claro)).tema-claro.conversa-agente header,html:where(:not(.tema-claro)).tema-claro.conversa-agente.casca #cabecalho,html:where(:not(.tema-claro)).tema-claro.conversa-agente .barra{background:linear-gradient(180deg,rgba(236,238,242,.82),rgba(205,210,218,.78));border-color:rgba(47,139,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 1px 8px rgba(30,40,60,.10)}
+html:where(:not(.tema-claro)).tema-claro.conversa-agente aside#menu{background:linear-gradient(180deg,rgba(218,221,227,.86),rgba(190,195,204,.84));border-right:1px solid rgba(47,139,255,.28);box-shadow:inset -1px 0 0 rgba(255,255,255,.5)}
+html:where(:not(.tema-claro)).tema-claro.conversa-agente .row.her .bub,html:where(:not(.tema-claro)).tema-claro.conversa-agente .row.cron .bub{background:linear-gradient(180deg,rgba(248,249,251,.92),rgba(226,229,235,.88));border:1px solid rgba(70,85,110,.22);box-shadow:0 4px 14px rgba(30,40,60,.12),inset 0 1px 0 rgba(255,255,255,.9)}
+html:where(:not(.tema-claro)).tema-claro.conversa-agente .row.me .bub{background:linear-gradient(180deg,#5d6b82,#3f4b60);color:#f4f6fa;border:1px solid rgba(47,139,255,.55);box-shadow:0 4px 14px rgba(30,45,75,.25),inset 0 1px 0 rgba(255,255,255,.18)}
+html:where(:not(.tema-claro)).tema-claro.conversa-agente .row.me .bub .meta{color:rgba(240,244,250,.78)}
 
 /* ajustes finos do grafite (escritos à mão no gerador) */
 html:not(.tema-claro){--bub-in:#232328;--bub-out:#5a1a22}  /* ideia 3: seu balão em vinho escuro */

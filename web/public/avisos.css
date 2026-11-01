@@ -14,7 +14,7 @@
 .av-btn:disabled{opacity:.5;cursor:default}
 .av-primario{background:var(--av-acento);border-color:var(--av-acento);color:#ffffff;font-weight:600;min-height:40px}
 .av-primario:hover{background:#88272f}
-.av-perigo{background:#2f8bff;border-color:#2f8bff;color:#ffffff}
+.av-perigo{background:#d93025;border-color:#d93025;color:#ffffff}
 .av-perigo:hover{background:#a93226}
 .av-mini{min-height:32px;padding:0 12px;font-size:13px}
 .av-ajuda{width:32px;height:32px;border-radius:50%;border:1px solid var(--av-linha);background:#000000;
@@ -35,15 +35,15 @@
 .av-fraco{color:var(--av-fraco);font-size:13px}
 .av-cont{margin:0;text-align:right;font-size:12px;color:var(--av-fraco)}
 .av-cont.av-passou{color:#2f8bff;font-weight:700}
-.av-erro{margin:0;font-size:13px;color:#2f8bff}
+.av-erro{margin:0;font-size:13px;color:#d93025}
 .av-erro[hidden],.av-resposta[hidden],.av-escolha[hidden]{display:none}
 .av-resposta{margin:0;padding:8px 10px;border-radius:10px;background:#0b1016;color:#a3b7d2;font-size:14px}
 .av-status{margin:6px 0 0;font-size:13px;min-height:0}
 .av-status:empty{display:none}
-.av-status.av-erro{color:#2f8bff}
+.av-status.av-erro{color:#d93025}
 .av-status.av-ok{color:#a3b7d2}
 .av-vazio{margin:0;padding:18px 8px;text-align:center;color:var(--av-fraco);font-size:14px}
-.av-erro-bloco{color:#2f8bff}
+.av-erro-bloco{color:#d93025}
 .av-dia-t{margin:14px 0 6px;font-size:13px;color:var(--av-fraco);font-weight:700}
 .av-dia:first-child .av-dia-t{margin-top:0}
 .av-aviso{border:1px solid var(--av-linha);border-left:4px solid var(--av-cor,#7e8793);border-radius:10px;
@@ -64,7 +64,7 @@
 .av-situacao{margin:6px 0 0;font-size:13px;color:#f0b175;font-style:italic}
 .av-entregas{list-style:none;margin:6px 0 0;padding:0;font-size:12.5px;color:var(--av-fraco)}
 .av-entregas li{padding:1px 0}
-.av-e-falha{color:#2f8bff;font-weight:600}
+.av-e-falha{color:#d93025;font-weight:600}
 .av-e-recado{color:#a3b7d2}
 .av-acoes{margin-top:8px;display:flex;justify-content:flex-end}
 .av-retirada{margin-top:8px;display:flex;flex-direction:column;gap:8px;font-size:13px}

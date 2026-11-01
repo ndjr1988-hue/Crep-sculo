@@ -251,7 +251,7 @@ if (!caps.voz) document.documentElement.classList.add('sem-voz');
 /* ── Texto de estado, faixas, utilidades ──────────────────────────────────── */
 function setEstado(txt, ehErro) {
   estadoEl.textContent = txt;
-  estadoEl.style.color = ehErro ? '#2f8bff' : '';
+  estadoEl.style.color = ehErro ? '#d93025' : '';
   estadoEl.dataset.sinal = txt === 'pronto' ? 'vivo' : '';   // Pretor: ponto verde pulsando (hitech.css)
   pintaAtividade();
 }
